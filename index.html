@@ -1,1 +1,573 @@
-test bro 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CuteKey & Click — Keyboard & Mouse Tester</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Nunito', 'sans-serif'],
+          },
+          colors: {
+            pastel: {
+              pink: '#FDE2E4',
+              pinkDark: '#F7CAD0',
+              purple: '#E2ECE9',
+              lavender: '#E8E8E4',
+              mint: '#D8F3DC',
+              mintDark: '#B7E4C7',
+              blue: '#D0F4DE',
+              sky: '#E0FAFF',
+              accent: '#FF99C8',
+              purpleAccent: '#C77DFF'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Key Glows & Transitions */
+    .key-btn {
+      transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+      box-shadow: 0 4px 0 0 #cbd5e1;
+    }
+    .key-btn:active, .key-pressed {
+      transform: translateY(3px) scale(0.97) !important;
+      box-shadow: 0 1px 0 0 #94a3b8 !important;
+      background-color: #FF99C8 !important;
+      color: white !important;
+      border-color: #f472b6 !important;
+    }
+    .key-tested {
+      background-color: #D8F3DC !important;
+      border-color: #74C69D !important;
+      color: #1B4332 !important;
+      box-shadow: 0 4px 0 0 #95D5B2 !important;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Floating animation for subtle background elements */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-purple-50 to-teal-100 min-h-screen font-sans text-slate-700 antialiased selection:bg-pink-200">
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col min-h-screen">
+    
+    <!-- Header -->
+    <header class="flex flex-wrap items-center justify-between gap-4 bg-white/80 backdrop-blur-md p-4 px-6 rounded-3xl shadow-sm border border-white/60 mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-gradient-to-tr from-pink-400 to-purple-400 rounded-2xl flex items-center justify-center text-white text-2xl shadow-md animate-float">
+          ✨
+        </div>
+        <div>
+          <h1 class="text-2xl font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+            CuteKey & Click
+          </h1>
+          <p class="text-xs text-slate-400 font-semibold">Fresh & Smooth Input Hardware Tester</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="flex items-center gap-2 bg-slate-100/80 p-1.5 rounded-2xl border border-slate-200/60">
+        <button id="tab-kb" onclick="switchTab('keyboard')" class="tab-btn px-4 py-2 rounded-xl text-sm font-bold transition-all bg-white text-slate-800 shadow-sm">
+          ⌨️ Keyboard
+        </button>
+        <button id="tab-mouse" onclick="switchTab('mouse')" class="tab-btn px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-slate-800">
+          🖱️ Mouse
+        </button>
+      </div>
+
+      <!-- Global Actions -->
+      <div class="flex items-center gap-3">
+        <button id="sound-toggle" onclick="toggleSound()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 rounded-2xl text-xs font-bold text-slate-600 transition flex items-center gap-1.5 border border-slate-200">
+          <span id="sound-icon">🔊</span> Sound: ON
+        </button>
+        <button onclick="resetAll()" class="px-4 py-2 bg-pink-500 hover:bg-pink-600 active:scale-95 text-white rounded-2xl text-xs font-bold transition shadow-sm shadow-pink-300">
+          🔄 Reset All
+        </button>
+      </div>
+    </header>
+
+    <!-- SECTION: KEYBOARD TESTER -->
+    <main id="section-keyboard" class="flex-1 flex flex-col gap-6">
+      
+      <!-- Realtime Key Display Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3">
+        <div class="bg-white/80 backdrop-blur p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col justify-center">
+          <span class="text-[10px] font-extrabold uppercase text-slate-400">Pressed Key</span>
+          <span id="stat-key" class="text-xl font-black text-pink-500 truncate">-</span>
+        </div>
+        <div class="bg-white/80 backdrop-blur p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col justify-center">
+          <span class="text-[10px] font-extrabold uppercase text-slate-400">Event Code</span>
+          <span id="stat-code" class="text-sm font-bold text-slate-700 truncate">-</span>
+        </div>
+        <div class="bg-white/80 backdrop-blur p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col justify-center">
+          <span class="text-[10px] font-extrabold uppercase text-slate-400">Key Code</span>
+          <span id="stat-keycode" class="text-sm font-bold text-slate-700 truncate">-</span>
+        </div>
+        <div class="bg-white/80 backdrop-blur p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col justify-center">
+          <span class="text-[10px] font-extrabold uppercase text-slate-400">Location</span>
+          <span id="stat-location" class="text-sm font-bold text-slate-700 truncate">-</span>
+        </div>
+        <div class="bg-white/80 backdrop-blur p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col justify-center">
+          <span class="text-[10px] font-extrabold uppercase text-slate-400">Modifiers</span>
+          <span id="stat-modifiers" class="text-xs font-bold text-purple-500 truncate">None</span>
+        </div>
+        <div class="bg-white/80 backdrop-blur p-3.5 rounded-2xl border border-white/80 shadow-sm flex flex-col justify-center">
+          <span class="text-[10px] font-extrabold uppercase text-slate-400">Tested Keys</span>
+          <span id="stat-count" class="text-xl font-black text-teal-600">0 / 83</span>
+        </div>
+      </div>
+
+      <!-- Visual Keyboard Workspace -->
+      <div class="bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-sm border border-white/80 overflow-x-auto">
+        <div class="min-w-[840px] flex flex-col gap-2.5 mx-auto max-w-[960px]" id="keyboard-layout">
+          <!-- Keyboard rows will be generated here by JavaScript -->
+        </div>
+      </div>
+
+      <!-- History Log Feed -->
+      <div class="bg-white/80 backdrop-blur p-4 rounded-3xl border border-white/80 shadow-sm">
+        <h3 class="text-xs font-extrabold uppercase text-slate-400 mb-2 flex items-center gap-2">
+          <span>📜</span> Recent Key Log
+        </h3>
+        <div id="key-log" class="flex gap-2 overflow-x-auto pb-1 text-xs font-bold text-slate-600 min-h-[32px]">
+          <span class="text-slate-300 italic font-normal text-xs">Press any key on your keyboard to start testing...</span>
+        </div>
+      </div>
+    </main>
+
+
+    <!-- SECTION: MOUSE TESTER -->
+    <main id="section-mouse" class="flex-1 hidden flex-col gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left: Mouse Graphic Visualizer -->
+        <div class="bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-sm border border-white/80 flex flex-col items-center justify-center relative min-h-[380px]">
+          <h3 class="absolute top-4 left-6 text-xs font-extrabold uppercase text-slate-400">Mouse Button Visualizer</h3>
+          
+          <!-- Cute Mouse Graphic -->
+          <div class="relative w-48 h-80 bg-slate-100 rounded-[80px] border-4 border-slate-200 shadow-inner flex flex-col items-center pt-2 mt-4">
+            
+            <!-- Top Buttons Container -->
+            <div class="w-full h-36 flex justify-between px-2 gap-2">
+              <!-- Left Click -->
+              <div id="mouse-btn-0" class="flex-1 bg-white rounded-tl-[60px] rounded-tr-xl rounded-bl-xl border-2 border-slate-200 flex items-center justify-center text-xs font-black text-slate-400 transition-all duration-75">
+                LMB
+              </div>
+
+              <!-- Scroll Wheel Container -->
+              <div class="w-10 flex flex-col items-center pt-2">
+                <div id="mouse-btn-1" class="w-6 h-12 bg-slate-200 rounded-full border-2 border-slate-300 flex items-center justify-center text-[10px] font-bold text-slate-500 transition-all duration-75">
+                  MMB
+                </div>
+                <div id="scroll-indicator" class="text-lg opacity-0 transition-opacity mt-1">↕️</div>
+              </div>
+
+              <!-- Right Click -->
+              <div id="mouse-btn-2" class="flex-1 bg-white rounded-tr-[60px] rounded-tl-xl rounded-br-xl border-2 border-slate-200 flex items-center justify-center text-xs font-black text-slate-400 transition-all duration-75">
+                RMB
+              </div>
+            </div>
+
+            <!-- Body Details & Side Buttons -->
+            <div class="w-full flex-1 relative flex items-center justify-center">
+              <span class="text-3xl opacity-20 font-black text-slate-400">🐭</span>
+              
+              <!-- Side Button 1 (Back / Button 3) -->
+              <div id="mouse-btn-3" class="absolute -left-3 top-6 w-3 h-10 bg-slate-200 rounded-l-md border-y border-l border-slate-300 transition-all text-[8px] flex items-center justify-center">
+              </div>
+              <!-- Side Button 2 (Forward / Button 4) -->
+              <div id="mouse-btn-4" class="absolute -left-3 top-18 w-3 h-10 bg-slate-200 rounded-l-md border-y border-l border-slate-300 transition-all text-[8px] flex items-center justify-center">
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 mt-4">Right-click test area is active! (Browser menu is disabled inside app)</p>
+        </div>
+
+        <!-- Right: Mouse Stats & Test Pad -->
+        <div class="lg:col-span-2 flex flex-col gap-4">
+          
+          <!-- Test Surface Pad -->
+          <div id="mouse-pad" class="bg-gradient-to-br from-pink-50/50 via-purple-50/50 to-teal-50/50 rounded-3xl border-2 border-dashed border-pink-200 p-6 flex-1 min-h-[220px] flex flex-col items-center justify-center relative overflow-hidden group cursor-crosshair">
+            <div class="text-center pointer-events-none select-none z-10">
+              <p class="text-lg font-black text-slate-600 mb-1">Move & Click Mouse Here</p>
+              <p class="text-xs text-slate-400">Test movement smoothness, clicks, scroll wheel, and side buttons</p>
+            </div>
+            
+            <!-- Coordinates Badge -->
+            <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 shadow-sm">
+              Cursor X: <span id="mouse-x" class="text-pink-500">0</span> | Y: <span id="mouse-y" class="text-pink-500">0</span>
+            </div>
+          </div>
+
+          <!-- Mouse Statistics Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-white/80 shadow-sm">
+              <span class="text-[10px] font-extrabold uppercase text-slate-400">Scroll Direction</span>
+              <span id="stat-scroll-dir" class="text-lg font-black text-purple-500 block">-</span>
+            </div>
+            <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-white/80 shadow-sm">
+              <span class="text-[10px] font-extrabold uppercase text-slate-400">Scroll Count</span>
+              <span id="stat-scroll-count" class="text-lg font-black text-teal-600 block">0</span>
+            </div>
+            <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-white/80 shadow-sm">
+              <span class="text-[10px] font-extrabold uppercase text-slate-400">Last Click Type</span>
+              <span id="stat-last-click" class="text-lg font-black text-pink-500 block">None</span>
+            </div>
+            <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-white/80 shadow-sm">
+              <span class="text-[10px] font-extrabold uppercase text-slate-400">Double Click Speed</span>
+              <span id="stat-click-speed" class="text-lg font-black text-indigo-500 block">0 ms</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-xs text-slate-400 font-semibold py-2">
+      Built with pure HTML, Tailwind CSS & JavaScript • Cute, Fresh & Ultra Fast ⚡
+    </footer>
+
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    /* ==========================================
+       KEYBOARD LAYOUT DATA
+       ========================================== */
+    const keyboardRows = [
+      [
+        { code: 'Escape', label: 'Esc', width: 'w-12' },
+        { code: 'F1', label: 'F1' }, { code: 'F2', label: 'F2' }, { code: 'F3', label: 'F3' }, { code: 'F4', label: 'F4' },
+        { code: 'F5', label: 'F5' }, { code: 'F6', label: 'F6' }, { code: 'F7', label: 'F7' }, { code: 'F8', label: 'F8' },
+        { code: 'F9', label: 'F9' }, { code: 'F10', label: 'F10' }, { code: 'F11', label: 'F11' }, { code: 'F12', label: 'F12' },
+        { code: 'Delete', label: 'Del', width: 'w-12' }
+      ],
+      [
+        { code: 'Backquote', label: '` ~' }, { code: 'Digit1', label: '1' }, { code: 'Digit2', label: '2' }, { code: 'Digit3', label: '3' },
+        { code: 'Digit4', label: '4' }, { code: 'Digit5', label: '5' }, { code: 'Digit6', label: '6' }, { code: 'Digit7', label: '7' },
+        { code: 'Digit8', label: '8' }, { code: 'Digit9', label: '9' }, { code: 'Digit0', label: '0' }, { code: 'Minus', label: '- _' },
+        { code: 'Equal', label: '= +' }, { code: 'Backspace', label: 'Backspace', width: 'flex-1' }
+      ],
+      [
+        { code: 'Tab', label: 'Tab', width: 'w-16' }, { code: 'KeyQ', label: 'Q' }, { code: 'KeyW', label: 'W' }, { code: 'KeyE', label: 'E' },
+        { code: 'KeyR', label: 'R' }, { code: 'KeyT', label: 'T' }, { code: 'KeyY', label: 'Y' }, { code: 'KeyU', label: 'U' },
+        { code: 'KeyI', label: 'I' }, { code: 'KeyO', label: 'O' }, { code: 'KeyP', label: 'P' }, { code: 'BracketLeft', label: '[ {' },
+        { code: 'BracketRight', label: '] }' }, { code: 'Backslash', label: '\\ |', width: 'flex-1' }
+      ],
+      [
+        { code: 'CapsLock', label: 'Caps Lock', width: 'w-20' }, { code: 'KeyA', label: 'A' }, { code: 'KeyS', label: 'S' }, { code: 'KeyD', label: 'D' },
+        { code: 'KeyF', label: 'F' }, { code: 'KeyG', label: 'G' }, { code: 'KeyH', label: 'H' }, { code: 'KeyJ', label: 'J' },
+        { code: 'KeyK', label: 'K' }, { code: 'KeyL', label: 'L' }, { code: 'Semicolon', label: '; :' }, { code: 'Quote', label: '\' "' },
+        { code: 'Enter', label: 'Enter', width: 'flex-1' }
+      ],
+      [
+        { code: 'ShiftLeft', label: 'Shift', width: 'w-24' }, { code: 'KeyZ', label: 'Z' }, { code: 'KeyX', label: 'X' }, { code: 'KeyC', label: 'C' },
+        { code: 'KeyV', label: 'V' }, { code: 'KeyB', label: 'B' }, { code: 'KeyN', label: 'N' }, { code: 'KeyM', label: 'M' },
+        { code: 'Comma', label: ', <' }, { code: 'Period', label: '. >' }, { code: 'Slash', label: '/ ?' }, { code: 'ShiftRight', label: 'Shift', width: 'flex-1' }
+      ],
+      [
+        { code: 'ControlLeft', label: 'Ctrl', width: 'w-16' }, { code: 'MetaLeft', label: 'Win', width: 'w-14' }, { code: 'AltLeft', label: 'Alt', width: 'w-14' },
+        { code: 'Space', label: 'Space', width: 'flex-1' }, { code: 'AltRight', label: 'Alt', width: 'w-14' }, { code: 'MetaRight', label: 'Win', width: 'w-14' },
+        { code: 'ContextMenu', label: 'Menu', width: 'w-14' }, { code: 'ControlRight', label: 'Ctrl', width: 'w-16' },
+        { code: 'ArrowLeft', label: '◄', width: 'w-10' }, { code: 'ArrowUp', label: '▲', width: 'w-10' }, { code: 'ArrowDown', label: '▼', width: 'w-10' }, { code: 'ArrowRight', label: '►', width: 'w-10' }
+      ]
+    ];
+
+    /* Global State */
+    const testedKeys = new Set();
+    let totalKeyCount = 0;
+    let soundEnabled = true;
+    let audioCtx = null;
+    let lastClickTime = 0;
+    let scrollTotal = 0;
+
+    /* Web Audio API Procedural Sound (Zero external sound files needed!) */
+    function playCutePop(freq = 440) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.6, audioCtx.currentTime + 0.05);
+        
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.06);
+      } catch (e) {
+        // Audio fallback handling
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById('sound-toggle');
+      const icon = document.getElementById('sound-icon');
+      if (soundEnabled) {
+        btn.classList.replace('bg-slate-200', 'bg-slate-100');
+        btn.innerHTML = `<span id="sound-icon">🔊</span> Sound: ON`;
+      } else {
+        btn.classList.replace('bg-slate-100', 'bg-slate-200');
+        btn.innerHTML = `<span id="sound-icon">🔇</span> Sound: OFF`;
+      }
+    }
+
+    /* Tab Switcher */
+    function switchTab(tab) {
+      const kbTab = document.getElementById('tab-kb');
+      const mouseTab = document.getElementById('tab-mouse');
+      const kbSection = document.getElementById('section-keyboard');
+      const mouseSection = document.getElementById('section-mouse');
+
+      if (tab === 'keyboard') {
+        kbSection.classList.remove('hidden');
+        kbSection.classList.add('flex');
+        mouseSection.classList.add('hidden');
+        mouseSection.classList.remove('flex');
+
+        kbTab.className = "tab-btn px-4 py-2 rounded-xl text-sm font-bold transition-all bg-white text-slate-800 shadow-sm";
+        mouseTab.className = "tab-btn px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-slate-800";
+      } else {
+        mouseSection.classList.remove('hidden');
+        mouseSection.classList.add('flex');
+        kbSection.classList.add('hidden');
+        kbSection.classList.remove('flex');
+
+        mouseTab.className = "tab-btn px-4 py-2 rounded-xl text-sm font-bold transition-all bg-white text-slate-800 shadow-sm";
+        kbTab.className = "tab-btn px-4 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-slate-800";
+      }
+    }
+
+    /* Render Visual Keyboard Layout */
+    function buildKeyboard() {
+      const container = document.getElementById('keyboard-layout');
+      container.innerHTML = '';
+      totalKeyCount = 0;
+
+      keyboardRows.forEach(row => {
+        const rowEl = document.createElement('div');
+        rowEl.className = 'flex gap-1.5 w-full justify-between';
+
+        row.forEach(key => {
+          totalKeyCount++;
+          const keyEl = document.createElement('div');
+          const widthClass = key.width || 'flex-1';
+          
+          keyEl.id = `key-${key.code}`;
+          keyEl.className = `key-btn ${widthClass} h-12 min-w-[38px] bg-white border border-slate-200 rounded-xl flex flex-col items-center justify-center font-extrabold text-xs text-slate-600 cursor-pointer shadow-sm`;
+          keyEl.innerText = key.label;
+          
+          rowEl.appendChild(keyEl);
+        });
+
+        container.appendChild(rowEl);
+      });
+
+      document.getElementById('stat-count').innerText = `0 / ${totalKeyCount}`;
+    }
+
+    /* Handle Keyboard Input */
+    window.addEventListener('keydown', (e) => {
+      // Prevent browser default shortcut actions like Tab focus shift, F5 refresh, Space scroll
+      if (['Tab', 'Space', 'F5', 'AltLeft', 'AltRight'].includes(e.code)) {
+        e.preventDefault();
+      }
+
+      const keyEl = document.getElementById(`key-${e.code}`);
+      if (keyEl) {
+        keyEl.classList.add('key-pressed');
+        if (!testedKeys.has(e.code)) {
+          testedKeys.add(e.code);
+          keyEl.classList.add('key-tested');
+          document.getElementById('stat-count').innerText = `${testedKeys.size} / ${totalKeyCount}`;
+        }
+      }
+
+      // Update Live Display Stats
+      document.getElementById('stat-key').innerText = e.key === ' ' ? 'Space' : e.key;
+      document.getElementById('stat-code').innerText = e.code;
+      document.getElementById('stat-keycode').innerText = e.keyCode || e.which;
+      document.getElementById('stat-location').innerText = e.location === 1 ? 'Left' : e.location === 2 ? 'Right' : 'Standard';
+
+      // Modifiers
+      const mods = [];
+      if (e.ctrlKey) mods.push('Ctrl');
+      if (e.shiftKey) mods.push('Shift');
+      if (e.altKey) mods.push('Alt');
+      if (e.metaKey) mods.push('Win/Cmd');
+      document.getElementById('stat-modifiers').innerText = mods.length > 0 ? mods.join(' + ') : 'None';
+
+      // History Log Entry
+      addKeyLog(e.key === ' ' ? 'Space' : e.key);
+
+      playCutePop(500);
+    });
+
+    window.addEventListener('keyup', (e) => {
+      const keyEl = document.getElementById(`key-${e.code}`);
+      if (keyEl) {
+        keyEl.classList.remove('key-pressed');
+      }
+    });
+
+    /* Key Log Feed Append */
+    function addKeyLog(keyName) {
+      const logContainer = document.getElementById('key-log');
+      if (logContainer.children[0]?.tagName === 'SPAN' && logContainer.children[0].innerText.includes('Press any key')) {
+        logContainer.innerHTML = '';
+      }
+
+      const badge = document.createElement('div');
+      badge.className = 'px-3 py-1 bg-pink-100 text-pink-700 border border-pink-200 rounded-xl whitespace-nowrap animate-pulse flex-shrink-0';
+      badge.innerText = keyName;
+
+      logContainer.prepend(badge);
+
+      if (logContainer.children.length > 15) {
+        logContainer.removeChild(logContainer.lastChild);
+      }
+    }
+
+    /* Prevent Context Menu Globally Inside App for Mouse Right-Click Testing */
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+    });
+
+    /* Handle Mouse Events */
+    const mousePad = document.getElementById('mouse-pad');
+    
+    window.addEventListener('mousedown', (e) => {
+      const btnId = `mouse-btn-${e.button}`;
+      const btnEl = document.getElementById(btnId);
+
+      if (btnEl) {
+        btnEl.classList.add('bg-pink-400', 'text-white', 'border-pink-500', 'shadow-md', 'scale-95');
+      }
+
+      const clickNames = { 0: 'Left Click (LMB)', 1: 'Middle Click (MMB)', 2: 'Right Click (RMB)', 3: 'Back (Side 1)', 4: 'Forward (Side 2)' };
+      document.getElementById('stat-last-click').innerText = clickNames[e.button] || `Button ${e.button}`;
+
+      // Double Click Speed Measurement
+      const now = performance.now();
+      if (lastClickTime > 0) {
+        const diff = Math.round(now - lastClickTime);
+        if (diff < 1000) {
+          document.getElementById('stat-click-speed').innerText = `${diff} ms`;
+        }
+      }
+      lastClickTime = now;
+
+      playCutePop(380);
+    });
+
+    window.addEventListener('mouseup', (e) => {
+      const btnId = `mouse-btn-${e.button}`;
+      const btnEl = document.getElementById(btnId);
+      if (btnEl) {
+        btnEl.classList.remove('bg-pink-400', 'text-white', 'border-pink-500', 'shadow-md', 'scale-95');
+      }
+    });
+
+    /* Scroll Wheel Event */
+    window.addEventListener('wheel', (e) => {
+      scrollTotal++;
+      document.getElementById('stat-scroll-count').innerText = scrollTotal;
+
+      const dir = e.deltaY < 0 ? 'Scroll Up ⬆️' : 'Scroll Down ⬇️';
+      document.getElementById('stat-scroll-dir').innerText = dir;
+
+      const indicator = document.getElementById('scroll-indicator');
+      indicator.style.opacity = '1';
+      indicator.innerText = e.deltaY < 0 ? '⬆️' : '⬇️';
+
+      setTimeout(() => {
+        indicator.style.opacity = '0';
+      }, 300);
+
+      playCutePop(650);
+    }, { passive: true });
+
+    /* Mouse Position Movement */
+    window.addEventListener('mousemove', (e) => {
+      document.getElementById('mouse-x').innerText = e.clientX;
+      document.getElementById('mouse-y').innerText = e.clientY;
+    });
+
+    /* Reset All States */
+    function resetAll() {
+      testedKeys.clear();
+      document.querySelectorAll('.key-btn').forEach(el => {
+        el.className = el.className.replace(/key-pressed|key-tested/g, '').trim();
+      });
+
+      document.getElementById('stat-key').innerText = '-';
+      document.getElementById('stat-code').innerText = '-';
+      document.getElementById('stat-keycode').innerText = '-';
+      document.getElementById('stat-location').innerText = '-';
+      document.getElementById('stat-modifiers').innerText = 'None';
+      document.getElementById('stat-count').innerText = `0 / ${totalKeyCount}`;
+
+      document.getElementById('stat-scroll-dir').innerText = '-';
+      document.getElementById('stat-scroll-count').innerText = '0';
+      document.getElementById('stat-last-click').innerText = 'None';
+      document.getElementById('stat-click-speed').innerText = '0 ms';
+      scrollTotal = 0;
+
+      document.getElementById('key-log').innerHTML = '<span class="text-slate-300 italic font-normal text-xs">Press any key on your keyboard to start testing...</span>';
+      
+      playCutePop(300);
+    }
+
+    // Initialize layout on ready
+    buildKeyboard();
+  </script>
+</body>
+</html>
