@@ -101,6 +101,19 @@
       font-size: 11px;
       color: var(--text-muted);
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cache-badge {
+      background: var(--mint-bg);
+      color: var(--mint-main);
+      border: 1px solid var(--mint-light);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
     }
 
     /* --- Tabs & Buttons --- */
@@ -389,7 +402,9 @@
         <div class="brand-icon">✨</div>
         <div>
           <div class="brand-title">CuteKey & Click</div>
-          <div class="brand-sub">Ultra Fast Input Hardware Tester</div>
+          <div class="brand-sub">
+            Ultra Fast Hardware Tester <span class="cache-badge">💾 Auto Cached</span>
+          </div>
         </div>
       </div>
 
@@ -402,7 +417,7 @@
       <!-- Actions -->
       <div style="display: flex; gap: 8px;">
         <button id="sound-btn" onclick="toggleSound()" class="btn btn-action">🔊 Sound: ON</button>
-        <button onclick="resetAll()" class="btn btn-reset">🔄 Reset</button>
+        <button onclick="resetAll()" class="btn btn-reset">🔄 Reset All</button>
       </div>
     </header>
 
@@ -512,7 +527,7 @@
 
   </div>
 
-  <!-- JAVASCRIPT - FAST & LIGHTWEIGHT -->
+  <!-- JAVASCRIPT - FAST & LOCALSTORAGE CACHED -->
   <script>
     // Layout Data Definition
     const layout = [
@@ -554,7 +569,7 @@
       ]
     ];
 
-    // Pre-cached DOM Elements Map (Sub-millisecond lookup speed)
+    // Pre-cached DOM Elements Map
     const keyNodes = new Map();
     const testedKeys = new Set();
     let totalKeys = 0;
@@ -571,6 +586,37 @@
     const elMods = document.getElementById('stat-modifiers');
     const elCount = document.getElementById('stat-count');
     const elLog = document.getElementById('key-log');
+
+    // --- LOCAL STORAGE CACHE HELPERS ---
+    const CACHE_KEY_TESTED = 'cutekey_tested_keys';
+    const CACHE_KEY_SOUND = 'cutekey_sound_pref';
+
+    function saveCache() {
+      try {
+        localStorage.setItem(CACHE_KEY_TESTED, JSON.stringify(Array.from(testedKeys)));
+        localStorage.setItem(CACHE_KEY_SOUND, soundOn);
+      } catch (e) {}
+    }
+
+    function loadCache() {
+      try {
+        const savedSound = localStorage.getItem(CACHE_KEY_SOUND);
+        if (savedSound !== null) {
+          soundOn = savedSound === 'true';
+          document.getElementById('sound-btn').textContent = soundOn ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+        }
+
+        const savedKeys = JSON.parse(localStorage.getItem(CACHE_KEY_TESTED) || '[]');
+        if (Array.isArray(savedKeys)) {
+          savedKeys.forEach(code => {
+            testedKeys.add(code);
+            const node = keyNodes.get(code);
+            if (node) node.classList.add('tested');
+          });
+          elCount.textContent = `${testedKeys.size} / ${totalKeys}`;
+        }
+      } catch (e) {}
+    }
 
     // Build Layout & Cache Elements
     function initKeyboard() {
@@ -597,6 +643,7 @@
       });
 
       elCount.textContent = `0 / ${totalKeys}`;
+      loadCache(); // Load saved state from device memory
     }
 
     // Audio Feedback
@@ -618,7 +665,7 @@
       osc.stop(audioCtx.currentTime + 0.05);
     }
 
-    // Keydown Listener (Ultra Fast $O(1)$)
+    // Keydown Listener
     window.addEventListener('keydown', (e) => {
       if (['Tab', 'Space', 'AltLeft', 'AltRight', 'F5'].includes(e.code)) {
         e.preventDefault();
@@ -631,6 +678,7 @@
           testedKeys.add(e.code);
           node.classList.add('tested');
           elCount.textContent = `${testedKeys.size} / ${totalKeys}`;
+          saveCache(); // Auto save to device cache
         }
       }
 
@@ -647,7 +695,6 @@
       if (e.metaKey) mods.push('Win');
       elMods.textContent = mods.length ? mods.join('+') : 'None';
 
-      // Log Badge Update
       addLogBadge(e.key === ' ' ? 'Space' : e.key);
       playBeep(520);
     });
@@ -726,10 +773,13 @@
     function toggleSound() {
       soundOn = !soundOn;
       document.getElementById('sound-btn').textContent = soundOn ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+      saveCache();
     }
 
     function resetAll() {
       testedKeys.clear();
+      localStorage.removeItem(CACHE_KEY_TESTED); // Clear device cache
+
       keyNodes.forEach(node => node.classList.remove('pressed', 'tested'));
       
       elKey.textContent = '-';
@@ -745,6 +795,23 @@
       document.getElementById('stat-scroll-dir').textContent = '-';
       document.getElementById('stat-last-click').textContent = 'None';
       document.getElementById('stat-click-speed').textContent = '0 ms';
+    }
+
+    // --- SERVICE WORKER INSTANT REFRESH CACHE REGISTRATION ---
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        const swCode = `
+          const CACHE_NAME = 'cutekey-cache-v1';
+          self.addEventListener('install', e => {
+            e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(['./'])));
+          });
+          self.addEventListener('fetch', e => {
+            e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
+          });
+        `;
+        const blob = new Blob([swCode], { type: 'application/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+      });
     }
 
     // Startup
