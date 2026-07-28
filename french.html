@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Décalage de l'Évolution — Neuroscience & Psychologie</title>
+  
+  <!-- Fonts Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07090e;
+      --surface: #0e131f;
+      --surface-border: rgba(255, 255, 255, 0.08);
+      --surface-hover: rgba(255, 255, 255, 0.12);
+      
+      --accent-orange: #ff6b35;
+      --accent-orange-glow: rgba(255, 107, 53, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-purple: #a855f7;
+      
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --font-ui: 'Plus Jakarta Sans', sans-serif;
+      --font-serif: 'Newsreader', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Background Ambient Glows */
+    .glow-bg {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-orange-glow) 0%, rgba(0,0,0,0) 70%);
+      top: -100px;
+      right: -100px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-bg-2 {
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, rgba(0,0,0,0) 70%);
+      bottom: -200px;
+      left: -200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-purple));
+      width: 0%;
+      z-index: 100;
+      transition: width 0.1s ease-out;
+    }
+
+    /* Hero Section */
+    header {
+      padding: 6rem 0 3rem;
+      text-align: center;
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      background: rgba(255, 107, 53, 0.1);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      color: var(--accent-orange);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span {
+      font-style: italic;
+      color: var(--accent-orange);
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 2rem;
+    }
+
+    .reading-time {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Section Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .quote-box {
+      border-left: 4px solid var(--accent-orange);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      background: rgba(255, 107, 53, 0.04);
+      border-radius: 0 16px 16px 0;
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #fff;
+    }
+
+    /* Timeline / Thought Experiment */
+    .timeline-header {
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+
+    .timeline-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 2rem 0;
+      padding-left: 2rem;
+      border-left: 2px solid var(--surface-border);
+    }
+
+    .step {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-orange);
+      box-shadow: 0 0 10px var(--accent-orange);
+    }
+
+    .step-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .step h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      color: var(--text-muted);
+    }
+
+    /* Big Highlight Banner */
+    .banner-highlight {
+      background: linear-gradient(135deg, rgba(255,107,53,0.15) 0%, rgba(168,85,247,0.15) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .banner-highlight h2 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    /* Science Grid (Karl Friston) */
+    .science-card {
+      background: rgba(14, 19, 31, 0.8);
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .scientist-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--surface-border);
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .scientist-info h4 {
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .scientist-info p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* Interactive Quiz / Reflection Widget */
+    .interactive-widget {
+      background: var(--surface);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .btn-action {
+      background: var(--accent-orange);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 1rem;
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-orange-glow);
+    }
+
+    .result-box {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      color: var(--accent-cyan);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 4rem 0 2rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--surface-border);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Ambient Glows -->
+  <div class="glow-bg"></div>
+  <div class="glow-bg-2"></div>
+
+  <div class="container">
+    
+    <!-- Hero Header -->
+    <header class="fade-in">
+      <div class="meta-tag">🧠 Neuroscience & Psychologie</div>
+      <h1>Avez-vous l'impression que quelque chose <span>ne tourne pas rond</span> dans le monde ?</h1>
+      <p class="subtitle">Une réponse surprenante venue des sciences cognitives qui explique enfin notre malaise moderne.</p>
+      <div class="reading-time">
+        <span>⏱️ Temps de lecture : 3 min</span>
+      </div>
+    </header>
+
+    <!-- Part 1: The Modern Malaise -->
+    <section class="card fade-in">
+      <p>Avez-vous déjà eu le sentiment que le monde n'est plus ce qu'il était ?</p>
+      <p style="margin-top: 1rem;">Tout change si vite que nous avons parfois l'impression de simplement <strong>survivre</strong>, sans vraiment vivre. Notifications incessantes, délais étouffants, réseaux sociaux, e-mails et stress omniprésent... pourtant, au fond de nous, persiste une étrange sensation :</p>
+      
+      <div class="quote-box">
+        « Bon sang... il y a quelque chose qui cloche. »
+      </div>
+
+      <p>Et le plus intéressant ? Le problème ne vient peut-être pas du monde lui-même, mais plutôt du <strong>décalage biologique</strong> entre notre cerveau et l'environnement moderne.</p>
+    </section>
+
+    <!-- Part 2: The Thought Experiment -->
+    <section>
+      <div class="timeline-header">
+        <span class="meta-tag">💡 Expérience de Pensée</span>
+        <h2 class="timeline-title">Le Voyageur du Temps</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="step">
+          <div class="step-badge">Il y a 150 000 ans</div>
+          <h3>La Savane Africaine</h3>
+          <p>Un chasseur parcourt la savane, sa lance à la main. Alors qu'il poursuit un gibier, il aperçoit une étrange machine scintillante équipée d'un siège. Poussé par la curiosité, il s'assoit...</p>
+        </div>
+
+        <div class="step">
+          <div class="step-badge">Téléportation Instantanée</div>
+          <h3>Arrivée en l'an 2026</h3>
+          <p>Il est propulsé en plein centre-ville moderne. Lorsqu'il ouvre les yeux, des personnes lui ressemblant trait pour trait sont assises autour de lui.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-badge">Le Choc Sensoriel</div>
+          <h3>L'Isolement Hyperconnecté</h3>
+          <p>Personne ne se parle. Tout le monde a la tête baissée, le regard rivé sur un rectangle lumineux. Il se demande : <em>« Pourquoi ces gens ne chassent-ils pas ? Pourquoi ne se parlent-ils pas ? »</em></p>
+        </div>
+
+        <div class="step">
+          <div class="step-badge">La Surcharge</div>
+          <h3>L'Effondrement</h3>
+          <p>Dehors : circulation, klaxons, panneaux lumineux, fumée, distractions. Son cerveau sature en quelques secondes. Il s'effondre avec une seule pensée : <strong>« Qu'est-il arrivé à ce monde ? »</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 3: The Big Reveal Banner -->
+    <div class="banner-highlight">
+      <h2>La vérité, c'est que... ce chasseur, c'est NOUS.</h2>
+      <p style="color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto;">
+        La seule différence entre ce chasseur et nous réside dans nos vêtements et notre technologie. Nos corps se sont modernisés, mais notre cerveau est resté le même qu'il y a <strong>300 000 ans</strong>.
+      </p>
+    </div>
+
+    <!-- Part 4: The Science - Karl Friston -->
+    <section class="card">
+      <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1rem;">Pourquoi notre cerveau sature-t-il ?</h2>
+      <p>L'évolution n'a pas suivi le rythme des transformations environnementales. Nous vivons avec un matériel biologique préhistorique dans un monde ultra-futuriste.</p>
+
+      <div class="science-card">
+        <div class="scientist-profile">
+          <div class="avatar">KF</div>
+          <div class="scientist-info">
+            <h4>Karl Friston</h4>
+            <p>Neuroscientifique & Créateur du principe de l'Énergie Libre</p>
+          </div>
+        </div>
+        
+        <h3 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">Notre cerveau est une « Machine à Prédire »</h3>
+        <p style="font-size: 0.95rem; color: var(--text-muted);">
+          Selon Karl Friston, le cerveau ne traite pas chaque information brute en temps réel. S'il le faisait, il consommerait tellement d'énergie que nous serions épuisés en quelques minutes.
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.8rem;">
+          À la place, il utilise un raccourci : <strong>il prédit le futur proche en se basant sur le passé.</strong>
+        </p>
+      </div>
+
+      <div style="margin-top: 1.5rem; background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--accent-purple);">
+        <p style="font-size: 0.95rem;">
+          ⚡ <strong>Le Bug Moderne :</strong> Le cerveau se dit <em>« Ce qui s'est produit auparavant se reproduira probablement »</em> pour économiser de l'énergie. Mais lorsque le monde change trop vite, les prédictions échouent en permanence, provoquant un stress et un épuisement cognitif chronique.
+        </p>
+      </div>
+    </section>
+
+    <!-- Interactive Self-Reflection -->
+    <div class="interactive-widget">
+      <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.5rem;">Ressentez-vous ce décalage au quotidien ?</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Testez votre niveau de surcharge cognitive liée au monde moderne :</p>
+      
+      <button class="btn-action" onclick="analyzeState()">Découvrir l'analyse ⚡</button>
+
+      <div class="result-box" id="resultBox">
+        ✨ <strong>Verdict Scientifique :</strong> Ce sentiment d'épuisement n'est pas une faiblesse personnelle. C'est la réaction normale d'un cerveau de 300 000 ans qui tente d'analyser un flux d'informations pour lequel il n'a jamais été programmé.
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Projet éditorial inspiré des sciences cognitives et du modèle du cerveau prédictif.</p>
+      <p style="margin-top: 6px; color: var(--text-dim);">An 2026 • Fait avec passion pour l'esprit humain.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Scroll Progress Bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+
+    // Interactive Button Action
+    function analyzeState() {
+      const box = document.getElementById('resultBox');
+      box.style.display = 'block';
+      box.style.animation = 'fadeIn 0.5s ease forwards';
+    }
+  </script>
+</body>
+</html>
