@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FontCutie 💖 — Cute & Fast Font Tester</title>
+  <!-- Fast Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Cute Pastel Palette */
+      --bg-gradient: linear-gradient(135deg, #fff0f6 0%, #e7f5ff 50%, #f3d9fa 100%);
+      --pink-accent: #ff85a2;
+      --pink-soft: #ffe3ec;
+      --purple-accent: #9c88ff;
+      --purple-soft: #f3f0ff;
+      --mint-accent: #38d9a9;
+      --mint-soft: #e6fcf5;
+      --yellow-accent: #ffd43b;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(255, 255, 255, 0.9);
+      --text-main: #343a40;
+      
+      /* Preview Dynamic Variables */
+      --preview-font: 'Fredoka', sans-serif;
+      --preview-size: 28px;
+      --preview-weight: 400;
+      --preview-spacing: 0px;
+      --preview-lh: 1.4;
+      --preview-color: #2b2d42;
+      --preview-bg: #ffffff;
+      --preview-align: left;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* --- Cute Header --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .logo {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--pink-accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-shadow: 2px 2px 0px #ffe3ec;
+    }
+
+    .badge {
+      background: var(--mint-soft);
+      color: #0ca678;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      border: 1px solid #b2f2bb;
+    }
+
+    .btn-get-css {
+      background: var(--pink-accent);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 133, 162, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-get-css:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 133, 162, 0.5);
+    }
+
+    /* --- Main Layout --- */
+    .app-container {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      flex: 1;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* --- Sidebar Controls --- */
+    .sidebar {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 1.5rem;
+      border: 2px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(156, 136, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      color: #495057;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Custom Font Upload Box */
+    .upload-zone {
+      border: 2px dashed var(--pink-accent);
+      background: var(--pink-soft);
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .upload-zone:hover {
+      background: #ffd8e4;
+      transform: scale(1.01);
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .upload-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #d6336c;
+    }
+
+    /* Form Controls */
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #5c5f66;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 2px solid #e9ecef;
+      background: white;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--purple-accent);
+    }
+
+    /* Range Sliders */
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--pink-accent);
+    }
+
+    /* Quick Color Palette Chips */
+    .color-pickers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .color-picker-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      padding: 6px 10px;
+      border-radius: 12px;
+      border: 1px solid #dee2e6;
+    }
+
+    .color-picker-item input[type="color"] {
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      cursor: pointer;
+      background: none;
+    }
+
+    /* Device Switcher Pills */
+    .device-pills {
+      display: flex;
+      background: #f1f3f5;
+      padding: 4px;
+      border-radius: 16px;
+      gap: 4px;
+    }
+
+    .device-btn {
+      flex: 1;
+      border: none;
+      padding: 8px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: transparent;
+      color: #6c757d;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .device-btn.active {
+      background: white;
+      color: var(--purple-accent);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    /* Quick Sample Text Buttons */
+    .samples-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      background: var(--purple-soft);
+      color: var(--purple-accent);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chip:hover {
+      background: #e5dbff;
+    }
+
+    /* --- Preview Canvas & Device Viewports --- */
+    .viewport-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    /* Animated Frame Container */
+    .device-frame {
+      background: var(--preview-bg);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 8px solid #2b2d42;
+      width: 100%;
+      min-height: 500px;
+    }
+
+    /* Mockup Header Bar */
+    .device-bar {
+      height: 36px;
+      background: #2b2d42;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .device-label {
+      color: #a0aab8;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Device Mode Sizing */
+    .mode-laptop {
+      width: 100%;
+      max-width: 960px;
+      border-radius: 20px;
+    }
+
+    .mode-tablet {
+      width: 640px;
+      border-radius: 28px;
+    }
+
+    .mode-mobile {
+      width: 375px;
+      min-height: 667px;
+      border-radius: 36px;
+    }
+
+    /* Editable Text Box inside Frame */
+    .preview-editable {
+      padding: 2.5rem;
+      outline: none;
+      flex: 1;
+      font-family: var(--preview-font);
+      font-size: var(--preview-size);
+      font-weight: var(--preview-weight);
+      letter-spacing: var(--preview-spacing);
+      line-height: var(--preview-lh);
+      color: var(--preview-color);
+      text-align: var(--preview-align);
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 999;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 24px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    pre {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid #e9ecef;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .app-container {
+        grid-template-columns: 1fr;
+      }
+      .mode-tablet, .mode-mobile {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      ✨ FontCutie <span style="font-size: 1.2rem;">💖</span>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <span class="badge">⚡ Ultra Fast & Local</span>
+      <button class="btn-get-css" onclick="toggleModal(true)">Copy CSS 📋</button>
+    </div>
+  </header>
+
+  <!-- App Body -->
+  <div class="app-container">
+    
+    <!-- Sidebar Controls -->
+    <aside class="sidebar">
+      
+      <!-- 1. Custom Font Upload -->
+      <div>
+        <div class="section-title">☁️ 1. Test Any Font File</div>
+        <div class="upload-zone" id="dropZone">
+          <span class="upload-icon">📁</span>
+          <div class="upload-text">Click or Drag & Drop Font Here</div>
+          <div style="font-size: 0.7rem; color: #868e96; margin-top: 4px;">.TTF, .OTF, .WOFF, .WOFF2</div>
+          <input type="file" id="fontFileInput" accept=".ttf,.otf,.woff,.woff2">
+        </div>
+      </div>
+
+      <!-- 2. Web Font Selector -->
+      <div class="control-group">
+        <div class="section-title">🌸 Or Pick Cute Web Fonts</div>
+        <select id="googleFontSelect">
+          <option value="Fredoka">Fredoka (Bubble Cute)</option>
+          <option value="Comic Neue">Comic Neue (Friendly)</option>
+          <option value="Pacifico">Pacifico (Handwritten)</option>
+          <option value="Itim">Itim (Playful Casual)</option>
+          <option value="Caveat">Caveat (Cute Script)</option>
+          <option value="Quicksand">Quicksand (Rounded Clean)</option>
+          <option value="Sniglet">Sniglet (Cute Marker)</option>
+          <option value="Bubblegum Sans">Bubblegum Sans (Sweet)</option>
+        </select>
+      </div>
+
+      <!-- 3. Device Mockup Selector -->
+      <div class="control-group">
+        <div class="section-title">📱 2. Device Viewport</div>
+        <div class="device-pills">
+          <button class="device-btn active" onclick="setDevice('laptop', this)">💻 Laptop</button>
+          <button class="device-btn" onclick="setDevice('tablet', this)">📑 Tablet</button>
+          <button class="device-btn" onclick="setDevice('mobile', this)">📱 Mobile</button>
+        </div>
+      </div>
+
+      <!-- 4. Typography Controls -->
+      <div class="control-group">
+        <div class="section-title">🎨 3. Styling & Metrics</div>
+        
+        <label>Font Size <span id="valSize">28px</span></label>
+        <input type="range" id="sliderSize" min="12" max="96" value="28">
+
+        <label>Letter Spacing <span id="valSpacing">0px</span></label>
+        <input type="range" id="sliderSpacing" min="-2" max="15" value="0" step="0.5">
+
+        <label>Line Height <span id="valLH">1.4</span></label>
+        <input type="range" id="sliderLH" min="0.8" max="2.5" value="1.4" step="0.1">
+
+        <label>Font Weight</label>
+        <select id="selectWeight">
+          <option value="300">Light (300)</option>
+          <option value="400" selected>Normal (400)</option>
+          <option value="600">Semi-Bold (600)</option>
+          <option value="700">Bold (700)</option>
+        </select>
+      </div>
+
+      <!-- 5. Colors -->
+      <div class="control-group">
+        <label>Color Palette</label>
+        <div class="color-pickers">
+          <div class="color-picker-item">
+            <input type="color" id="textColor" value="#2b2d42">
+            <span style="font-size: 0.75rem; font-weight: 700;">Text</span>
+          </div>
+          <div class="color-picker-item">
+            <input type="color" id="bgColor" value="#ffffff">
+            <span style="font-size: 0.75rem; font-weight: 700;">Background</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Quick Sample Texts -->
+      <div class="control-group">
+        <label>Quick Texts</label>
+        <div class="samples-grid">
+          <button class="chip" onclick="setSample('alphabet')">Aa-Zz</button>
+          <button class="chip" onclick="setSample('pangram')">Fox Pangram</button>
+          <button class="chip" onclick="setSample('cute')">Cute Emojis ✨</button>
+          <button class="chip" onclick="setSample('heading')">Headline & Body</button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Main Live Device Canvas -->
+    <main class="viewport-area">
+      <div class="device-frame mode-laptop" id="deviceFrame">
+        <!-- Mockup Top Bar -->
+        <div class="device-bar">
+          <div class="dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+          <div class="device-label" id="deviceLabel">Laptop Mode (Responsive View)</div>
+          <div style="width: 30px;"></div>
+        </div>
+
+        <!-- Editable Preview Box -->
+        <div class="preview-editable" id="previewText" contenteditable="true" spellcheck="false">
+Welcome to FontCutie! ✨
+
+Upload any font (.ttf, .otf, .woff) or pick a preset font to see how your typography renders on Mobile, Tablet, and Laptop displays!
+
+Click anywhere inside this frame to edit this text freely 💖.
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- CSS Code Export Modal -->
+  <div class="modal-overlay" id="cssModal">
+    <div class="modal-card">
+      <h3 style="font-family: 'Fredoka'; color: var(--pink-accent);">Your CSS Snippet ✂️</h3>
+      <p style="font-size: 0.85rem; color: #6c757d; margin-top: 4px;">Copy and paste this CSS snippet into your stylesheet:</p>
+      <pre id="cssCodeBox">/* Generated CSS */</pre>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="chip" style="padding: 10px 16px;" onclick="toggleModal(false)">Close</button>
+        <button class="btn-get-css" onclick="copyCSS()">Copy Code 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    // Elements
+    const root = document.documentElement;
+    const fontFileInput = document.getElementById('fontFileInput');
+    const googleFontSelect = document.getElementById('googleFontSelect');
+    const previewText = document.getElementById('previewText');
+    const deviceFrame = document.getElementById('deviceFrame');
+    const deviceLabel = document.getElementById('deviceLabel');
+
+    // Controls
+    const sliderSize = document.getElementById('sliderSize');
+    const sliderSpacing = document.getElementById('sliderSpacing');
+    const sliderLH = document.getElementById('sliderLH');
+    const selectWeight = document.getElementById('selectWeight');
+    const textColor = document.getElementById('textColor');
+    const bgColor = document.getElementById('bgColor');
+
+    let currentFontName = "'Fredoka', sans-serif";
+
+    // --- 1. Custom Font Upload Handler ---
+    fontFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const fontName = 'CustomFont_' + Date.now();
+      const reader = new FileReader();
+
+      reader.onload = function(evt) {
+        const font = new FontFace(fontName, evt.target.result);
+        font.load().then((loadedFont) => {
+          document.fonts.add(loadedFont);
+          currentFontName = `"${fontName}"`;
+          root.style.setProperty('--preview-font', currentFontName);
+          alert(`✨ Super! Custom font "${file.name}" loaded successfully!`);
+        }).catch(err => {
+          alert("Oops! Could not load this font file. Make sure it's a valid TTF/OTF/WOFF file.");
+        });
+      };
+      reader.readAsArrayBuffer(file);
+    });
+
+    // --- 2. Google Fonts Dynamic Loader ---
+    googleFontSelect.addEventListener('change', (e) => {
+      const selectedFont = e.target.value;
+      const fontUrlName = selectedFont.replace(/ /g, '+');
+      
+      // Dynamic link creation for ultra-fast async load
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://fonts.googleapis.com/css2?family=${fontUrlName}:wght@300;400;600;700&display=swap`;
+      document.head.appendChild(link);
+
+      currentFontName = `'${selectedFont}', sans-serif`;
+      root.style.setProperty('--preview-font', currentFontName);
+    });
+
+    // --- 3. Live Slider Controls ---
+    sliderSize.addEventListener('input', (e) => {
+      root.style.setProperty('--preview-size', e.target.value + 'px');
+      document.getElementById('valSize').innerText = e.target.value + 'px';
+    });
+
+    sliderSpacing.addEventListener('input', (e) => {
+      root.style.setProperty('--preview-spacing', e.target.value + 'px');
+      document.getElementById('valSpacing').innerText = e.target.value + 'px';
+    });
+
+    sliderLH.addEventListener('input', (e) => {
+      root.style.setProperty('--preview-lh', e.target.value);
+      document.getElementById('valLH').innerText = e.target.value;
+    });
+
+    selectWeight.addEventListener('change', (e) => {
+      root.style.setProperty('--preview-weight', e.target.value);
+    });
+
+    textColor.addEventListener('input', (e) => {
+      root.style.setProperty('--preview-color', e.target.value);
+    });
+
+    bgColor.addEventListener('input', (e) => {
+      root.style.setProperty('--preview-bg', e.target.value);
+    });
+
+    // --- 4. Device Viewport Switcher ---
+    function setDevice(mode, btn) {
+      document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      deviceFrame.className = 'device-frame mode-' + mode;
+      
+      if (mode === 'laptop') deviceLabel.innerText = "Laptop Mode (960px)";
+      if (mode === 'tablet') deviceLabel.innerText = "Tablet Mode (640px)";
+      if (mode === 'mobile') deviceLabel.innerText = "Mobile Mode (375px)";
+    }
+
+    // --- 5. Quick Text Samples ---
+    function setSample(type) {
+      if (type === 'alphabet') {
+        previewText.innerText = "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789 !@#$%^&*()";
+      } else if (type === 'pangram') {
+        previewText.innerText = "The quick brown fox jumps over the lazy dog.\n\nPACK MY BOX WITH FIVE DOZEN LIQUOR JUGS.";
+      } else if (type === 'cute') {
+        previewText.innerText = "✨ Sweet Dreams & Pastel Clouds 🌸\n\nStay creative, love design, and make everything cute! 🧸💖🧋";
+      } else if (type === 'heading') {
+        previewText.innerText = "Design the Future 🚀\n\nTypography is the craft of endowing human language with a durable visual form. Good fonts make reading feel effortless and delightful.";
+      }
+    }
+
+    // --- 6. Modal & CSS Generator ---
+    function toggleModal(show) {
+      const modal = document.getElementById('cssModal');
+      if (show) {
+        modal.classList.add('active');
+        generateCSS();
+      } else {
+        modal.classList.remove('active');
+      }
+    }
+
+    function generateCSS() {
+      const css = `.cute-text-style {
+  font-family: ${currentFontName};
+  font-size: ${sliderSize.value}px;
+  font-weight: ${selectWeight.value};
+  letter-spacing: ${sliderSpacing.value}px;
+  line-height: ${sliderLH.value};
+  color: ${textColor.value};
+  background-color: ${bgColor.value};
+}`;
+      document.getElementById('cssCodeBox').innerText = css;
+    }
+
+    function copyCSS() {
+      const cssText = document.getElementById('cssCodeBox').innerText;
+      navigator.clipboard.writeText(cssText);
+      alert('📋 CSS copied to clipboard successfully!');
+      toggleModal(false);
+    }
+  </script>
+</body>
+</html>
