@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & METADATA -->
+    <title>Basketball Stars Unblocked - Play Free 1v1 Basketball Game 🏀</title>
+    <meta name="description" content="Dominate the court in Basketball Stars Unblocked! Play epic 1v1 and 2v2 basketball matches, perform crazy slam dunks, and activate super shots online for free.">
+    
+    <!-- Optimized Keywords -->
+    <meta name="keywords" content="basketball stars unblocked, basketball stars, basketball stars online, basketball stars github, basketball stars unblocked 76, basketball stars unblocked 66, 1v1 basketball game, unblocked sports games, play basketball stars free">
+    
+    <!-- CANONICAL TAG REMOVED AS REQUESTED -->
+
+    <!-- FAVICON -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
+
+    <!-- GOOGLE FONTS (Fredoka & Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+
+
+    <!-- GOOGLE ADSENSE -->
+    <meta name="google-adsense-account" content="YOUR_ADSENSE_ID_HERE">
+
+
+    <!-- OPTIMIZED SCHEMA MARKUP (Rich Snippets) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Basketball Stars Unblocked",
+      "description": "A popular 2-player basketball game featuring big-headed characters, slam dunks, head fakes, and super shot powers.",
+      "genre": ["Sports", "Arcade", "Basketball"],
+      "gamePlatform": "Web Browser",
+      "applicationCategory": "Game",
+      "operatingSystem": "Any",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "2150",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+
+    <style>
+        /* Vibrant Orange Theme Variables & Typography */
+        :root {
+            --primary: #f97316; /* Energetic Basketball Orange */
+            --primary-hover: #ea580c;
+            --bg: #fff7ed; /* Warm Light Orange/Peach Tint */
+            --text: #1c1917;
+            --border: #fed7aa;
+            --card-bg: #ffffff;
+            --overlay-bg: #ffedd5;
+            --accent-yellow: #facc15;
+            --font-head: 'Fredoka', cursive;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            padding: 15px;
+            /* Warm Orange Dot Pattern */
+            background-image: radial-gradient(#fb923c 1.3px, transparent 1.3px);
+            background-size: 22px 22px;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; width: 100%; }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.08);
+        }
+
+        .logo { 
+            font-family: var(--font-head);
+            font-weight: 700; 
+            font-size: 1.5rem; 
+            color: var(--primary); 
+            letter-spacing: -0.3px; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Responsive Game Wrapper */
+        .game-wrapper {
+            background: #1c1917;
+            width: 100%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            padding-bottom: 56.25%; 
+            position: relative;
+            box-shadow: 0 14px 35px rgba(249, 115, 22, 0.18);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid #ffffff;
+        }
+
+        iframe { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--overlay-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .btn-play {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-family: var(--font-head);
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-radius: 50px;
+            box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-play:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(249, 115, 22, 0.45);
+        }
+
+        .btn-play:active { transform: scale(0.96); }
+
+        /* Controls Section */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; 
+            align-items: center;
+            margin: 20px 0 15px;
+            gap: 15px;
+            background: var(--card-bg);
+            padding: 15px 20px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.06);
+        }
+
+        .status-label {
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .server-box { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        
+        .server-select {
+            padding: 10px 14px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            min-width: 130px;
+            outline: none;
+        }
+
+        /* Quick Controls Guide Banner */
+        .controls-banner {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.04);
+        }
+
+        .controls-title {
+            font-family: var(--font-head);
+            color: var(--primary);
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .key-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            font-size: 0.88rem;
+        }
+
+        .key-box {
+            background: var(--bg);
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .key-code {
+            background: #ffffff;
+            border: 1px solid #fdba74;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 800;
+            color: #c2410c;
+        }
+
+        /* SEO Footer Text */
+        .seo-text {
+            font-size: 0.9rem;
+            color: #78350f;
+            text-align: left;
+            line-height: 1.6;
+            background: var(--card-bg);
+            padding: 22px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.04);
+        }
+
+        .seo-text h2 {
+            font-family: var(--font-head);
+            color: var(--primary);
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+        }
+
+        .seo-text p {
+            margin-bottom: 12px;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            header { padding: 12px; margin-bottom: 15px; }
+            .logo { font-size: 1.2rem; }
+            .controls { flex-direction: column; align-items: stretch; text-align: center; padding: 15px 12px; }
+            .server-box { justify-content: center; width: 100%; }
+            .server-select { width: 100%; font-size: 16px; }
+            .btn-play { width: 100%; padding: 14px 20px; font-size: 1.15rem; justify-content: center; }
+            .game-wrapper { padding-bottom: 65%; border-radius: 16px; }
+            .controls-banner, .seo-text { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo">🏀 Basketball Stars <span style="color:#78350f; font-size:0.8em;">Unblocked</span></div>
+        <span style="font-family: var(--font-head); font-weight:700; font-size:0.8rem; background: var(--border); color: #c2410c; padding: 4px 12px; border-radius: 20px;">🔥 Arcade Edition</span>
+    </header>
+
+    <main>
+        <!-- GAME AREA -->
+        <div class="game-wrapper">
+            <iframe id="gameFrame" src="about:blank" title="Basketball Stars Unblocked Game" allowfullscreen></iframe>
+            <div id="overlay" class="overlay">
+                <div id="status" style="font-family: var(--font-head); font-weight: 700; font-size: 1.2rem; margin-bottom: 20px; color: var(--primary);">🔥 READY TO DUNK? PREPARING COURT...</div>
+                <div id="playAction" class="hidden">
+                    <button class="btn-play" onclick="startGame()">⚡ START HOOP MATCH</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTROLS & SERVER PANEL -->
+        <div class="controls">
+            <div class="status-label">ACTIVE NODE: <span id="activeGameTitle" style="color:var(--primary)">Selecting...</span></div>
+            <div class="server-box">
+                <select id="serverSelect" class="server-select" onchange="changeServer(this.value)" aria-label="Select Game Server"></select>
+            </div>
+        </div>
+
+        <!-- QUICK GAME CONTROLS GUIDE -->
+        <div class="controls-banner">
+            <div class="controls-title">🎮 Quick Controls Cheat-Sheet</div>
+            <div class="key-grid">
+                <div class="key-box">
+                    <span>Move / Jump (P1)</span>
+                    <span class="key-code">W A S D</span>
+                </div>
+                <div class="key-box">
+                    <span>Shoot / Steal (P1)</span>
+                    <span class="key-code">B Key</span>
+                </div>
+                <div class="key-box">
+                    <span>Super Shot (P1)</span>
+                    <span class="key-code">V Key</span>
+                </div>
+                <div class="key-box">
+                    <span>P2 Controls</span>
+                    <span class="key-code">Arrows + L / K</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO TEXT BLOCK -->
+        <div class="seo-text">
+            <h2>Master the Court in Basketball Stars Unblocked 🏀</h2>
+            <p>Welcome to the ultimate online court for <strong>Basketball Stars Unblocked</strong>! Experience high-octane 1v1 and 2v2 basketball matches right inside your web browser. Pick your legendary big-head player, execute slick pump fakes, steal the ball, and unleash fire dunks to outscore your rivals.</p>
+            <p>Whether you're searching for <em>Basketball Stars GitHub</em>, <em>1v1 Basketball Unblocked</em>, or quick unblocked games at school, our fast dedicated servers deliver instant, smooth, lag-free gameplay with no downloads needed!</p>
+        </div>
+
+    </main>
+</div>
+
+<!-- EXTERNAL CODE LINKING -->
+<script src="/codes.js"></script>
+
+<script>
+    // Configuration
+    const DEFAULT_GAME_URL = "https://gameinclassroom.github.io/basketball-stars/";
+    const JSON_URL = "https://sidgames.pages.dev/games.json"; 
+    const KEY = "2"; 
+    
+    let gameUrls = []; 
+    let currentUrl = DEFAULT_GAME_URL;
+
+    async function init() {
+        try {
+            const res = await fetch(`${JSON_URL}?t=${Date.now()}`);
+            if (!res.ok) throw new Error("Network response was not ok");
+            
+            const data = await res.json();
+            gameUrls = data[KEY] || [DEFAULT_GAME_URL];
+            
+            if(gameUrls.length > 0) { 
+                 document.getElementById('activeGameTitle').innerText = "Server 01 (Ready)";
+                 renderServerList();
+                 showPlayButton();
+             } else {
+                 throw new Error("No urls found");
+             }
+        } catch (e) {
+            console.log("Using default fallback server:", e);
+            gameUrls = [DEFAULT_GAME_URL];
+            document.getElementById('activeGameTitle').innerText = "Default Server (Ready)";
+            renderServerList();
+            showPlayButton();
+        }
+    }
+
+    function renderServerList() {
+        const select = document.getElementById('serverSelect');
+        select.innerHTML = gameUrls.map((url, i) => `<option value="${url}">Server 0${i + 1}</option>`).join('');
+        currentUrl = gameUrls[0] || DEFAULT_GAME_URL;
+    }
+
+    function showPlayButton() { 
+        document.getElementById('status').classList.add('hidden');
+        document.getElementById('playAction').classList.remove('hidden'); 
+    }
+
+    function changeServer(val) { 
+        currentUrl = val; 
+        const frame = document.getElementById('gameFrame');
+        if(document.getElementById('overlay').classList.contains('hidden')) {
+            frame.src = currentUrl;
+        }
+    }
+
+    function startGame() {
+        const frame = document.getElementById('gameFrame'); 
+        const overlay = document.getElementById('overlay');
+        
+        frame.src = currentUrl; 
+        overlay.innerHTML = `<div style="font-family: var(--font-head); color:var(--primary); font-weight: 700; letter-spacing: 1px;">KICKING OFF MATCH...</div>`;
+        
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+        }, 1200);
+    }
+
+    window.onload = init;
+</script>
+
+</body>
+</html>
