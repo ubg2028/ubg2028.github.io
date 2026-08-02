@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niraj's Blog - Minimal & Aesthetic Editorial</title>
+    <meta name="description" content="वेब डेवलपमेंट, मिनिमल डिज़ाइन और टेक्नोलॉजी से जुड़े आर्टिकल्स।">
+    
+    <!-- Aesthetic Google Font (Serif for Headings, Sans-Serif for Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- SEO Schema Markup (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Niraj's Blog",
+      "url": "https://yourdomain.com",
+      "description": "एक एस्थेटिक और मिनिमल ब्लॉग जहाँ आपको टेक्नोलॉजी की बेहतरीन जानकारियां मिलेंगी।",
+      "publisher": {
+        "@type": "Person",
+        "name": "Niraj",
+        "image": "https://via.placeholder.com/150"
+      }
+    }
+    </script>
+
+    <style>
+        /* CSS Variables - Fresh Aesthetic Theme */
+        :root {
+            --bg-primary: #FAF9F6;      /* Off-white / Alabaster (Aesthetic background) */
+            --bg-card: #ffffff;
+            --text-main: #1C1C1A;       /* Warm Charcoal */
+            --text-muted: #706E6B;      /* Soft Muted Gray */
+            --border-color: #E6E4E0;    /* Thin Warm Border */
+            --accent-dark: #2D4B3E;     /* Elegant Forest Green (Accent) */
+            --font-title: 'Lora', Georgia, serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Style - Editorial & Clean */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .menu-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            padding: 0.5rem 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-main);
+            border-radius: 4px; /* Minimal Sharp corners */
+        }
+
+        .menu-btn:hover {
+            background-color: #F3F1ED;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        /* Minimal Search Bar */
+        .search-container {
+            position: relative;
+            max-width: 260px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 0.5rem 0.5rem 2rem;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            outline: none;
+            background-color: transparent;
+        }
+
+        .search-input:focus {
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+        }
+
+        /* Minimal Dropdown Menu (No Slide Animation) */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(28, 28, 26, 0.3);
+            z-index: 200;
+            display: none; /* Instant Show/Hide */
+        }
+
+        .drawer-overlay.active {
+            display: block;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100%;
+            background-color: var(--bg-card);
+            z-index: 201;
+            border-right: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            display: none; /* Instant Show/Hide */
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .drawer.active {
+            display: flex;
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .drawer-menu a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-main);
+            font-family: var(--font-title);
+        }
+
+        .drawer-menu a:hover {
+            color: var(--accent-dark);
+            text-decoration: underline;
+        }
+
+        /* Main Container Layout */
+        .container {
+            max-width: 1100px;
+            margin: 3.5rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 4rem;
+        }
+
+        /* Minimal Blog Posts Section */
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .post-card {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2.5rem;
+        }
+
+        .post-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .post-title {
+            font-family: var(--font-title);
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+
+        .post-title a:hover {
+            color: var(--accent-dark);
+        }
+
+        .post-excerpt {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-body);
+        }
+
+        .post-footer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Aesthetic Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 6rem;
+            align-self: start;
+        }
+
+        .profile-card {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 4px; /* Sharp & Clean */
+            padding: 2.5rem 1.8rem;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 8px; /* Square with soft rounded corner - highly aesthetic */
+            object-fit: cover;
+            margin-bottom: 1.2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .profile-name {
+            font-family: var(--font-title);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
+        }
+
+        .profile-bio {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Horizontal Clean Footer */
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            margin-top: 6rem;
+            background-color: var(--bg-primary);
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-main);
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* Mobile Breakpoints */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .header {
+                padding: 1rem;
+            }
+            .search-container {
+                max-width: 150px;
+            }
+            .post-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Instant Overlay & Drawer (No animations, instant display change) -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <aside class="drawer" id="sideDrawer">
+        <div class="drawer-header">
+            <div class="logo">Niraj's Blog</div>
+            <button class="close-btn" id="closeDrawer" aria-label="Close menu">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <nav>
+            <ul class="drawer-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Articles</a></li>
+                <li><a href="#">Tutorials</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+                <!-- Minimal 2-Line Menu Icon -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>
+                <span>Menu</span>
+            </button>
+            <a href="#" class="logo">Niraj's Blog</a>
+        </div>
+
+        <div class="search-container">
+            <span class="search-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input type="text" class="search-input" id="searchInput" placeholder="सर्च करें...">
+        </div>
+    </header>
+
+    <!-- Grid Container -->
+    <div class="container">
+        <!-- Blog Posts -->
+        <main class="blog-posts" id="postsContainer">
+            <p style="color: var(--text-muted);">लोड हो रहा है...</p>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <!-- Aesthetic Square-ish Image -->
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&width=200&height=200&fit=crop" alt="Niraj" class="profile-img">
+                <h3 class="profile-name">Niraj</h3>
+                <p class="profile-bio">"नमस्ते! मैं नीरज हूँ। यहाँ मैं कोड, न्यू-एज डिज़ाइन और वेब टेक्नोलॉजी से जुड़ी एस्थेटिक और गहरी जानकारियां शेयर करता हूँ।"</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <nav>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+            <p class="copyright">&copy; 2026 Niraj's Blog. सभी अधिकार सुरक्षित।</p>
+        </div>
+    </footer>
+
+    <!-- Instant JS Logic (No Animation delays) -->
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const closeDrawer = document.getElementById('closeDrawer');
+        const sideDrawer = document.getElementById('sideDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const postsContainer = document.getElementById('postsContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        let blogPosts = [];
+
+        // 1. Instant Menu Toggle (Style Changed to Block/None, No Slow Transitions)
+        function openMenu() {
+            sideDrawer.style.display = 'flex';
+            drawerOverlay.style.display = 'block';
+        }
+
+        function closeMenu() {
+            sideDrawer.style.display = 'none';
+            drawerOverlay.style.display = 'none';
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeDrawer.addEventListener('click', closeMenu);
+        drawerOverlay.addEventListener('click', closeMenu);
+
+        // Fallback Data (Designed to fit the new aesthetic look)
+        const fallbackData = [
+            {
+                "id": 1,
+                "title": "Minimal UI डिज़ाइन के स्वर्णिम नियम",
+                "excerpt": "वेब डिज़ाइन में कम ही ज्यादा (Less is More) है। जानिए कैसे कम एलिमेंट्स और सही व्हाइटस्पेस (Whitespace) का उपयोग करके आप एक एस्थेटिक वेबसाइट बना सकते हैं...",
+                "category": "Design Theory",
+                "date": "Aug 02, 2026",
+                "readTime": "4 मिनट"
+            },
+            {
+                "id": 2,
+                "title": "CSS Grid का उपयोग कर आधुनिक ग्रिड सिस्टम बनाना",
+                "excerpt": "बिना किसी बाहरी फ्रेमवर्क के अपनी वेबसाइट को स्वच्छ, संरेखित और पूरी तरह से रिस्पॉन्सिव ग्रिड लेआउट में कैसे बदलें।",
+                "category": "Web Dev",
+                "date": "Jul 28, 2026",
+                "readTime": "7 मिनट"
+            },
+            {
+                "id": 3,
+                "title": "वेबसाइट स्पीड और रिस्पॉन्सिवनेस की सबसे आसान टिप्स",
+                "excerpt": "हैवी एनीमेशन और अनावश्यक लिपियों को हटाकर अपने वेब पेजों के लोडिंग टाइम को आधा करने के मुख्य तरीके।",
+                "category": "Performance",
+                "date": "Jul 15, 2026",
+                "readTime": "5 मिनट"
+            }
+        ];
+
+        // Render Posts
+        function displayPosts(posts) {
+            if (posts.length === 0) {
+                postsContainer.innerHTML = `<p style="text-align: center; padding: 3rem; color: var(--text-muted); font-family: var(--font-title); font-style: italic;">कोई आर्टिकल नहीं मिला...</p>`;
+                return;
+            }
+
+            postsContainer.innerHTML = posts.map(post => `
+                <article class="post-card">
+                    <span class="post-meta">${post.category}</span>
+                    <h2 class="post-title"><a href="#">${post.title}</a></h2>
+                    <p class="post-excerpt">${post.excerpt}</p>
+                    <div class="post-footer">
+                        <span>${post.date}</span>
+                        <span>•</span>
+                        <span>${post.readTime} रीड</span>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // Fetch JSON logic with instant fallback
+        async function loadBlogPosts() {
+            try {
+                const response = await fetch('posts.json');
+                if (!response.ok) throw new Error('Using fallback data');
+                blogPosts = await response.json();
+                displayPosts(blogPosts);
+            } catch (error) {
+                blogPosts = fallbackData;
+                displayPosts(blogPosts);
+            }
+        }
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const filteredPosts = blogPosts.filter(post => 
+                post.title.toLowerCase().includes(searchTerm) || 
+                post.excerpt.toLowerCase().includes(searchTerm) || 
+                post.category.toLowerCase().includes(searchTerm)
+            );
+            displayPosts(filteredPosts);
+        });
+
+        window.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
+</body>
+</html>
