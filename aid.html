@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Aplicativos Android de Código Aberto Essenciais 🌿 - Niraj's Blog</title>
+    <meta name="description" content="Descubra sete aplicativos fantásticos de código aberto para Android, totalmente gratuitos, sem anúncios e sem rastreamento!">
+    
+    <!-- Google Fonts for Cute Rounded Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                greenwich: '#1F4E3A',
+                greenwichLight: '#2A6F51',
+                mint: '#E3EFE9',
+                cream: '#F3F7F5',
+                charcoal: '#1B352B',
+                sage: '#567367',
+                peach: '#FDF0ED',
+                borderGreen: '#DBE7E1'
+              },
+              fontFamily: {
+                sans: ['Nunito', 'sans-serif'],
+              }
+            }
+          }
+        }
+    </script>
+
+    <!-- SEO Schema Markup (JSON-LD) for Blog Posting -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "7 Aplicativos Android de Código Aberto Essenciais (Livres de Anúncios e Rastreadores)",
+      "description": "Você está procurando aplicativos Android incríveis que sejam totalmente gratuitos, sem anúncios e sem rastreamento?",
+      "datePublished": "2026-08-02",
+      "author": {
+        "@type": "Person",
+        "name": "Niraj",
+        "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&width=200&height=200&fit=crop"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Niraj's Blog 🌿",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&width=200&height=200&fit=crop"
+        }
+      }
+    }
+    </script>
+</head>
+<body class="bg-cream text-charcoal font-sans min-h-screen">
+
+    <!-- Instant Overlay & Drawer -->
+    <div id="drawerOverlay" class="fixed inset-0 bg-greenwich/20 backdrop-blur-[2px] z-50 hidden"></div>
+    <aside id="sideDrawer" class="fixed top-0 left-0 w-[290px] h-full bg-white z-50 border-r-2 border-dashed border-borderGreen p-10 hidden flex-col gap-10">
+        <div class="flex items-center justify-between">
+            <div class="font-extrabold text-xl text-greenwich">🌿 Niraj's Blog</div>
+            <button id="closeDrawer" class="bg-peach p-2 rounded-full cursor-pointer flex items-center justify-center">
+                <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="#D05A40" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <nav>
+            <ul class="flex flex-col gap-5">
+                <li><a href="#" class="font-bold text-lg text-charcoal flex items-center gap-2 p-2 hover:bg-mint rounded-xl transition-none">🏡 Início</a></li>
+                <li><a href="#" class="font-bold text-lg text-charcoal flex items-center gap-2 p-2 hover:bg-mint rounded-xl transition-none">📝 Artigos</a></li>
+                <li><a href="#" class="font-bold text-lg text-charcoal flex items-center gap-2 p-2 hover:bg-mint rounded-xl transition-none">🤖 Código Aberto</a></li>
+                <li><a href="#" class="font-bold text-lg text-charcoal flex items-center gap-2 p-2 hover:bg-mint rounded-xl transition-none">⭐ Sobre mim</a></li>
+                <li><a href="#" class="font-bold text-lg text-charcoal flex items-center gap-2 p-2 hover:bg-mint rounded-xl transition-none">📬 Contato</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Header Section -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b-2 border-dashed border-borderGreen px-4 sm:px-8 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-5">
+            <button id="menuBtn" class="bg-mint text-greenwich cursor-pointer px-4 py-2.5 flex items-center gap-1.5 font-bold text-sm rounded-xl">
+                <span>🌱</span>
+                <span>Menu</span>
+            </button>
+            <a href="#" class="text-xl sm:text-2xl font-extrabold text-greenwich flex items-center gap-1.5">Niraj's Blog 🌿</a>
+        </div>
+
+        <div class="relative max-w-[280px] w-full hidden sm:block">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-base">🔍</span>
+            <input type="text" id="searchInput" class="w-full pl-10 pr-4 py-2 border-2 border-borderGreen rounded-full text-sm font-semibold outline-none bg-cream focus:border-greenwichLight focus:bg-white" placeholder="Pesquisar aplicativos...">
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="max-w-[1100px] mx-auto my-12 px-6 grid grid-cols-1 lg:grid-cols-3 gap-12">
+        
+        <!-- Left: Blog Post Content -->
+        <main class="lg:col-span-2 flex flex-col gap-8">
+            
+            <!-- Article Header -->
+            <article class="bg-white border-2 border-borderGreen rounded-[24px] p-6 sm:p-8 relative">
+                <!-- Cute greenwich bar on top -->
+                <div class="absolute -top-1.5 left-8 w-[60px] h-1.5 bg-greenwichLight rounded-full"></div>
+                
+                <span class="text-xs font-bold text-greenwichLight bg-mint px-3 py-1 rounded-lg inline-block mb-4">🤖 ANDROID & PRIVACIDADE</span>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-charcoal mb-4 leading-tight">7 Aplicativos Android de Código Aberto Essenciais (Livres de Anúncios e Rastreadores)</h1>
+                
+                <!-- Date and read time -->
+                <div class="flex items-center gap-4 text-xs font-bold text-sage border-b-2 border-dashed border-borderGreen pb-5 mb-6">
+                    <span>📅 02 de Agosto, 2026</span>
+                    <span>•</span>
+                    <span>🕒 5 min de leitura</span>
+                </div>
+
+                <p class="text-sage font-semibold text-[15px] sm:text-base leading-relaxed">
+                    Você está procurando aplicativos Android incríveis que sejam totalmente gratuitos, sem anúncios e sem rastreamento? Aqui estão sete aplicativos de código aberto fantásticos que podem transformar a maneira como você usa o seu celular! ✨
+                </p>
+            </article>
+
+            <!-- App List Container -->
+            <div id="appList" class="flex flex-col gap-6">
+                
+                <!-- App 1 -->
+                <div class="app-card bg-white border-2 border-borderGreen rounded-[20px] p-6" data-title="privacy flip sensores privacidade">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h2 class="text-lg font-extrabold text-greenwich flex items-center gap-2">1. Privacy Flip 🛡️</h2>
+                        <span class="text-xs font-bold text-red-500 bg-red-50 px-2.5 py-1 rounded-lg border border-red-100">Necessita Root / Shizuku</span>
+                    </div>
+                    <p class="text-sage font-semibold text-sm leading-relaxed">Este aplicativo gerencia automaticamente a privacidade do seu telefone com base em ele estar bloqueado ou desbloqueado. Quando você bloqueia o dispositivo e o guarda no bolso, o Privacy Flip desativa sensores como Wi-Fi, Bluetooth e dados móveis para evitar que aplicativos em segundo plano coletem seus dados. Ao desbloquear, ele reativa essas funções de forma inteligente.</p>
+                </div>
+
+                <!-- App 2 -->
+                <div class="app-card bg-white border-2 border-borderGreen rounded-[20px] p-6" data-title="adns bloqueio de anuncios dns sem vpn shizuku adb">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h2 class="text-lg font-extrabold text-greenwich flex items-center gap-2">2. aDNS 🔒</h2>
+                        <span class="text-xs font-bold text-greenwichLight bg-mint px-2.5 py-1 rounded-lg">Fácil de Configurar</span>
+                    </div>
+                    <p class="text-sage font-semibold text-sm leading-relaxed">Uma ferramenta de bloqueio de anúncios rápida e acessível que lhe dá controle total sobre as configurações de DNS do Android, sem a necessidade de usar uma VPN. Ele oferece proteção rápida contra anúncios, rastreadores e malware, suportando provedores gratuitos como Cloudflare e Google Cloud9, ou até mesmo nomes de host personalizados. Basta uma configuração rápida usando as permissões do Shizuku ou ADB para ativá-lo.</p>
+                </div>
+
+                <!-- App 3 -->
+                <div class="app-card bg-white border-2 border-borderGreen rounded-[20px] p-6" data-title="aura orbit widget orbital 3d tela inicial libgdx">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h2 class="text-lg font-extrabold text-greenwich flex items-center gap-2">3. Aura Orbit 🌌</h2>
+                        <span class="text-xs font-bold text-purple-500 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-100">Widget 3D Estiloso</span>
+                    </div>
+                    <p class="text-sage font-semibold text-sm leading-relaxed">Dê à sua tela inicial um visual premium com este widget orbital 3D. Ele gira seus aplicativos favoritos em uma esfera interativa diretamente na tela inicial, rodando suavemente a até 120fps graças ao motor de jogo libGDX. Você pode arrastar para girar a esfera e tocar rapidamente para abrir os aplicativos.</p>
+                </div>
+
+                <!-- App 4 -->
+                <div class="app-card bg-white border-2 border-borderGreen rounded-[20px] p-6" data-title="minus controle de orcamento financas assinaturas calculo">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h2 class="text-lg font-extrabold text-greenwich flex items-center gap-2">4. Minus 📊</h2>
+                        <span class="text-xs font-bold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-lg border border-orange-100">Finanças Pessoais</span>
+                    </div>
+                    <p class="text-sage font-semibold text-sm leading-relaxed">Um aplicativo de controle de orçamento simples, mas muito poderoso. Você pode registrar suas despesas diárias rapidamente usando um teclado numérico estilo calculadora e até mesmo realizar operações matemáticas diretamente no aplicativo. Ele também rastreia de forma inteligente as suas assinaturas (como Netflix, academia ou faturas de cartão de crédito) e envia notificações automáticas para que você nunca perca um pagamento.</p>
+                </div>
+
+                <!-- App 5 -->
+                <div class="app-card bg-white border-2 border-borderGreen rounded-[20px] p-6" data-title="vx mus reprodutor musica offline equalizador audio espacial">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h2 class="text-lg font-extrabold text-greenwich flex items-center gap-2">5. VX Mus 🎵</h2>
+                        <span class="text-xs font-bold text-blue-500 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-100">Visual Retrô</span>
+                    </div>
+                    <p class="text-sage font-semibold text-sm leading-relaxed">Se você procura um reprodutor de música offline único, o VX Mus oferece uma interface com um visual retrô e levemente cartunesco que se destaca bastante. Ele possui um equalizador de estúdio integrado com vários perfis predefinidos (como reforço de graves e clareza de voz), além de suporte para áudio espacial avançado, incluindo som surround, reverberação de sala de concertos e opções de temas.</p>
+                </div>
+
+                <!-- App 6 -->
+                <div class="app-card bg-white border-2 border-borderGreen rounded-[20px] p-6" data-title="flowbytes velocidade de internet dados limite VPN firewall">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h2 class="text-lg font-extrabold text-greenwich flex items-center gap-2">6. Flowbytes ⚡</h2>
+                        <span class="text-xs font-bold text-pink-500 bg-pink-50 px-2.5 py-1 rounded-lg border border-pink-100">Monitor de Rede</span>
+                    </div>
+                    <p class="text-sage font-semibold text-sm leading-relaxed">Este é um monitor de velocidade de internet em tempo real e analisador de uso de dados. Ele exibe suas velocidades de download e upload ao vivo na barra de status ou em um atalho nas configurações rápidas. O seu recurso mais poderoso é o bloqueio de aplicativos: se um aplicativo atingir um limite de dados predefinido, o Flowbytes restringe automaticamente o acesso dele à internet usando o serviço VPN do Android, agindo como um firewall. Você pode definir limites de dados de forma global ou individual para cada aplicativo.</p>
+                </div>
+
+                <!-- App 7 -->
+                <div class="app-card bg-white border-2 border-borderGreen rounded-[20px] p-6" data-title="dots launcher minimalista ultra focus sessao foco privacidade produtividade">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h2 class="text-lg font-extrabold text-greenwich flex items-center gap-2">7. Dots Launcher 📱</h2>
+                        <span class="text-xs font-bold text-teal-500 bg-teal-50 px-2.5 py-1 rounded-lg border border-teal-100">Minimalista</span>
+                    </div>
+                    <p class="text-sage font-semibold text-sm leading-relaxed">Um iniciador (launcher) minimalista projetado para deixar o seu telefone livre de distrações. Seu principal destaque é o Modo "Ultra Focus", que permite iniciar sessões de foco (de 15 minutos a 2 horas), ocultando distrações e mostrando apenas os aplicativos essenciais para o seu trabalho. As notificações são entregues em lotes para não incomodá-lo o tempo todo, garantindo uma abordagem focada na privacidade e na produtividade, além de deixar o celular com uma sensação mais rápida.</p>
+                </div>
+
+            </div>
+
+            <!-- Conclusion Section -->
+            <section class="bg-white border-2 border-borderGreen rounded-[24px] p-6 sm:p-8 mt-4 relative">
+                <div class="absolute -top-1.5 left-8 w-[60px] h-1.5 bg-greenwichLight rounded-full"></div>
+                <h2 class="text-xl font-extrabold text-greenwich mb-4 flex items-center gap-2">Conclusão 📢</h2>
+                <p class="text-sage font-semibold text-sm leading-relaxed">
+                    Esses foram sete aplicativos incríveis e úteis para o seu Android. Qual deles é o seu favorito ou você tem algum aplicativo oculto para sugerir? Deixe-nos saber nos comentários abaixo! 💬✨
+                </p>
+            </section>
+
+        </main>
+
+        <!-- Right: Cozy Sidebar (Author Profile) -->
+        <aside class="sidebar lg:col-span-1">
+            <div class="sticky top-[100px] bg-white border-2 border-borderGreen rounded-[24px] p-8 text-center shadow-[0_8px_0px_rgba(219,231,225,0.5)]">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&width=200&height=200&fit=crop" alt="Niraj" class="w-[100px] h-[100px] rounded-full object-cover mx-auto mb-5 border-4 border-mint">
+                <h3 class="text-lg font-extrabold text-greenwich mb-2">Niraj 🌱</h3>
+                <p class="text-xs font-bold text-sage leading-relaxed italic mb-5">
+                    "Olá! Sou um desenvolvedor web apaixonado por tecnologia de código aberto, aplicativos privados e designs minimalistas. Bem-vindo ao meu cantinho verde!"
+                </p>
+                <div class="flex justify-center gap-3 text-lg">
+                    <span class="hover:scale-110 cursor-pointer">☕</span>
+                    <span class="hover:scale-110 cursor-pointer">💻</span>
+                    <span class="hover:scale-110 cursor-pointer">🎨</span>
+                    <span class="hover:scale-110 cursor-pointer">🚀</span>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Footer Area with Horizontal links -->
+    <footer class="bg-white border-t-2 border-dashed border-borderGreen py-10 px-6 mt-16">
+        <div class="max-w-[1100px] mx-auto flex flex-col items-center gap-6">
+            <nav>
+                <ul class="flex flex-wrap justify-center gap-6 sm:gap-8">
+                    <li><a href="#" class="text-xs font-bold text-sage hover:text-greenwich hover:underline">🔒 Política de Privacidade</a></li>
+                    <li><a href="#" class="text-xs font-bold text-sage hover:text-greenwich hover:underline">📜 Termos de Serviço</a></li>
+                    <li><a href="#" class="text-xs font-bold text-sage hover:text-greenwich hover:underline">🗺️ Sitemap</a></li>
+                    <li><a href="#" class="text-xs font-bold text-sage hover:text-greenwich hover:underline">📢 Isenção de Responsabilidade</a></li>
+                    <li><a href="#" class="text-xs font-bold text-sage hover:text-greenwich hover:underline">📬 Fale Conosco</a></li>
+                </ul>
+            </nav>
+            <p class="text-xs font-semibold text-sage">
+                &copy; 2026 Niraj's Blog. Feito com amor e código aberto! ✨
+            </p>
+        </div>
+    </footer>
+
+    <!-- Instant JS Logic -->
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const closeDrawer = document.getElementById('closeDrawer');
+        const sideDrawer = document.getElementById('sideDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const searchInput = document.getElementById('searchInput');
+        const appCards = document.querySelectorAll('.app-card');
+
+        // Drawer toggle functions (Instant show/hide without transitions)
+        function openMenu() {
+            sideDrawer.style.display = 'flex';
+            drawerOverlay.style.display = 'block';
+        }
+
+        function closeMenu() {
+            sideDrawer.style.display = 'none';
+            drawerOverlay.style.display = 'none';
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeDrawer.addEventListener('click', closeMenu);
+        drawerOverlay.addEventListener('click', closeMenu);
+
+        // Real-time Search functionality (Filters the local app list instantly)
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            appCards.forEach(card => {
+                const titleText = card.getAttribute('data-title') || '';
+                const cardContent = card.innerText.toLowerCase();
+
+                if (titleText.includes(searchTerm) || cardContent.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
