@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niraj's Blog - Premium Technology & Web Development Blog</title>
+    <meta name="description" content="वेब डेवलपमेंट, टेक्नोलॉजी और कोडिंग से जुड़े प्रीमियम आर्टिकल्स पढ़ें।">
+    
+    <!-- Google Font for Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- SEO Schema Markup (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Niraj's Blog",
+      "url": "https://yourdomain.com",
+      "description": "वेब डेवलपमेंट और टेक्नोलॉजी से जुड़े प्रीमियम हिंदी आर्टिकल्स।",
+      "publisher": {
+        "@type": "Person",
+        "name": "Niraj",
+        "image": "https://via.placeholder.com/150"
+      }
+    }
+    </script>
+
+    <style>
+        /* CSS Variables for Premium Theme */
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border-color: #e2e8f0;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Styles with Premium Blur Effect */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background var(--transition-speed);
+        }
+
+        .menu-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        /* Working Search Bar styling */
+        .search-container {
+            position: relative;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: all var(--transition-speed);
+            background-color: var(--bg-primary);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-color);
+            background-color: var(--bg-card);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Slide-out Navigation Drawer */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-speed);
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--bg-card);
+            z-index: 201;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+            transition: left var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .drawer.active {
+            left: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .drawer-menu a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color var(--transition-speed);
+        }
+
+        .drawer-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Layout Grid */
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 2.5rem;
+        }
+
+        /* Blog Posts Section */
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .post-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .post-meta {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .post-excerpt {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .post-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        /* Sidebar Style */
+        .sidebar {
+            position: sticky;
+            top: 6rem;
+            align-self: start;
+        }
+
+        .profile-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.2rem;
+            border: 3px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .profile-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-bio {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Horizontal Footer */
+        .footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: color var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Utility State Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .header {
+                padding: 0.8rem 1rem;
+            }
+            .search-container {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <aside class="drawer" id="sideDrawer">
+        <div class="drawer-header">
+            <div class="logo">Niraj's Blog</div>
+            <button class="close-btn" id="closeDrawer" aria-label="Close menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <nav>
+            <ul class="drawer-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Articles</a></li>
+                <li><a href="#">Tutorials</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <a href="#" class="logo">Niraj's Blog</a>
+        </div>
+
+        <div class="search-container">
+            <span class="search-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input type="text" class="search-input" id="searchInput" placeholder="सर्च करें...">
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <div class="container">
+        <!-- Dynamic Blog Post Area -->
+        <main class="blog-posts" id="postsContainer">
+            <!-- Loading State or fallback text -->
+            <p>लोड हो रहा है...</p>
+        </main>
+
+        <!-- Right Sidebar (Author Profile) -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&width=200&height=200&fit=crop" alt="Niraj" class="profile-img">
+                <h3 class="profile-name">Niraj</h3>
+                <p class="profile-bio">नमस्ते! मैं नीरज हूँ, एक पैशनेट वेब डेवलपर और ब्लॉगर। यहाँ मैं कोडिंग, यूआई डिज़ाइन और नई टेक्नोलॉजी से जुड़ी बेहतरीन जानकारियां शेयर करता हूँ।</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer Area with horizontal pages link -->
+    <footer class="footer">
+        <div class="footer-content">
+            <nav>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+            <p class="copyright">&copy; 2026 Niraj's Blog. सर्वाधिकार सुरक्षित।</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // DOM Elements
+        const menuBtn = document.getElementById('menuBtn');
+        const closeDrawer = document.getElementById('closeDrawer');
+        const sideDrawer = document.getElementById('sideDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const postsContainer = document.getElementById('postsContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        // State variables
+        let blogPosts = [];
+
+        // 1. Menu Hide/Show Drawer functionality
+        function toggleDrawer() {
+            sideDrawer.classList.toggle('active');
+            drawerOverlay.classList.toggle('active');
+        }
+
+        menuBtn.addEventListener('click', toggleDrawer);
+        closeDrawer.addEventListener('click', toggleDrawer);
+        drawerOverlay.addEventListener('click', toggleDrawer);
+
+        // 2. Fallback Mock Data (For local use if CORS issue arises without a server)
+        const localMockData = [
+            {
+                "id": 1,
+                "title": "HTML5 और CSS3 के आधुनिक और प्रीमियम तरीके",
+                "excerpt": "इस लेख में हम आधुनिक वेब डिज़ाइन के सर्वोत्तम और फास्टेस्ट तरीकों के बारे में गहराई से जानेंगे। बिना किसी बड़े फ्रेमवर्क के साइट डिज़ाइन कैसे करें...",
+                "category": "Web Design",
+                "date": "Aug 2, 2026",
+                "readTime": "5 मिनट"
+            },
+            {
+                "id": 2,
+                "title": "JavaScript Performance Optimization कैसे करें?",
+                "excerpt": "अपनी वेबसाइट को सुपर फ़ास्ट और रिस्पॉन्सिव बनाने के लिए आवश्यक Vanilla JavaScript ऑप्टिमाइज़ेशन टिप्स की पूरी सूची देखें।",
+                "category": "JavaScript",
+                "date": "Jul 28, 2026",
+                "readTime": "8 मिनट"
+            },
+            {
+                "id": 3,
+                "title": "SEO Friendly ब्लॉग कैसे लिखें? (2026 Guide)",
+                "excerpt": "बिना किसी प्लगइन के अपने वेब पेजों को सर्च इंजन के लिए परफेक्ट कैसे बनाएं, और स्कीमा मार्कअप को सही तरीके से जोड़ने के टिप्स सीखें।",
+                "category": "SEO Tips",
+                "date": "Jul 20, 2026",
+                "readTime": "6 मिनट"
+            }
+        ];
+
+        // 3. Render Posts dynamically on screen
+        function displayPosts(posts) {
+            if (posts.length === 0) {
+                postsContainer.innerHTML = `<p style="text-align: center; padding: 2rem; color: var(--text-muted);">कोई आर्टिकल नहीं मिला। कृपया कुछ और सर्च करें।</p>`;
+                return;
+            }
+
+            postsContainer.innerHTML = posts.map(post => `
+                <article class="post-card">
+                    <span class="post-meta">${post.category}</span>
+                    <h2 class="post-title"><a href="#">${post.title}</a></h2>
+                    <p class="post-excerpt">${post.excerpt}</p>
+                    <div class="post-footer">
+                        <span>🕒 ${post.readTime}</span>
+                        <span>📅 ${post.date}</span>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // 4. Fetch JSON file logic
+        async function loadBlogPosts() {
+            try {
+                // posts.json फ़ाइल से डेटा फेच करने का प्रयास (लोकल सर्वर होने पर काम करेगा)
+                const response = await fetch('posts.json');
+                if (!response.ok) {
+                    throw new Error('JSON load failed, switching to local mock data.');
+                }
+                blogPosts = await response.json();
+                displayPosts(blogPosts);
+            } catch (error) {
+                console.warn("JSON file loading bypassed. Using optimized mock data:", error.message);
+                blogPosts = localMockData;
+                displayPosts(blogPosts);
+            }
+        }
+
+        // 5. Working Real-time Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const filteredPosts = blogPosts.filter(post => 
+                post.title.toLowerCase().includes(searchTerm) || 
+                post.excerpt.toLowerCase().includes(searchTerm) || 
+                post.category.toLowerCase().includes(searchTerm)
+            );
+            displayPosts(filteredPosts);
+        });
+
+        // Initialize application on load
+        window.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
+</body>
+</html>
