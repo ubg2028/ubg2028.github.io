@@ -1,8 +1,36 @@
 ---
-// 1. JSON DATA IMPORT
+// ================= 1. JSON DATA IMPORT =================
 import gamesData from '../data/games.json';
 
-const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=75";
+// CSS Gradients & Cute Icons for every game (Zero Network Overhead)
+const cardStyles: Record<number, { bg: string, icon: string, glow: string }> = {
+  1: { bg: 'from-pink-600/30 via-purple-600/20 to-[#0B0F19]', icon: '🐱', glow: 'bg-pink-500/20' },
+  2: { bg: 'from-cyan-600/30 via-blue-600/20 to-[#0B0F19]', icon: '⚡', glow: 'bg-cyan-500/20' },
+  3: { bg: 'from-amber-500/30 via-pink-600/20 to-[#0B0F19]', icon: '🍬', glow: 'bg-amber-500/20' },
+  4: { bg: 'from-emerald-600/30 via-teal-600/20 to-[#0B0F19]', icon: '🎮', glow: 'bg-emerald-500/20' },
+  5: { bg: 'from-indigo-600/30 via-purple-600/20 to-[#0B0F19]', icon: '🔮', glow: 'bg-purple-500/20' },
+  6: { bg: 'from-fuchsia-600/30 via-rose-600/20 to-[#0B0F19]', icon: '🏃‍♀️', glow: 'bg-fuchsia-500/20' },
+  7: { bg: 'from-red-600/30 via-orange-600/20 to-[#0B0F19]', icon: '🏎️', glow: 'bg-red-500/20' },
+  8: { bg: 'from-yellow-500/30 via-amber-600/20 to-[#0B0F19]', icon: '⭐', glow: 'bg-yellow-500/20' },
+  9: { bg: 'from-pink-500/30 via-rose-500/20 to-[#0B0F19]', icon: '🧁', glow: 'bg-pink-500/20' },
+  10: { bg: 'from-lime-600/30 via-emerald-600/20 to-[#0B0F19]', icon: '🦖', glow: 'bg-lime-500/20' },
+  11: { bg: 'from-rose-500/30 via-pink-600/20 to-[#0B0F19]', icon: '👗', glow: 'bg-rose-500/20' },
+  12: { bg: 'from-violet-600/30 via-indigo-600/20 to-[#0B0F19]', icon: '⚔️', glow: 'bg-violet-500/20' },
+  13: { bg: 'from-amber-600/40 via-red-600/25 to-[#0B0F19]', icon: '🦆', glow: 'bg-amber-500/30' },
+  14: { bg: 'from-emerald-600/40 via-teal-600/25 to-[#0B0F19]', icon: '🍉', glow: 'bg-emerald-500/30' },
+  15: { bg: 'from-blue-600/30 via-cyan-600/20 to-[#0B0F19]', icon: '🤖', glow: 'bg-blue-500/20' },
+  16: { bg: 'from-purple-600/30 via-pink-600/20 to-[#0B0F19]', icon: '🫧', glow: 'bg-purple-500/20' },
+  17: { bg: 'from-orange-500/30 via-pink-500/20 to-[#0B0F19]', icon: '🍩', glow: 'bg-orange-500/20' },
+  18: { bg: 'from-teal-500/30 via-emerald-500/20 to-[#0B0F19]', icon: '🧩', glow: 'bg-teal-500/20' },
+  19: { bg: 'from-amber-600/30 via-yellow-600/20 to-[#0B0F19]', icon: '🐹', glow: 'bg-amber-500/20' },
+  20: { bg: 'from-indigo-500/30 via-pink-500/20 to-[#0B0F19]', icon: '🌈', glow: 'bg-pink-500/20' },
+  21: { bg: 'from-red-500/30 via-pink-600/20 to-[#0B0F19]', icon: '🐼', glow: 'bg-red-500/20' },
+  22: { bg: 'from-cyan-500/30 via-indigo-600/20 to-[#0B0F19]', icon: '🪐', glow: 'bg-cyan-500/20' },
+  23: { bg: 'from-fuchsia-500/30 via-purple-600/20 to-[#0B0F19]', icon: '🦄', glow: 'bg-fuchsia-500/20' },
+  24: { bg: 'from-pink-500/30 via-purple-600/20 to-[#0B0F19]', icon: '👾', glow: 'bg-pink-500/20' },
+  25: { bg: 'from-purple-500/30 via-blue-600/20 to-[#0B0F19]', icon: '🍮', glow: 'bg-purple-500/20' },
+  26: { bg: 'from-rose-500/30 via-amber-500/20 to-[#0B0F19]', icon: '🐾', glow: 'bg-rose-500/20' }
+};
 ---
 
 <!DOCTYPE html>
@@ -29,7 +57,7 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
     }
   </script>
 
-  <!-- 3. Tailwind CSS CDN (Guaranteed Styling Fix) -->
+  <!-- 3. Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com" is:inline></script>
   <script is:inline>
     tailwind.config = {
@@ -62,6 +90,10 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
     .game-card { 
       transform: translateZ(0); 
       will-change: transform; 
+    }
+    /* Cute Animated Background Gradients */
+    .hero-glow {
+      background: radial-gradient(circle at 50% 40%, rgba(255, 101, 132, 0.25) 0%, rgba(140, 122, 230, 0.15) 45%, transparent 75%);
     }
   </style>
 </head>
@@ -116,22 +148,23 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
     </div>
   </header>
 
-  <!-- ================= FEATURED GAME SECTION ================= -->
+  <!-- ================= FEATURED GAME SECTION (PURE CSS HERO) ================= -->
   <main class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
     <section class="flex flex-col items-center">
       <div id="gameScreenContainer" class="w-full max-w-3xl bg-slate-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-slate-200 dark:border-[#232E4A] ring-2 sm:ring-4 ring-pink-500/20 relative">
         <div class="relative w-full aspect-video flex items-center justify-center bg-slate-950">
           
-          <!-- PLAY NOW OVERLAY -->
-          <div id="gameCoverOverlay" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-slate-900 overflow-hidden cursor-pointer group">
-            <img 
-              src={featuredImage} 
-              alt="Geometry Neon Dash Featured Game" 
-              width="800" 
-              height="450"
-              class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500" 
-            />
+          <!-- PLAY NOW OVERLAY (PURE CSS STYLING) -->
+          <div id="gameCoverOverlay" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-gradient-to-br from-[#1b1433] via-[#0e1322] to-[#1a0f1d] hero-glow overflow-hidden cursor-pointer group">
+            
+            <!-- Animated Background CSS Elements -->
+            <div class="absolute -top-10 -left-10 w-48 h-48 bg-pink-500/20 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-700"></div>
+            <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-700"></div>
+            
             <div class="relative z-10 flex flex-col items-center gap-2 sm:gap-3 p-3 text-center">
+              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl sm:text-4xl shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                🚀
+              </div>
               <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#FF6584] text-white font-extrabold text-[10px] sm:text-xs uppercase tracking-widest rounded-full shadow-md">Featured Game</span>
               <h1 class="text-xl sm:text-4xl font-black text-white drop-shadow-md">Geometry Neon Dash</h1>
               <button id="playGameBtn" aria-label="Play Geometry Neon Dash" class="mt-1 sm:mt-2 flex items-center gap-2 sm:gap-3 px-6 py-2.5 sm:px-8 sm:py-3.5 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:brightness-110 text-white font-black text-sm sm:text-lg rounded-xl sm:rounded-2xl shadow-xl shadow-pink-500/40 transform group-hover:scale-105 active:scale-95 transition-all">
@@ -163,7 +196,7 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
       </div>
     </section>
 
-    <!-- ================= MORE GAMES SECTION ================= -->
+    <!-- ================= MORE GAMES SECTION (PURE CSS CARDS) ================= -->
     <section id="more-games" class="mt-8 sm:mt-12">
       <div class="flex items-center justify-between mb-4 sm:mb-6">
         <div class="flex items-center gap-1.5 sm:gap-2">
@@ -177,13 +210,28 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
 
       <!-- Responsive Dynamic Grid -->
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-4">
-        {gamesData.map((game) => (
-          game.isBig ? (
-            <div class="game-card group relative col-span-2 sm:col-span-3 md:col-span-3 bg-white dark:bg-[#151D30] rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer aspect-[16/9] border-2 border-pink-400/40 dark:border-[#FF6584]/50">
+        {gamesData.map((game) => {
+          const style = cardStyles[game.id] || { bg: 'from-pink-600/30 via-purple-600/20 to-[#0B0F19]', icon: '🎮', glow: 'bg-pink-500/20' };
+          
+          return game.isBig ? (
+            <!-- BIG CARDS (PURE CSS) -->
+            <div class="game-card group relative col-span-2 sm:col-span-3 md:col-span-3 bg-gradient-to-br from-[#1a1429] to-[#0d111d] rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer aspect-[16/9] border-2 border-pink-400/40 dark:border-[#FF6584]/50">
+              
+              <!-- Ambient CSS Glow -->
+              <div class={`absolute inset-0 bg-gradient-to-br ${style.bg} opacity-80 group-hover:scale-110 transition-transform duration-500`}></div>
+              
+              <!-- Cute Center Icon -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-4xl sm:text-5xl shadow-xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                  {style.icon}
+                </div>
+              </div>
+
               <span class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#FF6584] text-white font-black text-[10px] sm:text-xs uppercase tracking-widest rounded-full shadow-lg">{game.badge}</span>
-              <img src={game.image} alt={game.title} width="600" height="338" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" loading="lazy" />
+              
               <video class="hover-video absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" loop muted playsinline preload="none" data-src={game.video}></video>
-              <div class="absolute bottom-0 inset-x-0 p-3 sm:p-4 bg-gradient-to-t from-black/95 via-black/70 to-transparent flex items-center justify-between">
+              
+              <div class="absolute bottom-0 inset-x-0 p-3 sm:p-4 bg-gradient-to-t from-black/95 via-black/70 to-transparent flex items-center justify-between z-10">
                 <div>
                   <span class="text-white font-black text-sm sm:text-lg block leading-tight">{game.title}</span>
                   <span class="text-slate-300 text-[10px] sm:text-xs font-semibold">{game.category}</span>
@@ -192,16 +240,29 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
               </div>
             </div>
           ) : (
-            <div class="game-card group relative bg-white dark:bg-[#151D30] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer aspect-[16/11] border-2 border-slate-200 dark:border-[#232E4A] hover:border-[#FF6584] dark:hover:border-[#FF6584]">
-              <img src={game.image} alt={game.title} width="300" height="206" class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-0" loading="lazy" />
+            <!-- SMALL CARDS (PURE CSS) -->
+            <div class="game-card group relative bg-gradient-to-br from-[#151D30] to-[#0B0F19] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer aspect-[16/11] border-2 border-slate-200 dark:border-[#232E4A] hover:border-[#FF6584] dark:hover:border-[#FF6584]">
+              
+              <!-- Ambient CSS Glow & Pattern -->
+              <div class={`absolute inset-0 bg-gradient-to-br ${style.bg} opacity-70 group-hover:scale-110 transition-transform duration-500`}></div>
+              
+              <!-- Center Cute Icon -->
+              <div class="absolute inset-0 flex items-center justify-center pb-2">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center text-xl sm:text-2xl shadow-md transform group-hover:scale-110 transition-all duration-300">
+                  {style.icon}
+                </div>
+              </div>
+
               <video class="hover-video absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" loop muted playsinline preload="none" data-src={game.video}></video>
-              <div class="absolute bottom-0 inset-x-0 p-2 sm:p-2.5 bg-gradient-to-t from-black/90 via-black/60 to-transparent sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-between">
+              
+              <!-- Info Bar -->
+              <div class="absolute bottom-0 inset-x-0 p-2 sm:p-2.5 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex items-center justify-between z-10">
                 <span class="text-white font-extrabold text-[11px] sm:text-xs truncate max-w-[70%]">{game.title}</span>
                 <span class="bg-[#FF6584] text-white text-[8px] sm:text-[9px] font-black px-1.5 py-0.5 rounded-full">PLAY</span>
               </div>
             </div>
-          )
-        ))}
+          );
+        })}
       </div>
 
       <!-- Explore All Games Button -->
