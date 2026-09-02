@@ -44,7 +44,7 @@ const gamesData = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KawaiiPlay - Cute Online Games</title>
 
-  <!-- 100% Instant Dark Mode (No White Flash) -->
+  <!-- 1. Instant Dark Mode (No White Flash) -->
   <script is:inline>
     if (localStorage.getItem('theme') === 'light') {
       document.documentElement.classList.remove('dark');
@@ -53,16 +53,40 @@ const gamesData = [
     }
   </script>
 
-  <!-- Google Nunito Font -->
+  <!-- 2. TAILWIND CSS CDN (Fixes CSS not loading issue) -->
+  <script src="https://cdn.tailwindcss.com" is:inline></script>
+
+  <!-- 3. TAILWIND CONFIGURATION -->
+  <script is:inline>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            nunito: ['Nunito', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              pink: '#FF6584',
+              hoverPink: '#FF4772',
+              purple: '#8C7AE6',
+              yellow: '#FDCB6E',
+              darkBg: '#0B0F19',
+              darkCard: '#151D30',
+              darkBorder: '#232E4A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- 4. Google Nunito Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style is:global>
-    html.dark, html.dark body {
-      background-color: #0B0F19 !important;
-      color: #F8FAFC !important;
-    }
     body {
       font-family: 'Nunito', sans-serif;
     }
@@ -74,7 +98,7 @@ const gamesData = [
 </head>
 <body class="bg-slate-50 dark:bg-[#0B0F19] text-slate-800 dark:text-slate-100 antialiased selection:bg-[#FF6584] selection:text-white transition-colors duration-200 relative">
 
-  <!-- ================= 2. SLIDE SIDEBAR MENU (NO BLUR) ================= -->
+  <!-- ================= SIDEBAR MENU ================= -->
   <div id="menuOverlay" class="fixed inset-0 bg-black/70 z-40 hidden transition-opacity duration-200"></div>
 
   <aside id="sidebar" class="fixed top-0 left-0 w-72 h-full bg-white dark:bg-[#151D30] z-50 transform -translate-x-full transition-transform duration-300 ease-out shadow-2xl flex flex-col justify-between border-r border-slate-200 dark:border-[#232E4A]">
@@ -101,7 +125,7 @@ const gamesData = [
     </div>
   </aside>
 
-  <!-- ================= 3. TOP NAVBAR ================= -->
+  <!-- ================= TOP NAVBAR ================= -->
   <header class="sticky top-0 z-30 bg-white/95 dark:bg-[#151D30]/95 border-b border-slate-200 dark:border-[#232E4A] shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -122,7 +146,7 @@ const gamesData = [
     </div>
   </header>
 
-  <!-- ================= 4. FEATURED GAME IFRAME SECTION ================= -->
+  <!-- ================= FEATURED GAME SECTION ================= -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
     <section class="flex flex-col items-center">
       <div id="gameScreenContainer" class="w-full max-w-3xl bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-200 dark:border-[#232E4A] ring-4 ring-pink-500/20 relative">
@@ -134,7 +158,7 @@ const gamesData = [
             <div class="relative z-10 flex flex-col items-center gap-3 p-4 text-center">
               <span class="px-3 py-1 bg-[#FF6584] text-white font-extrabold text-xs uppercase tracking-widest rounded-full shadow-md">Featured Game</span>
               <h2 class="text-2xl sm:text-4xl font-black text-white drop-shadow-md">Geometry Neon Dash</h2>
-              <button id="playGameBtn" class="mt-2 flex items-center gap-3 px-8 py-3.5 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] text-white font-black text-lg rounded-2xl shadow-xl shadow-pink-500/40 transform group-hover:scale-110 active:scale-95 transition-all">
+              <button id="playGameBtn" class="mt-2 flex items-center gap-3 px-8 py-3.5 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:from-[#FF4772] hover:to-purple-600 text-white font-black text-lg rounded-2xl shadow-xl shadow-pink-500/40 transform group-hover:scale-110 active:scale-95 transition-all">
                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 PLAY NOW
               </button>
@@ -163,7 +187,7 @@ const gamesData = [
       </div>
     </section>
 
-    <!-- ================= 5. MORE GAMES SECTION (CUSTOM GRID) ================= -->
+    <!-- ================= MORE GAMES SECTION ================= -->
     <section id="more-games" class="mt-12">
       <div class="flex items-center justify-between mb-6">
         <div class="flex items-center gap-2">
@@ -175,11 +199,10 @@ const gamesData = [
         </span>
       </div>
 
-      <!-- Dynamic Grid: 2 Lines Small + 2 Big Featured + 2 Lines Small -->
+      <!-- Dynamic Grid -->
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4">
         {gamesData.map((game) => (
           game.isBig ? (
-            <!-- 2 BADE RECTANGLE CARDS -->
             <div class="game-card group relative col-span-2 sm:col-span-3 md:col-span-3 bg-white dark:bg-[#151D30] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer aspect-[16/8] sm:aspect-[16/9] border-2 border-pink-400/40 dark:border-[#FF6584]/50">
               <span class="absolute top-3 left-3 z-10 px-3 py-1 bg-[#FF6584] text-white font-black text-xs uppercase tracking-widest rounded-full shadow-lg">{game.badge}</span>
               <img src={game.image} alt={game.title} class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" loading="lazy" />
@@ -193,7 +216,6 @@ const gamesData = [
               </div>
             </div>
           ) : (
-            <!-- CHOTE RECTANGLE CARDS -->
             <div class="game-card group relative bg-white dark:bg-[#151D30] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer aspect-[16/11] border-2 border-slate-200 dark:border-[#232E4A] hover:border-[#FF6584] dark:hover:border-[#FF6584]">
               <img src={game.image} alt={game.title} class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-0" loading="lazy" />
               <video class="hover-video absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" loop muted playsinline preload="none" data-src={game.video}></video>
@@ -208,7 +230,7 @@ const gamesData = [
 
       <!-- Explore All Games Button -->
       <div class="mt-12 text-center">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] text-white text-lg font-black rounded-full shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:from-[#FF4772] hover:to-purple-600 text-white text-lg font-black rounded-full shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all">
           <span>🎮</span> Explore All Games (500+)
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </button>
@@ -216,7 +238,7 @@ const gamesData = [
     </section>
   </main>
 
-  <!-- ================= 6. FOOTER WITH PARTNER BACKLINKS ================= -->
+  <!-- ================= FOOTER ================= -->
   <footer class="mt-20 bg-white dark:bg-[#151D30] border-t border-slate-200 dark:border-[#232E4A] pt-10 pb-8 text-slate-600 dark:text-slate-400">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="bg-slate-50 dark:bg-slate-900/60 p-6 rounded-3xl border border-slate-200/80 dark:border-[#232E4A] mb-8">
@@ -234,11 +256,11 @@ const gamesData = [
     </div>
   </footer>
 
-  <!-- ================= 7. FLOATING BACK TO GAME BUTTON ================= -->
+  <!-- ================= FLOATING BACK TO GAME BUTTON ================= -->
   <button
     id="backToGameBtn"
     aria-label="Back to Game"
-    class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:from-[#FF4772] hover:to-purple-600 text-white font-black text-sm rounded-full shadow-2xl shadow-pink-500/40 hover:scale-105 active:scale-95 transition-all duration-300 opacity-0 pointer-events-none translate-y-5 border-2 border-white/20"
+    class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:from-[#FF4772] hover:to-purple-600 text-white font-extrabold text-sm rounded-full shadow-2xl shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all duration-300 opacity-0 pointer-events-none translate-y-5 border-2 border-white/20"
   >
     <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
@@ -246,7 +268,7 @@ const gamesData = [
     <span>Back to Game</span>
   </button>
 
-  <!-- ================= 8. CLIENT-SIDE SCRIPTS ================= -->
+  <!-- ================= CLIENT-SIDE SCRIPTS ================= -->
   <script>
     // --- Theme Switcher ---
     const themeBtn = document.getElementById('themeToggleBtn');
