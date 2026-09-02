@@ -2,34 +2,34 @@
 // ================= 1. JSON DATA IMPORT =================
 import gamesData from '../data/games.json';
 
-// CSS Gradients & Cute Icons for every game (Zero Network Overhead)
-const cardStyles: Record<number, { bg: string, icon: string, glow: string }> = {
-  1: { bg: 'from-pink-600/30 via-purple-600/20 to-[#0B0F19]', icon: '🐱', glow: 'bg-pink-500/20' },
-  2: { bg: 'from-cyan-600/30 via-blue-600/20 to-[#0B0F19]', icon: '⚡', glow: 'bg-cyan-500/20' },
-  3: { bg: 'from-amber-500/30 via-pink-600/20 to-[#0B0F19]', icon: '🍬', glow: 'bg-amber-500/20' },
-  4: { bg: 'from-emerald-600/30 via-teal-600/20 to-[#0B0F19]', icon: '🎮', glow: 'bg-emerald-500/20' },
-  5: { bg: 'from-indigo-600/30 via-purple-600/20 to-[#0B0F19]', icon: '🔮', glow: 'bg-purple-500/20' },
-  6: { bg: 'from-fuchsia-600/30 via-rose-600/20 to-[#0B0F19]', icon: '🏃‍♀️', glow: 'bg-fuchsia-500/20' },
-  7: { bg: 'from-red-600/30 via-orange-600/20 to-[#0B0F19]', icon: '🏎️', glow: 'bg-red-500/20' },
-  8: { bg: 'from-yellow-500/30 via-amber-600/20 to-[#0B0F19]', icon: '⭐', glow: 'bg-yellow-500/20' },
-  9: { bg: 'from-pink-500/30 via-rose-500/20 to-[#0B0F19]', icon: '🧁', glow: 'bg-pink-500/20' },
-  10: { bg: 'from-lime-600/30 via-emerald-600/20 to-[#0B0F19]', icon: '🦖', glow: 'bg-lime-500/20' },
-  11: { bg: 'from-rose-500/30 via-pink-600/20 to-[#0B0F19]', icon: '👗', glow: 'bg-rose-500/20' },
-  12: { bg: 'from-violet-600/30 via-indigo-600/20 to-[#0B0F19]', icon: '⚔️', glow: 'bg-violet-500/20' },
-  13: { bg: 'from-amber-600/40 via-red-600/25 to-[#0B0F19]', icon: '🦆', glow: 'bg-amber-500/30' },
-  14: { bg: 'from-emerald-600/40 via-teal-600/25 to-[#0B0F19]', icon: '🍉', glow: 'bg-emerald-500/30' },
-  15: { bg: 'from-blue-600/30 via-cyan-600/20 to-[#0B0F19]', icon: '🤖', glow: 'bg-blue-500/20' },
-  16: { bg: 'from-purple-600/30 via-pink-600/20 to-[#0B0F19]', icon: '🫧', glow: 'bg-purple-500/20' },
-  17: { bg: 'from-orange-500/30 via-pink-500/20 to-[#0B0F19]', icon: '🍩', glow: 'bg-orange-500/20' },
-  18: { bg: 'from-teal-500/30 via-emerald-500/20 to-[#0B0F19]', icon: '🧩', glow: 'bg-teal-500/20' },
-  19: { bg: 'from-amber-600/30 via-yellow-600/20 to-[#0B0F19]', icon: '🐹', glow: 'bg-amber-500/20' },
-  20: { bg: 'from-indigo-500/30 via-pink-500/20 to-[#0B0F19]', icon: '🌈', glow: 'bg-pink-500/20' },
-  21: { bg: 'from-red-500/30 via-pink-600/20 to-[#0B0F19]', icon: '🐼', glow: 'bg-red-500/20' },
-  22: { bg: 'from-cyan-500/30 via-indigo-600/20 to-[#0B0F19]', icon: '🪐', glow: 'bg-cyan-500/20' },
-  23: { bg: 'from-fuchsia-500/30 via-purple-600/20 to-[#0B0F19]', icon: '🦄', glow: 'bg-fuchsia-500/20' },
-  24: { bg: 'from-pink-500/30 via-purple-600/20 to-[#0B0F19]', icon: '👾', glow: 'bg-pink-500/20' },
-  25: { bg: 'from-purple-500/30 via-blue-600/20 to-[#0B0F19]', icon: '🍮', glow: 'bg-purple-500/20' },
-  26: { bg: 'from-rose-500/30 via-amber-500/20 to-[#0B0F19]', icon: '🐾', glow: 'bg-rose-500/20' }
+// Pure CSS Card Themes & Emojis
+const cardStyles: Record<number, { bg: string; icon: string }> = {
+  1: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🐱' },
+  2: { bg: 'linear-gradient(135deg, rgba(6,182,212,0.3), rgba(59,130,246,0.2), #0B0F19)', icon: '⚡' },
+  3: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🍬' },
+  4: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.3), rgba(20,184,166,0.2), #0B0F19)', icon: '🎮' },
+  5: { bg: 'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🔮' },
+  6: { bg: 'linear-gradient(135deg, rgba(217,70,239,0.3), rgba(244,63,94,0.2), #0B0F19)', icon: '🏃‍♀️' },
+  7: { bg: 'linear-gradient(135deg, rgba(239,68,68,0.3), rgba(249,115,22,0.2), #0B0F19)', icon: '🏎️' },
+  8: { bg: 'linear-gradient(135deg, rgba(234,179,8,0.3), rgba(245,158,11,0.2), #0B0F19)', icon: '⭐' },
+  9: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(244,63,94,0.2), #0B0F19)', icon: '🧁' },
+  10: { bg: 'linear-gradient(135deg, rgba(132,204,22,0.3), rgba(16,185,129,0.2), #0B0F19)', icon: '🦖' },
+  11: { bg: 'linear-gradient(135deg, rgba(244,63,94,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '👗' },
+  12: { bg: 'linear-gradient(135deg, rgba(139,92,246,0.3), rgba(99,102,241,0.2), #0B0F19)', icon: '⚔️' },
+  13: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.35), rgba(239,68,68,0.25), #0B0F19)', icon: '🦆' },
+  14: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(20,184,166,0.25), #0B0F19)', icon: '🍉' },
+  15: { bg: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(6,182,212,0.2), #0B0F19)', icon: '🤖' },
+  16: { bg: 'linear-gradient(135deg, rgba(140,122,230,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🫧' },
+  17: { bg: 'linear-gradient(135deg, rgba(249,115,22,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🍩' },
+  18: { bg: 'linear-gradient(135deg, rgba(20,184,166,0.3), rgba(16,185,129,0.2), #0B0F19)', icon: '🧩' },
+  19: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.3), rgba(234,179,8,0.2), #0B0F19)', icon: '🐹' },
+  20: { bg: 'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🌈' },
+  21: { bg: 'linear-gradient(135deg, rgba(239,68,68,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🐼' },
+  22: { bg: 'linear-gradient(135deg, rgba(6,182,212,0.3), rgba(99,102,241,0.2), #0B0F19)', icon: '🪐' },
+  23: { bg: 'linear-gradient(135deg, rgba(217,70,239,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🦄' },
+  24: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '👾' },
+  25: { bg: 'linear-gradient(135deg, rgba(140,122,230,0.3), rgba(59,130,246,0.2), #0B0F19)', icon: '🍮' },
+  26: { bg: 'linear-gradient(135deg, rgba(244,63,94,0.3), rgba(245,158,11,0.2), #0B0F19)', icon: '🐾' }
 };
 ---
 
@@ -41,14 +41,16 @@ const cardStyles: Record<number, { bg: string, icon: string, glow: string }> = {
   
   <title>KawaiiPlay - Cute & Fun Free Online Games</title>
   <meta name="description" content="Play the best cute and kawaii online games for free! Arcade, puzzles, dress-up, and action games playable directly in your browser." />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://ubg2028.github.io/" />
+  <meta name="theme-color" content="#0B0F19" />
 
-  <!-- 1. Google Fonts -->
+  <!-- Google Nunito Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- 2. Instant Dark Mode Script -->
+  <!-- Instant Dark Mode Script (No White Flash) -->
   <script is:inline>
     if (localStorage.getItem('theme') === 'light') {
       document.documentElement.classList.remove('dark');
@@ -56,119 +58,75 @@ const cardStyles: Record<number, { bg: string, icon: string, glow: string }> = {
       document.documentElement.classList.add('dark');
     }
   </script>
-
-  <!-- 3. Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com" is:inline></script>
-  <script is:inline>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            nunito: ['Nunito', 'sans-serif']
-          },
-          colors: {
-            brand: {
-              pink: '#FF6584',
-              hoverPink: '#FF4772',
-              purple: '#8C7AE6',
-              yellow: '#FDCB6E',
-              darkBg: '#0B0F19',
-              darkCard: '#151D30',
-              darkBorder: '#232E4A'
-            }
-          }
-        }
-      }
-    }
-  </script>
-
-  <style is:global>
-    body { 
-      font-family: 'Nunito', sans-serif; 
-    }
-    .game-card { 
-      transform: translateZ(0); 
-      will-change: transform; 
-    }
-    /* Cute Animated Background Gradients */
-    .hero-glow {
-      background: radial-gradient(circle at 50% 40%, rgba(255, 101, 132, 0.25) 0%, rgba(140, 122, 230, 0.15) 45%, transparent 75%);
-    }
-  </style>
 </head>
 
-<body class="bg-slate-50 dark:bg-[#0B0F19] text-slate-800 dark:text-slate-100 antialiased selection:bg-[#FF6584] selection:text-white transition-colors duration-200 relative overflow-x-hidden">
+<body>
 
   <!-- ================= SIDEBAR MENU ================= -->
-  <div id="menuOverlay" class="fixed inset-0 bg-black/70 z-40 hidden transition-opacity duration-200"></div>
+  <div id="menuOverlay" class="menu-overlay hidden"></div>
 
-  <aside id="sidebar" class="fixed top-0 left-0 w-72 max-w-[80vw] h-full bg-white dark:bg-[#151D30] z-50 transform -translate-x-full transition-transform duration-300 ease-out shadow-2xl flex flex-col justify-between border-r border-slate-200 dark:border-[#232E4A]">
+  <aside id="sidebar" class="sidebar">
     <div>
-      <div class="p-4 sm:p-5 flex items-center justify-between border-b border-slate-100 dark:border-[#232E4A]">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl sm:text-3xl">🎀</span>
-          <span class="text-lg sm:text-xl font-black text-[#FF6584] tracking-wide">CuteGames</span>
+      <div class="sidebar-header">
+        <div class="brand">
+          <span class="emoji-logo">🎀</span>
+          <span class="brand-name">CuteGames</span>
         </div>
-        <button id="closeMenuBtn" aria-label="Close Menu" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-red-500 focus:outline-none">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <button id="closeMenuBtn" aria-label="Close Menu" class="icon-btn">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
-      <nav class="p-3 sm:p-4 space-y-1.5 sm:space-y-2 font-bold text-sm">
-        <a href="/" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-pink-50 dark:bg-pink-950/30 text-[#FF6584]">🔥 Home</a>
-        <a href="#more-games" class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">🎮 Arcade & Action</a>
-        <a href="#more-games" class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">🧩 Cute Puzzle</a>
-        <a href="#more-games" class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">👗 Dress Up & Girls</a>
+      <nav class="sidebar-nav">
+        <a href="/" class="nav-item active">🔥 Home</a>
+        <a href="#more-games" class="nav-item">🎮 Arcade & Action</a>
+        <a href="#more-games" class="nav-item">🧩 Cute Puzzle</a>
+        <a href="#more-games" class="nav-item">👗 Dress Up & Girls</a>
       </nav>
     </div>
-    <div class="p-4 sm:p-5 border-t border-slate-100 dark:border-[#232E4A] text-center">
-      <p class="text-xs text-slate-400 dark:text-slate-500 font-semibold">© 2026 KawaiiPlay Zone</p>
+    <div class="sidebar-footer">
+      <p>© 2026 KawaiiPlay Zone</p>
     </div>
   </aside>
 
   <!-- ================= TOP NAVBAR ================= -->
-  <header class="sticky top-0 z-30 bg-white/95 dark:bg-[#151D30]/95 border-b border-slate-200 dark:border-[#232E4A] shadow-sm backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
-      <div class="flex items-center gap-2 sm:gap-3">
-        <button id="openMenuBtn" aria-label="Open Navigation Menu" class="p-2 rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-[#232E4A]">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+  <header class="top-navbar">
+    <div class="container nav-content">
+      <div class="nav-left">
+        <button id="openMenuBtn" aria-label="Open Menu" class="icon-btn">
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
-        <a href="/" class="flex items-center gap-1.5 sm:gap-2 text-xl sm:text-2xl font-black bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] bg-clip-text text-transparent">
-          <span class="text-xl sm:text-2xl">🐱</span> KawaiiPlay
+        <a href="/" class="site-logo">
+          <span>🐱</span> KawaiiPlay
         </a>
       </div>
 
-      <!-- Theme Switcher Button -->
-      <button id="themeToggleBtn" aria-label="Toggle Color Theme" class="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#232E4A] text-slate-700 dark:text-yellow-400 font-extrabold text-xs sm:text-sm active:scale-95 transition-all">
-        <svg id="moonIcon" class="w-4 h-4 sm:w-5 sm:h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-        <svg id="sunIcon" class="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-        <span id="themeText" class="hidden sm:inline text-xs">Dark Mode</span>
+      <!-- Theme Switcher -->
+      <button id="themeToggleBtn" aria-label="Toggle Theme" class="theme-btn">
+        <svg id="moonIcon" class="hidden" width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        <span id="themeText">Dark Mode</span>
       </button>
     </div>
   </header>
 
-  <!-- ================= FEATURED GAME SECTION (PURE CSS HERO) ================= -->
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
-    <section class="flex flex-col items-center">
-      <div id="gameScreenContainer" class="w-full max-w-3xl bg-slate-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-slate-200 dark:border-[#232E4A] ring-2 sm:ring-4 ring-pink-500/20 relative">
-        <div class="relative w-full aspect-video flex items-center justify-center bg-slate-950">
+  <!-- ================= FEATURED GAME SECTION ================= -->
+  <main class="container main-content">
+    <section class="featured-section">
+      <div id="gameScreenContainer" class="game-screen-box">
+        <div class="aspect-video-box">
           
-          <!-- PLAY NOW OVERLAY (PURE CSS STYLING) -->
-          <div id="gameCoverOverlay" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-gradient-to-br from-[#1b1433] via-[#0e1322] to-[#1a0f1d] hero-glow overflow-hidden cursor-pointer group">
+          <!-- PLAY NOW OVERLAY (PURE CSS HERO) -->
+          <div id="gameCoverOverlay" class="hero-cover">
+            <div class="hero-glow-blob1"></div>
+            <div class="hero-glow-blob2"></div>
             
-            <!-- Animated Background CSS Elements -->
-            <div class="absolute -top-10 -left-10 w-48 h-48 bg-pink-500/20 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-700"></div>
-            <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-700"></div>
-            
-            <div class="relative z-10 flex flex-col items-center gap-2 sm:gap-3 p-3 text-center">
-              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl sm:text-4xl shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                🚀
-              </div>
-              <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#FF6584] text-white font-extrabold text-[10px] sm:text-xs uppercase tracking-widest rounded-full shadow-md">Featured Game</span>
-              <h1 class="text-xl sm:text-4xl font-black text-white drop-shadow-md">Geometry Neon Dash</h1>
-              <button id="playGameBtn" aria-label="Play Geometry Neon Dash" class="mt-1 sm:mt-2 flex items-center gap-2 sm:gap-3 px-6 py-2.5 sm:px-8 sm:py-3.5 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:brightness-110 text-white font-black text-sm sm:text-lg rounded-xl sm:rounded-2xl shadow-xl shadow-pink-500/40 transform group-hover:scale-105 active:scale-95 transition-all">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div class="hero-content">
+              <div class="hero-icon-box">🚀</div>
+              <span class="badge-featured">Featured Game</span>
+              <h1 class="hero-title">Geometry Neon Dash</h1>
+              <button id="playGameBtn" class="btn-play-hero">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 PLAY NOW
               </button>
             </div>
@@ -177,9 +135,9 @@ const cardStyles: Record<number, { bg: string, icon: string, glow: string }> = {
           <!-- IFRAME -->
           <iframe 
             id="gameIframe"
-            class="w-full h-full border-0 hidden"
+            class="game-iframe hidden"
             data-src="https://geometrydashlite.io/"
-            title="Geometry Neon Dash Full Game"
+            title="Featured Game"
             allow="fullscreen; autoplay; gamepad"
             loading="lazy">
           </iframe>
@@ -188,77 +146,51 @@ const cardStyles: Record<number, { bg: string, icon: string, glow: string }> = {
       </div>
 
       <!-- Fullscreen Button -->
-      <div class="mt-2.5 sm:mt-3">
-        <button id="fullscreenBtn" aria-label="Enter Full Screen Mode" class="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-[#8C7AE6] to-[#FF6584] text-white font-extrabold rounded-xl sm:rounded-2xl shadow-md hover:brightness-110 active:scale-95 transition-all text-xs sm:text-sm">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+      <div class="fullscreen-wrapper">
+        <button id="fullscreenBtn" class="btn-fullscreen">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
           Full Screen Mode
         </button>
       </div>
     </section>
 
-    <!-- ================= MORE GAMES SECTION (PURE CSS CARDS) ================= -->
-    <section id="more-games" class="mt-8 sm:mt-12">
-      <div class="flex items-center justify-between mb-4 sm:mb-6">
-        <div class="flex items-center gap-1.5 sm:gap-2">
-          <span class="text-xl sm:text-2xl">⭐</span>
-          <h2 class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white">More Fun Games</h2>
+    <!-- ================= MORE GAMES SECTION ================= -->
+    <section id="more-games" class="games-section">
+      <div class="section-header">
+        <div class="section-title">
+          <span>⭐</span>
+          <h2>More Fun Games</h2>
         </div>
-        <span class="text-[11px] sm:text-xs font-extrabold text-slate-500 dark:text-slate-400 bg-slate-200/70 dark:bg-[#151D30] px-2.5 py-1 sm:px-3 sm:py-1 rounded-full border border-slate-300/40 dark:border-[#232E4A]">
-          {gamesData.length} Games
-        </span>
+        <span class="count-badge">{gamesData.length} Games</span>
       </div>
 
       <!-- Responsive Dynamic Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-4">
+      <div class="games-grid">
         {gamesData.map((game) => {
-          const style = cardStyles[game.id] || { bg: 'from-pink-600/30 via-purple-600/20 to-[#0B0F19]', icon: '🎮', glow: 'bg-pink-500/20' };
+          const style = cardStyles[game.id] || { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🎮' };
           
           return game.isBig ? (
-            <!-- BIG CARDS (PURE CSS) -->
-            <div class="game-card group relative col-span-2 sm:col-span-3 md:col-span-3 bg-gradient-to-br from-[#1a1429] to-[#0d111d] rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer aspect-[16/9] border-2 border-pink-400/40 dark:border-[#FF6584]/50">
+            <div class="game-card big-card" style={`background: ${style.bg};`}>
+              <span class="card-badge">{game.badge}</span>
+              <div class="card-center-icon big-icon">{style.icon}</div>
+              <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
               
-              <!-- Ambient CSS Glow -->
-              <div class={`absolute inset-0 bg-gradient-to-br ${style.bg} opacity-80 group-hover:scale-110 transition-transform duration-500`}></div>
-              
-              <!-- Cute Center Icon -->
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-4xl sm:text-5xl shadow-xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                  {style.icon}
-                </div>
-              </div>
-
-              <span class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#FF6584] text-white font-black text-[10px] sm:text-xs uppercase tracking-widest rounded-full shadow-lg">{game.badge}</span>
-              
-              <video class="hover-video absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" loop muted playsinline preload="none" data-src={game.video}></video>
-              
-              <div class="absolute bottom-0 inset-x-0 p-3 sm:p-4 bg-gradient-to-t from-black/95 via-black/70 to-transparent flex items-center justify-between z-10">
+              <div class="card-bottom-info">
                 <div>
-                  <span class="text-white font-black text-sm sm:text-lg block leading-tight">{game.title}</span>
-                  <span class="text-slate-300 text-[10px] sm:text-xs font-semibold">{game.category}</span>
+                  <span class="card-title-big">{game.title}</span>
+                  <span class="card-category">{game.category}</span>
                 </div>
-                <span class="bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] text-white text-[10px] sm:text-xs font-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl shadow-lg">PLAY</span>
+                <span class="btn-card-play">PLAY</span>
               </div>
             </div>
           ) : (
-            <!-- SMALL CARDS (PURE CSS) -->
-            <div class="game-card group relative bg-gradient-to-br from-[#151D30] to-[#0B0F19] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer aspect-[16/11] border-2 border-slate-200 dark:border-[#232E4A] hover:border-[#FF6584] dark:hover:border-[#FF6584]">
+            <div class="game-card small-card" style={`background: ${style.bg};`}>
+              <div class="card-center-icon small-icon">{style.icon}</div>
+              <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
               
-              <!-- Ambient CSS Glow & Pattern -->
-              <div class={`absolute inset-0 bg-gradient-to-br ${style.bg} opacity-70 group-hover:scale-110 transition-transform duration-500`}></div>
-              
-              <!-- Center Cute Icon -->
-              <div class="absolute inset-0 flex items-center justify-center pb-2">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center text-xl sm:text-2xl shadow-md transform group-hover:scale-110 transition-all duration-300">
-                  {style.icon}
-                </div>
-              </div>
-
-              <video class="hover-video absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" loop muted playsinline preload="none" data-src={game.video}></video>
-              
-              <!-- Info Bar -->
-              <div class="absolute bottom-0 inset-x-0 p-2 sm:p-2.5 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex items-center justify-between z-10">
-                <span class="text-white font-extrabold text-[11px] sm:text-xs truncate max-w-[70%]">{game.title}</span>
-                <span class="bg-[#FF6584] text-white text-[8px] sm:text-[9px] font-black px-1.5 py-0.5 rounded-full">PLAY</span>
+              <div class="card-bottom-info compact">
+                <span class="card-title-small">{game.title}</span>
+                <span class="btn-card-play-sm">PLAY</span>
               </div>
             </div>
           );
@@ -266,152 +198,649 @@ const cardStyles: Record<number, { bg: string, icon: string, glow: string }> = {
       </div>
 
       <!-- Explore All Games Button -->
-      <div class="mt-8 sm:mt-12 text-center">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Explore all games" class="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:brightness-110 text-white text-sm sm:text-lg font-black rounded-full shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all">
+      <div class="explore-wrapper">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-explore">
           <span>🎮</span> Explore All Games (500+)
-          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </button>
       </div>
     </section>
   </main>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="mt-14 sm:mt-20 bg-white dark:bg-[#151D30] border-t border-slate-200 dark:border-[#232E4A] pt-8 sm:pt-10 pb-6 sm:pb-8 text-slate-600 dark:text-slate-400">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="bg-slate-50 dark:bg-slate-900/60 p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 dark:border-[#232E4A] mb-6 sm:mb-8">
-        <h3 class="text-[10px] sm:text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2.5 sm:mb-3">Our Partner Networks & Backlinks</h3>
-        <div class="flex flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 text-xs sm:text-sm font-bold">
-          <a href="https://example.com/crazy-games" target="_blank" rel="noopener dofollow" class="hover:text-[#FF6584]">CrazyGames Portal</a>
-          <a href="https://example.com/poki-clone" target="_blank" rel="noopener dofollow" class="hover:text-[#FF6584]">Poki Free Games</a>
-          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener dofollow" class="hover:text-[#FF6584]">HTML5 Game Hub</a>
-          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener dofollow" class="hover:text-[#FF6584]">Unblocked Games 76</a>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-card">
+        <h3>OUR PARTNER NETWORKS & BACKLINKS</h3>
+        <div class="backlinks">
+          <a href="https://example.com/crazy-games" target="_blank" rel="noopener dofollow">CrazyGames Portal</a>
+          <a href="https://example.com/poki-clone" target="_blank" rel="noopener dofollow">Poki Free Games</a>
+          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener dofollow">HTML5 Game Hub</a>
+          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener dofollow">Unblocked Games 76</a>
         </div>
       </div>
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-[11px] sm:text-xs font-semibold text-slate-400 dark:text-slate-500 text-center sm:text-left">
+      <div class="footer-bottom">
         <span>🐱 KawaiiPlay © 2026. Fast & Cute Gaming Experience.</span>
       </div>
     </div>
   </footer>
 
   <!-- ================= FLOATING BACK TO GAME BUTTON ================= -->
-  <button
-    id="backToGameBtn"
-    aria-label="Back to Featured Game"
-    class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-5 sm:py-3 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:brightness-110 text-white font-extrabold text-xs sm:text-sm rounded-full shadow-2xl shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all duration-300 opacity-0 pointer-events-none translate-y-5 border-2 border-white/20"
-  >
-    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <button id="backToGameBtn" aria-label="Back to Game" class="btn-back-to-game hidden-floating">
+    <svg class="bounce-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
     </svg>
     <span>Back to Game</span>
   </button>
 
-  <!-- ================= CLIENT-SIDE SCRIPTS ================= -->
-  <script>
-    // --- Theme Switcher ---
-    const themeBtn = document.getElementById('themeToggleBtn');
-    const sunIcon = document.getElementById('sunIcon');
-    const moonIcon = document.getElementById('moonIcon');
-    const themeText = document.getElementById('themeText');
-
-    function applyTheme(isDark: boolean) {
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-        sunIcon?.classList.remove('hidden');
-        moonIcon?.classList.add('hidden');
-        if (themeText) themeText.textContent = 'Dark Mode';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        sunIcon?.classList.add('hidden');
-        moonIcon?.classList.remove('hidden');
-        if (themeText) themeText.textContent = 'Light Mode';
-        localStorage.setItem('theme', 'light');
-      }
-    }
-
-    if (localStorage.getItem('theme') === 'light') applyTheme(false);
-    else applyTheme(true);
-
-    themeBtn?.addEventListener('click', () => {
-      applyTheme(!document.documentElement.classList.contains('dark'));
-    });
-
-    // --- Sidebar Menu ---
-    const sidebar = document.getElementById('sidebar');
-    const menuOverlay = document.getElementById('menuOverlay');
-    document.getElementById('openMenuBtn')?.addEventListener('click', () => {
-      menuOverlay?.classList.remove('hidden');
-      sidebar?.classList.remove('-translate-x-full');
-      document.body.style.overflow = 'hidden';
-    });
-    const closeMenu = () => {
-      sidebar?.classList.add('-translate-x-full');
-      menuOverlay?.classList.add('hidden');
-      document.body.style.overflow = '';
-    };
-    document.getElementById('closeMenuBtn')?.addEventListener('click', closeMenu);
-    menuOverlay?.addEventListener('click', closeMenu);
-
-    // --- Iframe Play Now & Fullscreen ---
-    const cover = document.getElementById('gameCoverOverlay');
-    const iframe = document.getElementById('gameIframe') as HTMLIFrameElement;
-    const fullscreenBtn = document.getElementById('fullscreenBtn');
-    const container = document.getElementById('gameScreenContainer');
-
-    cover?.addEventListener('click', () => {
-      if (iframe && !iframe.src && iframe.dataset.src) {
-        iframe.src = iframe.dataset.src;
-        iframe.classList.remove('hidden');
-        cover.classList.add('hidden');
-      }
-    });
-
-    fullscreenBtn?.addEventListener('click', () => {
-      if (iframe && !iframe.src && iframe.dataset.src) {
-        iframe.src = iframe.dataset.src;
-        iframe.classList.remove('hidden');
-        cover?.classList.add('hidden');
-      }
-      if (!document.fullscreenElement) {
-        container?.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
-    });
-
-    // --- Smart Video Hover (Desktop) ---
-    document.querySelectorAll('.game-card').forEach(card => {
-      const video = card.querySelector<HTMLVideoElement>('.hover-video');
-      if (!video) return;
-      card.addEventListener('mouseenter', () => {
-        if (!video.src && video.dataset.src) video.src = video.dataset.src;
-        video.play().catch(() => {});
-      });
-      card.addEventListener('mouseleave', () => {
-        video.pause();
-        video.currentTime = 0;
-      });
-    });
-
-    // --- Floating Back to Game Button Scroll Logic ---
-    const backBtn = document.getElementById('backToGameBtn');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 350) {
-        backBtn?.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-5');
-        backBtn?.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-      } else {
-        backBtn?.classList.add('opacity-0', 'pointer-events-none', 'translate-y-5');
-        backBtn?.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-      }
-    }, { passive: true });
-
-    backBtn?.addEventListener('click', () => {
-      if (container) {
-        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    });
-  </script>
 </body>
 </html>
+
+<!-- ================= 100% PURE SCOPED CSS (ZERO DEPENDENCY) ================= -->
+<style is:global>
+  /* Root CSS Variables for Light & Dark Mode */
+  :root {
+    --bg-color: #f8fafc;
+    --text-color: #1e293b;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --pink: #FF6584;
+    --hover-pink: #FF4772;
+    --purple: #8C7AE6;
+    --nav-bg: rgba(255, 255, 255, 0.95);
+  }
+
+  html.dark {
+    --bg-color: #0B0F19;
+    --text-color: #f8fafc;
+    --card-bg: #151D30;
+    --border-color: #232E4A;
+    --nav-bg: rgba(21, 29, 48, 0.95);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.2s, color 0.2s;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .hidden { display: none !important; }
+
+  /* Navbar */
+  .top-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(8px);
+    height: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-logo {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 900;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .icon-btn {
+    background: #f1f5f9;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  html.dark .icon-btn { background: #1e293b; color: #cbd5e1; }
+
+  .theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 0.85rem;
+    background: #f1f5f9;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  html.dark .theme-btn { background: #1e293b; color: #facc15; }
+
+  /* Sidebar */
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 40;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    max-width: 80vw;
+    height: 100%;
+    background: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out;
+    display: flex;
+    flex-col: column;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  .sidebar-header {
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .brand { display: flex; align-items: center; gap: 0.5rem; }
+  .emoji-logo { font-size: 1.5rem; }
+  .brand-name { font-weight: 900; color: var(--pink); font-size: 1.2rem; }
+
+  .sidebar-nav { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .nav-item {
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 0.85rem;
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .nav-item.active { background: rgba(255,101,132,0.12); color: var(--pink); }
+  .nav-item:hover { background: rgba(0,0,0,0.05); }
+  html.dark .nav-item:hover { background: rgba(255,255,255,0.05); }
+  .sidebar-footer { padding: 1rem; text-align: center; border-top: 1px solid var(--border-color); font-size: 0.75rem; opacity: 0.6; }
+
+  /* Featured Game Hero */
+  .main-content { padding: 1.5rem 1rem; }
+  .featured-section { display: flex; flex-direction: column; align-items: center; }
+
+  .game-screen-box {
+    width: 100%;
+    max-width: 800px;
+    background: #0B0F19;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 3px solid var(--border-color);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    position: relative;
+  }
+
+  .aspect-video-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-cover {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1b1433 0%, #0e1322 50%, #1a0f1d 100%);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .hero-glow-blob1 {
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 250px;
+    height: 250px;
+    background: rgba(255,101,132,0.25);
+    border-radius: 50%;
+    filter: blur(50px);
+  }
+
+  .hero-glow-blob2 {
+    position: absolute;
+    bottom: -20%;
+    right: -10%;
+    width: 250px;
+    height: 250px;
+    background: rgba(140,122,230,0.25);
+    border-radius: 50%;
+    filter: blur(50px);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .hero-icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  .badge-featured {
+    background: var(--pink);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .hero-title {
+    color: #ffffff;
+    font-size: clamp(1.2rem, 4vw, 2.2rem);
+    font-weight: 900;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+
+  .btn-play-hero {
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 1rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255,101,132,0.4);
+    transition: transform 0.2s;
+  }
+  .btn-play-hero:hover { transform: scale(1.05); }
+
+  .game-iframe { width: 100%; height: 100%; border: none; }
+
+  .fullscreen-wrapper { margin-top: 0.75rem; }
+  .btn-fullscreen {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.2rem;
+    background: linear-gradient(to right, var(--purple), var(--pink));
+    color: white;
+    font-weight: 800;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 0.85rem;
+    cursor: pointer;
+  }
+
+  /* Games Grid */
+  .games-section { margin-top: 2.5rem; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+
+  .count-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .games-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  }
+  @media (min-width: 1024px) {
+    .games-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  .game-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    background-color: #0B0F19;
+  }
+  .game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    border-color: var(--pink);
+  }
+
+  .small-card { aspect-ratio: 16 / 11; }
+  .big-card {
+    grid-column: span 2;
+    aspect-ratio: 16 / 9;
+  }
+  @media (min-width: 640px) { .big-card { grid-column: span 3; } }
+  @media (min-width: 1024px) { .big-card { grid-column: span 3; } }
+
+  .card-badge {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    z-index: 10;
+    background: var(--pink);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+  }
+
+  .card-center-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    transition: transform 0.3s;
+  }
+  .big-icon { font-size: 2.75rem; }
+  .game-card:hover .card-center-icon { transform: scale(1.15); }
+
+  .hover-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .game-card:hover .hover-video { opacity: 1; }
+
+  .card-bottom-info {
+    position: absolute;
+    bottom: 0;
+    inset-inline: 0;
+    padding: 0.75rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+  }
+  .card-bottom-info.compact { padding: 0.45rem 0.6rem; }
+
+  .card-title-big { display: block; color: white; font-weight: 900; font-size: 1rem; }
+  .card-category { display: block; color: #cbd5e1; font-size: 0.75rem; }
+  .card-title-small { color: white; font-weight: 800; font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
+
+  .btn-card-play {
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 900;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.6rem;
+  }
+  .btn-card-play-sm {
+    background: var(--pink);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+  }
+
+  .explore-wrapper { margin-top: 2rem; text-align: center; }
+  .btn-explore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    color: white;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255,101,132,0.3);
+  }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 4rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--card-bg);
+    padding: 2rem 0;
+  }
+
+  .footer-card {
+    background: rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  html.dark .footer-card { background: rgba(0,0,0,0.3); }
+
+  .footer-card h3 { font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; opacity: 0.6; margin-bottom: 0.5rem; }
+  .backlinks { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; font-size: 0.85rem; font-weight: 700; }
+  .backlinks a { color: inherit; text-decoration: none; }
+  .backlinks a:hover { color: var(--pink); }
+  .footer-bottom { text-align: center; font-size: 0.75rem; opacity: 0.6; }
+
+  /* Floating Button */
+  .btn-back-to-game {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 800;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 25px rgba(255,101,132,0.4);
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .hidden-floating {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(15px);
+  }
+  .bounce-icon {
+    animation: bounce 1s infinite alternate;
+  }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-4px); }
+  }
+</style>
+
+<!-- ================= CLIENT JAVASCRIPT ================= -->
+<script>
+  // Theme Switcher
+  const themeBtn = document.getElementById('themeToggleBtn');
+  const sunIcon = document.getElementById('sunIcon');
+  const moonIcon = document.getElementById('moonIcon');
+  const themeText = document.getElementById('themeText');
+
+  function applyTheme(isDark: boolean) {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+      if (themeText) themeText.textContent = 'Dark Mode';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+      if (themeText) themeText.textContent = 'Light Mode';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  if (localStorage.getItem('theme') === 'light') applyTheme(false);
+  else applyTheme(true);
+
+  themeBtn?.addEventListener('click', () => {
+    applyTheme(!document.documentElement.classList.contains('dark'));
+  });
+
+  // Sidebar Menu
+  const sidebar = document.getElementById('sidebar');
+  const menuOverlay = document.getElementById('menuOverlay');
+  document.getElementById('openMenuBtn')?.addEventListener('click', () => {
+    menuOverlay?.classList.remove('hidden');
+    sidebar?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  const closeMenu = () => {
+    sidebar?.classList.remove('open');
+    menuOverlay?.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+  document.getElementById('closeMenuBtn')?.addEventListener('click', closeMenu);
+  menuOverlay?.addEventListener('click', closeMenu);
+
+  // Iframe Play Now & Fullscreen
+  const cover = document.getElementById('gameCoverOverlay');
+  const iframe = document.getElementById('gameIframe') as HTMLIFrameElement;
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const container = document.getElementById('gameScreenContainer');
+
+  cover?.addEventListener('click', () => {
+    if (iframe && !iframe.src && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.classList.remove('hidden');
+      cover.classList.add('hidden');
+    }
+  });
+
+  fullscreenBtn?.addEventListener('click', () => {
+    if (iframe && !iframe.src && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.classList.remove('hidden');
+      cover?.classList.add('hidden');
+    }
+    if (!document.fullscreenElement) {
+      container?.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  // Smart Video Hover
+  document.querySelectorAll('.game-card').forEach(card => {
+    const video = card.querySelector<HTMLVideoElement>('.hover-video');
+    if (!video) return;
+    card.addEventListener('mouseenter', () => {
+      if (!video.src && video.dataset.src) video.src = video.dataset.src;
+      video.play().catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+
+  // Back to Game Scroll Button
+  const backBtn = document.getElementById('backToGameBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 350) {
+      backBtn?.classList.remove('hidden-floating');
+    } else {
+      backBtn?.classList.add('hidden-floating');
+    }
+  }, { passive: true });
+
+  backBtn?.addEventListener('click', () => {
+    container ? container.scrollIntoView({ behavior: 'smooth', block: 'center' }) : window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
