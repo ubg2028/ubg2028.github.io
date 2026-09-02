@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moto X3M Unblocked - Play Cute & Fast Online</title>
+  <meta name="description" content="Play Moto X3M Unblocked full screen game for free. Enjoy fast, fun, and cute bike stunt gameplay directly in your browser with zero lag!">
+  <meta name="keywords" content="moto x3m unblocked, moto x3m game, unblocked games, bike stunts, free online games">
+  
+  <!-- Preconnect to Google Fonts for CWV Speed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       CSS VARIABLES & THEME (Cute Orange UI)
+    ========================================= */
+    :root {
+      --primary: #FF7A00;
+      --primary-hover: #FF9432;
+      --primary-light: #FFEAD8;
+      --bg-color: #FFF7F0;
+      --card-bg: #FFFFFF;
+      --text-main: #2D231E;
+      --text-muted: #7A6B63;
+      --accent-yellow: #FFC000;
+      --accent-coral: #FF5A5F;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --shadow-soft: 0 10px 25px -5px rgba(255, 122, 0, 0.12), 0 8px 10px -6px rgba(255, 122, 0, 0.08);
+      --shadow-btn: 0 6px 0px #D86300;
+      --transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Cute Background Bubbles Effect */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,178,117,0.2) 0%, rgba(255,255,255,0) 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    body::before { width: 400px; height: 400px; top: -100px; left: -100px; }
+    body::after { width: 500px; height: 500px; bottom: -150px; right: -150px; }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+    header {
+      background: var(--card-bg);
+      box-shadow: 0 4px 20px rgba(255, 122, 0, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-family: 'Fredoka', cursive;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo-icon {
+      background: var(--primary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 10px rgba(255, 122, 0, 0.3);
+    }
+
+    .nav-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* =========================================
+       CONTAINER & GAME SECTION
+    ========================================= */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .game-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .game-header h1 {
+      font-family: 'Fredoka', cursive;
+      font-size: 2.2rem;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-pill {
+      background: var(--accent-yellow);
+      color: #5B3F00;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    /* Zero CLS Fix: Strict 16/9 Aspect Ratio */
+    .game-viewport {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      background: #111;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 4px solid #fff;
+    }
+
+    /* Lazy Click-to-Play Overlay (Huge CWV Win for LCP/FID) */
+    .game-poster {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), 
+                  url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .play-btn-large {
+      background: linear-gradient(180deg, #FF9E44 0%, var(--primary) 100%);
+      color: white;
+      font-family: 'Fredoka', cursive;
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn), 0 10px 20px rgba(255, 122, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
+      animation: cutePulse 2s infinite;
+    }
+
+    .play-btn-large:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 9px 0px #D86300, 0 15px 25px rgba(255, 122, 0, 0.5);
+    }
+
+    .play-btn-large:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0px #D86300;
+    }
+
+    @keyframes cutePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .game-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+
+    /* Game Controls Bar */
+    .game-bar {
+      max-width: 900px;
+      margin: 14px auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .game-info-mini {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stars {
+      color: var(--accent-yellow);
+      font-size: 1.1rem;
+    }
+
+    .game-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-btn {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-family: 'Fredoka', cursive;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* =========================================
+       MORE GAMES GRID SECTION
+    ========================================= */
+    .more-games {
+      margin-top: 48px;
+    }
+
+    .section-title {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.8rem;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .game-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      border: 2px solid transparent;
+      aspect-ratio: 1 / 1.15;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary-light);
+      box-shadow: 0 15px 30px rgba(255, 122, 0, 0.18);
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 65%;
+      position: relative;
+      background: #f0f0f0;
+      overflow: hidden;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .game-card:hover .card-thumb img {
+      transform: scale(1.08);
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    .card-details {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .card-title {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Description Box */
+    .game-description {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-top: 40px;
+      box-shadow: var(--shadow-soft);
+      border-left: 6px solid var(--primary);
+    }
+
+    .game-description h2 {
+      font-family: 'Fredoka', cursive;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+    footer {
+      background: var(--card-bg);
+      border-top: 2px solid var(--primary-light);
+      padding: 24px 20px;
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
+      .game-header h1 { font-size: 1.6rem; }
+      .play-btn-large { font-size: 1.2rem; padding: 12px 28px; }
+      .games-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+  </style>
+
+  <!-- Schema.org for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Moto X3M Unblocked",
+    "genre": ["Racing", "Stunt", "Action"],
+    "playMode": "SinglePlayer",
+    "applicationCategory": "Browser Game"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="navbar">
+      <a href="#" class="logo">
+        <div class="logo-icon">🏍️</div>
+        <span>MotoPlay</span>
+      </a>
+      <div class="nav-badge">✨ Fast & Cute UI</div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    
+    <!-- GAME CONTAINER -->
+    <section class="game-header">
+      <h1>Moto X3M Unblocked <span class="badge-pill">Hot 🔥</span></h1>
+    </section>
+
+    <!-- CWV Zero-CLS 16:9 Frame -->
+    <div class="game-viewport" id="gameContainer">
+      <!-- Fast-loading Preview Poster -->
+      <div class="game-poster" id="gamePoster" onclick="startPlay()">
+        <button class="play-btn-large" aria-label="Play Moto X3M Now">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          PLAY NOW
+        </button>
+      </div>
+      
+      <!-- Actual Game iframe (Deferred Load) -->
+      <iframe 
+        id="gameIframe" 
+        class="game-iframe" 
+        title="Moto X3M Unblocked Game" 
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- Mini Controls Bar -->
+    <div class="game-bar">
+      <div class="game-info-mini">
+        <div class="stars">★★★★★</div>
+        <span style="font-weight: 700; font-size: 0.9rem;">4.9 / 5</span>
+      </div>
+      <div class="game-actions">
+        <button class="action-btn" onclick="toggleFullScreen()" aria-label="Fullscreen Mode">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+          Fullscreen
+        </button>
+        <button class="action-btn" onclick="reloadGame()" aria-label="Reload Game">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          Restart
+        </button>
+      </div>
+    </div>
+
+    <!-- SEO DESCRIPTION -->
+    <article class="game-description">
+      <h2>About Moto X3M Unblocked</h2>
+      <p>Welcome to <strong>Moto X3M Unblocked</strong>! Grab your helmet, rev your engine, and race through challenging obstacle courses full of massive loops, dangerous spikes, and explosive barrels. Perform flips to shave seconds off your time and earn 3 stars on all levels!</p>
+    </article>
+
+    <!-- MORE GAMES SECTION -->
+    <section class="more-games">
+      <h2 class="section-title">
+        <span>🎮</span> More Awesome Games
+      </h2>
+
+      <div class="games-grid">
+        <!-- Game 1 -->
+        <a href="#play" class="game-card" onclick="switchGame('https://motox3m.co/moto-x3m-winter.embed', 'Moto X3M Winter')">
+          <div class="card-thumb">
+            <span class="card-tag">Winter</span>
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=70" alt="Moto X3M Winter" loading="lazy" width="200" height="140">
+          </div>
+          <div class="card-details">
+            <h3 class="card-title">Moto X3M Winter</h3>
+            <div class="card-meta">
+              <span>❄️ Stunts</span>
+              <span>⭐ 4.8</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Game 2 -->
+        <a href="#play" class="game-card" onclick="switchGame('https://motox3m.co/moto-x3m-pool-party.embed', 'Pool Party')">
+          <div class="card-thumb">
+            <span class="card-tag">Summer</span>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=70" alt="Moto X3M Pool Party" loading="lazy" width="200" height="140">
+          </div>
+          <div class="card-details">
+            <h3 class="card-title">Moto Pool Party</h3>
+            <div class="card-meta">
+              <span>🏖️ Racing</span>
+              <span>⭐ 4.9</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Game 3 -->
+        <a href="#play" class="game-card" onclick="switchGame('https://motox3m.co/moto-x3m-spooky-land.embed', 'Spooky Land')">
+          <div class="card-thumb">
+            <span class="card-tag">Spooky</span>
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=400&q=70" alt="Moto X3M Spooky" loading="lazy" width="200" height="140">
+          </div>
+          <div class="card-details">
+            <h3 class="card-title">Spooky Land</h3>
+            <div class="card-meta">
+              <span>🎃 Adventure</span>
+              <span>⭐ 4.7</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Game 4 -->
+        <a href="#play" class="game-card" onclick="switchGame('https://motox3m.co/moto-x3m.embed', 'Bike Hero')">
+          <div class="card-thumb">
+            <span class="card-tag">Action</span>
+            <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=400&q=70" alt="Bike Hero Stunt" loading="lazy" width="200" height="140">
+          </div>
+          <div class="card-details">
+            <h3 class="card-title">Bike Hero Stunt</h3>
+            <div class="card-meta">
+              <span>⚡ Fast</span>
+              <span>⭐ 4.8</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 MotoPlay - Fast, Cute & Safe Gaming Playground.</p>
+  </footer>
+
+  <!-- LIGHTWEIGHT INTERACTION JAVASCRIPT -->
+  <script>
+    const DEFAULT_GAME_URL = "https://motox3m.co/moto-x3m.embed";
+    const iframe = document.getElementById('gameIframe');
+    const poster = document.getElementById('gamePoster');
+    const container = document.getElementById('gameContainer');
+
+    // Click to Play (Prevents early network request and keeps CLS / LCP fast)
+    function startPlay() {
+      poster.style.display = 'none';
+      iframe.style.display = 'block';
+      if (!iframe.src || iframe.src === "about:blank") {
+        iframe.src = DEFAULT_GAME_URL;
+      }
+    }
+
+    // Switch game instantly when clicking "More Games"
+    function switchGame(url, title) {
+      poster.style.display = 'none';
+      iframe.style.display = 'block';
+      iframe.src = url;
+      window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
+    }
+
+    // Fullscreen Toggle
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        if (container.requestFullscreen) {
+          container.requestFullscreen();
+        } else if (container.webkitRequestFullscreen) {
+          container.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Reload active game
+    function reloadGame() {
+      if (iframe.src) {
+        const currentSrc = iframe.src;
+        iframe.src = '';
+        iframe.src = currentSrc;
+      }
+    }
+  </script>
+</body>
+</html>
