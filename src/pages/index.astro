@@ -1,15 +1,35 @@
 ---
-// ========================================================
-// 1. JSON FETCH / IMPORT
-// ========================================================
-import gamesList from '../data/games.json';
+// ================= 1. JSON DATA IMPORT =================
+import gamesData from '../data/games.json';
 
-const featuredGame = {
-  title: "Geometry Neon Dash",
-  icon: "🚀",
-  badge: "Featured Game",
-  iframeUrl: "https://geometrydashlite.io/",
-  category: "Arcade • Action"
+// Pure CSS Card Themes & Emojis
+const cardStyles: Record<number, { bg: string; icon: string }> = {
+  1: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🐱' },
+  2: { bg: 'linear-gradient(135deg, rgba(6,182,212,0.3), rgba(59,130,246,0.2), #0B0F19)', icon: '⚡' },
+  3: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🍬' },
+  4: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.3), rgba(20,184,166,0.2), #0B0F19)', icon: '🎮' },
+  5: { bg: 'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🔮' },
+  6: { bg: 'linear-gradient(135deg, rgba(217,70,239,0.3), rgba(244,63,94,0.2), #0B0F19)', icon: '🏃‍♀️' },
+  7: { bg: 'linear-gradient(135deg, rgba(239,68,68,0.3), rgba(249,115,22,0.2), #0B0F19)', icon: '🏎️' },
+  8: { bg: 'linear-gradient(135deg, rgba(234,179,8,0.3), rgba(245,158,11,0.2), #0B0F19)', icon: '⭐' },
+  9: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(244,63,94,0.2), #0B0F19)', icon: '🧁' },
+  10: { bg: 'linear-gradient(135deg, rgba(132,204,22,0.3), rgba(16,185,129,0.2), #0B0F19)', icon: '🦖' },
+  11: { bg: 'linear-gradient(135deg, rgba(244,63,94,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '👗' },
+  12: { bg: 'linear-gradient(135deg, rgba(139,92,246,0.3), rgba(99,102,241,0.2), #0B0F19)', icon: '⚔️' },
+  13: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.35), rgba(239,68,68,0.25), #0B0F19)', icon: '🦆' },
+  14: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(20,184,166,0.25), #0B0F19)', icon: '🍉' },
+  15: { bg: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(6,182,212,0.2), #0B0F19)', icon: '🤖' },
+  16: { bg: 'linear-gradient(135deg, rgba(140,122,230,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🫧' },
+  17: { bg: 'linear-gradient(135deg, rgba(249,115,22,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🍩' },
+  18: { bg: 'linear-gradient(135deg, rgba(20,184,166,0.3), rgba(16,185,129,0.2), #0B0F19)', icon: '🧩' },
+  19: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.3), rgba(234,179,8,0.2), #0B0F19)', icon: '🐹' },
+  20: { bg: 'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🌈' },
+  21: { bg: 'linear-gradient(135deg, rgba(239,68,68,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🐼' },
+  22: { bg: 'linear-gradient(135deg, rgba(6,182,212,0.3), rgba(99,102,241,0.2), #0B0F19)', icon: '🪐' },
+  23: { bg: 'linear-gradient(135deg, rgba(217,70,239,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🦄' },
+  24: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '👾' },
+  25: { bg: 'linear-gradient(135deg, rgba(140,122,230,0.3), rgba(59,130,246,0.2), #0B0F19)', icon: '🍮' },
+  26: { bg: 'linear-gradient(135deg, rgba(244,63,94,0.3), rgba(245,158,11,0.2), #0B0F19)', icon: '🐾' }
 };
 ---
 
@@ -17,21 +37,22 @@ const featuredGame = {
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>KawaiiPlay - Cute & Fun Free Online Games</title>
-  <meta name="description" content="Play cute and kawaii online games for free in your browser!" />
-  <meta name="theme-color" content="#0B0F19" />
+  <meta name="description" content="Play the best cute and kawaii online games for free! Arcade, puzzles, dress-up, and action games playable directly in your browser." />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://ubg2028.github.io/" />
+  <meta name="theme-color" content="#0B0F19" />
 
-  <!-- Google Font: Nunito -->
+  <!-- Google Nunito Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Instant Theme Script (Zero White Flash) -->
+  <!-- Instant Dark Mode Script (No White Flash) -->
   <script is:inline>
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') {
+    if (localStorage.getItem('theme') === 'light') {
       document.documentElement.classList.remove('dark');
     } else {
       document.documentElement.classList.add('dark');
@@ -40,175 +61,147 @@ const featuredGame = {
 </head>
 
 <body>
+
   <!-- ================= SIDEBAR MENU ================= -->
-  <div id="menuOverlay" class="drawer-overlay hidden" aria-hidden="true"></div>
-  
-  <aside id="sidebar" class="drawer-sidebar" aria-label="Main Navigation">
-    <div class="drawer-top">
-      <div class="drawer-header">
-        <div class="brand-badge">
-          <span>🎀</span>
-          <span class="brand-title">CuteGames</span>
+  <div id="menuOverlay" class="menu-overlay hidden"></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <div class="brand">
+          <span class="emoji-logo">🎀</span>
+          <span class="brand-name">CuteGames</span>
         </div>
-        <button id="closeMenuBtn" class="btn-icon" aria-label="Close Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+        <button id="closeMenuBtn" aria-label="Close Menu" class="icon-btn">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
-      <nav class="drawer-nav">
-        <a href="/" class="drawer-link active"><span>🔥</span> Home</a>
-        <a href="#games-section" class="drawer-link"><span>🎮</span> Arcade & Action</a>
-        <a href="#games-section" class="drawer-link"><span>🧩</span> Cute Puzzle</a>
-        <a href="#games-section" class="drawer-link"><span>👗</span> Dress Up & Girls</a>
+      <nav class="sidebar-nav">
+        <a href="/" class="nav-item active">🔥 Home</a>
+        <a href="#more-games" class="nav-item">🎮 Arcade & Action</a>
+        <a href="#more-games" class="nav-item">🧩 Cute Puzzle</a>
+        <a href="#more-games" class="nav-item">👗 Dress Up & Girls</a>
       </nav>
     </div>
-
-    <div class="drawer-footer">
+    <div class="sidebar-footer">
       <p>© 2026 KawaiiPlay Zone</p>
     </div>
   </aside>
 
-  <!-- ================= STICKY TOP NAVBAR ================= -->
-  <header class="site-header">
-    <div class="site-container header-inner">
-      <div class="header-left">
-        <button id="openMenuBtn" class="btn-icon" aria-label="Open Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="top-navbar">
+    <div class="container nav-content">
+      <div class="nav-left">
+        <button id="openMenuBtn" aria-label="Open Menu" class="icon-btn">
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
-        <a href="/" class="site-brand">
-          <span class="site-logo">🐱</span>
-          <span class="site-name">KawaiiPlay</span>
+        <a href="/" class="site-logo">
+          <span>🐱</span> KawaiiPlay
         </a>
       </div>
 
-      <div class="header-right">
-        <button id="themeToggleBtn" class="btn-theme" aria-label="Toggle Theme">
-          <svg id="moonIcon" class="icon hidden" width="15" height="15" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-          </svg>
-          <svg id="sunIcon" class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <span id="themeLabel">Dark</span>
-        </button>
-      </div>
+      <!-- Theme Switcher -->
+      <button id="themeToggleBtn" aria-label="Toggle Theme" class="theme-btn">
+        <svg id="moonIcon" class="hidden" width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        <span id="themeText">Dark Mode</span>
+      </button>
     </div>
   </header>
 
-  <!-- ================= MAIN CONTENT ================= -->
-  <main class="site-container main-wrapper">
-    
-    <!-- 1. COMPACT & CENTERED HERO GAME -->
-    <section class="hero-arena-wrapper" aria-label="Featured Game">
-      <div class="hero-center-box">
-        <figure id="gameScreenContainer" class="game-viewport">
-          <!-- Facade Overlay -->
-          <div id="gameCoverOverlay" class="hero-facade" role="button" tabindex="0" aria-label="Play Game">
-            <div class="facade-glow"></div>
-            <div class="facade-content">
-              <span class="hero-emoji">{featuredGame.icon}</span>
-              <span class="pill-badge">{featuredGame.badge}</span>
-              <h1 class="hero-heading">{featuredGame.title}</h1>
-              <button id="playGameBtn" class="btn-hero-play">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
+  <!-- ================= FEATURED GAME SECTION ================= -->
+  <main class="container main-content">
+    <section class="featured-section">
+      <div id="gameScreenContainer" class="game-screen-box">
+        <div class="aspect-video-box">
+          
+          <!-- PLAY NOW OVERLAY (PURE CSS HERO) -->
+          <div id="gameCoverOverlay" class="hero-cover">
+            <div class="hero-glow-blob1"></div>
+            <div class="hero-glow-blob2"></div>
+            
+            <div class="hero-content">
+              <div class="hero-icon-box">🚀</div>
+              <span class="badge-featured">Featured Game</span>
+              <h1 class="hero-title">Geometry Neon Dash</h1>
+              <button id="playGameBtn" class="btn-play-hero">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 PLAY NOW
               </button>
             </div>
           </div>
 
-          <!-- Iframe lazy loaded on click -->
+          <!-- IFRAME -->
           <iframe 
-            id="gameIframe" 
-            class="hero-iframe hidden" 
-            data-src={featuredGame.iframeUrl} 
-            title={featuredGame.title} 
-            allow="fullscreen; autoplay; gamepad" 
+            id="gameIframe"
+            class="game-iframe hidden"
+            data-src="https://geometrydashlite.io/"
+            title="Featured Game"
+            allow="fullscreen; autoplay; gamepad"
             loading="lazy">
           </iframe>
-        </figure>
 
-        <!-- Fullscreen Bar Under Centered Game -->
-        <div class="hero-controls">
-          <span class="now-playing-tag">🔥 {featuredGame.category}</span>
-          <button id="fullscreenBtn" class="btn-control">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-            </svg>
-            Full Screen
-          </button>
         </div>
+      </div>
+
+      <!-- Fullscreen Button -->
+      <div class="fullscreen-wrapper">
+        <button id="fullscreenBtn" class="btn-fullscreen">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+          Full Screen Mode
+        </button>
       </div>
     </section>
 
-    <!-- 2. MORE GAMES (HOVER-ONLY TITLE CARDS) -->
-    <section id="games-section" class="catalog-section" aria-label="More Games Collection">
-      <header class="section-top">
-        <div class="section-title-group">
-          <span class="section-icon">⭐</span>
-          <h2 class="section-heading">More Fun Games</h2>
+    <!-- ================= MORE GAMES SECTION ================= -->
+    <section id="more-games" class="games-section">
+      <div class="section-header">
+        <div class="section-title">
+          <span>⭐</span>
+          <h2>More Fun Games</h2>
         </div>
-        <span class="badge-counter">{gamesList.length} Games</span>
-      </header>
-
-      <!-- Fully Responsive Adaptive Grid -->
-      <div class="catalog-grid">
-        {gamesList.map((game) => (
-          <article 
-            class={`card-item ${game.isFeaturedSpan ? 'span-2x' : ''}`} 
-            style={`background: ${game.bg};`}
-          >
-            {game.badge && <span class="card-tag">{game.badge}</span>}
-            
-            <!-- Default Center Icon -->
-            <div class="card-icon-area">
-              <span class="card-emoji">{game.icon}</span>
-            </div>
-
-            <!-- Video Preview (Streams on hover/touch only) -->
-            <video 
-              class="card-video-hover" 
-              loop 
-              muted 
-              playsinline 
-              preload="none" 
-              data-src={game.video}
-            ></video>
-
-            <!-- TITLE SHOWN ONLY ON HOVER / TOUCH -->
-            <div class="card-meta-hover">
-              <strong class="card-name">{game.title}</strong>
-              {game.category && <small class="card-genre">{game.category}</small>}
-              <span class="btn-card-play">PLAY</span>
-            </div>
-          </article>
-        ))}
+        <span class="count-badge">{gamesData.length} Games</span>
       </div>
 
-      <!-- Explore All Button -->
-      <div class="explore-action-box">
-        <button class="btn-explore-all" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-          <span>🎮</span> Explore All (500+ Games)
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
+      <!-- Responsive Dynamic Grid -->
+      <div class="games-grid">
+        {gamesData.map((game) => {
+          const style = cardStyles[game.id] || { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🎮' };
+          
+          return game.isBig ? (
+            <div class="game-card big-card" style={`background: ${style.bg};`}>
+              <span class="card-badge">{game.badge}</span>
+              <div class="card-center-icon big-icon">{style.icon}</div>
+              <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
+              
+              <div class="card-bottom-info">
+                <div>
+                  <span class="card-title-big">{game.title}</span>
+                  <span class="card-category">{game.category}</span>
+                </div>
+                <span class="btn-card-play">PLAY</span>
+              </div>
+            </div>
+          ) : (
+            <div class="game-card small-card" style={`background: ${style.bg};`}>
+              <div class="card-center-icon small-icon">{style.icon}</div>
+              <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
+              
+              <div class="card-bottom-info compact">
+                <span class="card-title-small">{game.title}</span>
+                <span class="btn-card-play-sm">PLAY</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Explore All Games Button -->
+      <div class="explore-wrapper">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-explore">
+          <span>🎮</span> Explore All Games (500+)
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </button>
       </div>
     </section>
@@ -216,767 +209,638 @@ const featuredGame = {
 
   <!-- ================= FOOTER ================= -->
   <footer class="site-footer">
-    <div class="site-container footer-content">
-      <div class="partners-block">
-        <h3 class="partners-title">PARTNER NETWORKS & BACKLINKS</h3>
-        <nav class="partners-nav" aria-label="Partner Links">
-          <a href="https://example.com/crazy-games" target="_blank" rel="noopener noreferrer">CrazyGames Portal</a>
-          <a href="https://example.com/poki-clone" target="_blank" rel="noopener noreferrer">Poki Free Games</a>
-          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener noreferrer">HTML5 Game Hub</a>
-          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener noreferrer">Unblocked Games 76</a>
-        </nav>
+    <div class="container">
+      <div class="footer-card">
+        <h3>OUR PARTNER NETWORKS & BACKLINKS</h3>
+        <div class="backlinks">
+          <a href="https://example.com/crazy-games" target="_blank" rel="noopener dofollow">CrazyGames Portal</a>
+          <a href="https://example.com/poki-clone" target="_blank" rel="noopener dofollow">Poki Free Games</a>
+          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener dofollow">HTML5 Game Hub</a>
+          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener dofollow">Unblocked Games 76</a>
+        </div>
       </div>
-      <div class="copyright-block">
-        <p>🐱 KawaiiPlay © 2026. Fast, Responsive & Clean UI.</p>
+      <div class="footer-bottom">
+        <span>🐱 KawaiiPlay © 2026. Fast & Cute Gaming Experience.</span>
       </div>
     </div>
   </footer>
 
-  <!-- Floating Scroll To Top -->
-  <button id="backToTopBtn" class="btn-floating hidden-float" aria-label="Scroll Back to Top">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="12" y1="19" x2="12" y2="5"></line>
-      <polyline points="5 12 12 5 19 12"></polyline>
+  <!-- ================= FLOATING BACK TO GAME BUTTON ================= -->
+  <button id="backToGameBtn" aria-label="Back to Game" class="btn-back-to-game hidden-floating">
+    <svg class="bounce-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
     </svg>
-    <span>Top</span>
+    <span>Back to Game</span>
   </button>
 
-  <!-- ================= JAVASCRIPT ================= -->
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      // 1. Theme Toggle
-      const themeBtn = document.getElementById("themeToggleBtn");
-      const sunIcon = document.getElementById("sunIcon");
-      const moonIcon = document.getElementById("moonIcon");
-      const themeLabel = document.getElementById("themeLabel");
-
-      const applyTheme = (isDark) => {
-        if (isDark) {
-          document.documentElement.classList.add("dark");
-          sunIcon?.classList.remove("hidden");
-          moonIcon?.classList.add("hidden");
-          if (themeLabel) themeLabel.textContent = "Dark";
-          localStorage.setItem("theme", "dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-          sunIcon?.classList.add("hidden");
-          moonIcon?.classList.remove("hidden");
-          if (themeLabel) themeLabel.textContent = "Light";
-          localStorage.setItem("theme", "light");
-        }
-      };
-
-      applyTheme(localStorage.getItem("theme") !== "light");
-      themeBtn?.addEventListener("click", () => {
-        applyTheme(!document.documentElement.classList.contains("dark"));
-      });
-
-      // 2. Mobile Responsive Drawer
-      const sidebar = document.getElementById("sidebar");
-      const overlay = document.getElementById("menuOverlay");
-      const openBtn = document.getElementById("openMenuBtn");
-      const closeBtn = document.getElementById("closeMenuBtn");
-
-      const toggleDrawer = (open) => {
-        if (open) {
-          sidebar?.classList.add("open");
-          overlay?.classList.remove("hidden");
-          document.body.style.overflow = "hidden";
-        } else {
-          sidebar?.classList.remove("open");
-          overlay?.classList.add("hidden");
-          document.body.style.overflow = "";
-        }
-      };
-
-      openBtn?.addEventListener("click", () => toggleDrawer(true));
-      closeBtn?.addEventListener("click", () => toggleDrawer(false));
-      overlay?.addEventListener("click", () => toggleDrawer(false));
-
-      // 3. Facade Centered Iframe Loader
-      const cover = document.getElementById("gameCoverOverlay");
-      const iframe = document.getElementById("gameIframe");
-      const fsBtn = document.getElementById("fullscreenBtn");
-      const container = document.getElementById("gameScreenContainer");
-
-      const triggerGame = () => {
-        if (iframe && !iframe.src && iframe.dataset.src) {
-          iframe.src = iframe.dataset.src;
-          iframe.classList.remove("hidden");
-          cover?.classList.add("hidden");
-        }
-      };
-
-      cover?.addEventListener("click", triggerGame);
-      fsBtn?.addEventListener("click", () => {
-        triggerGame();
-        if (!document.fullscreenElement) {
-          container?.requestFullscreen().catch(() => {});
-        } else {
-          document.exitFullscreen();
-        }
-      });
-
-      // 4. Video Hover / Touch Play
-      document.querySelectorAll(".card-item").forEach((card) => {
-        const vid = card.querySelector(".card-video-hover");
-        if (!vid) return;
-
-        const startVideo = () => {
-          if (!vid.src && vid.dataset.src) vid.src = vid.dataset.src;
-          vid.play().catch(() => {});
-        };
-
-        const stopVideo = () => {
-          vid.pause();
-          vid.currentTime = 0;
-        };
-
-        card.addEventListener("mouseenter", startVideo, { passive: true });
-        card.addEventListener("mouseleave", stopVideo, { passive: true });
-        card.addEventListener("touchstart", startVideo, { passive: true });
-      });
-
-      // 5. Scroll Floating Button
-      const floatBtn = document.getElementById("backToTopBtn");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-          floatBtn?.classList.remove("hidden-float");
-        } else {
-          floatBtn?.classList.add("hidden-float");
-        }
-      }, { passive: true });
-
-      floatBtn?.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    });
-  </script>
 </body>
 </html>
 
-<!-- ================= CSS3 STYLES ================= -->
+<!-- ================= 100% PURE SCOPED CSS (ZERO DEPENDENCY) ================= -->
 <style is:global>
-  /* --- Design Tokens --- */
+  /* Root CSS Variables for Light & Dark Mode */
   :root {
-    --font-stack: 'Nunito', system-ui, -apple-system, sans-serif;
-    --bg-body: #f4f6fb;
-    --bg-surface: #ffffff;
-    --bg-surface-elevated: rgba(255, 255, 255, 0.92);
+    --bg-color: #f8fafc;
+    --text-color: #1e293b;
+    --card-bg: #ffffff;
     --border-color: #e2e8f0;
-    --text-primary: #0f172a;
-    --text-secondary: #64748b;
-    --accent-pink: #ec4899;
-    --accent-gradient: linear-gradient(135deg, #ec4899, #8b5cf6);
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 18px;
-    --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.06);
+    --pink: #FF6584;
+    --hover-pink: #FF4772;
+    --purple: #8C7AE6;
+    --nav-bg: rgba(255, 255, 255, 0.95);
   }
 
   html.dark {
-    --bg-body: #0b0f19;
-    --bg-surface: #131b2e;
-    --bg-surface-elevated: rgba(11, 15, 25, 0.92);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.4);
+    --bg-color: #0B0F19;
+    --text-color: #f8fafc;
+    --card-bg: #151D30;
+    --border-color: #232E4A;
+    --nav-bg: rgba(21, 29, 48, 0.95);
   }
 
-  /* --- Reset & Layout Base --- */
-  *, *::before, *::after {
-    box-sizing: border-box;
+  * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
   }
 
   body {
-    font-family: var(--font-stack);
-    background-color: var(--bg-body);
-    color: var(--text-primary);
-    line-height: 1.4;
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.2s, color 0.2s;
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  .site-container {
-    width: 100%;
-    max-width: 1200px;
+  .container {
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 clamp(10px, 3vw, 20px);
+    padding: 0 1rem;
   }
 
-  /* --- Top Sticky Navbar --- */
-  .site-header {
+  .hidden { display: none !important; }
+
+  /* Navbar */
+  .top-navbar {
     position: sticky;
     top: 0;
-    z-index: 40;
-    height: 54px;
-    background: var(--bg-surface-elevated);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    z-index: 30;
+    background: var(--nav-bg);
     border-bottom: 1px solid var(--border-color);
-  }
-
-  .header-inner {
+    backdrop-filter: blur(8px);
+    height: 60px;
     display: flex;
     align-items: center;
+  }
+
+  .nav-content {
+    display: flex;
     justify-content: space-between;
-    height: 100%;
+    align-items: center;
+    width: 100%;
   }
 
-  .header-left {
+  .nav-left {
     display: flex;
     align-items: center;
-    gap: 10px;
-  }
-
-  .site-brand {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
+    gap: 0.75rem;
   }
 
   .site-logo {
-    font-size: 1.3rem;
-  }
-
-  .site-name {
-    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    text-decoration: none;
+    font-size: 1.4rem;
     font-weight: 900;
-    color: var(--accent-pink);
-    letter-spacing: -0.5px;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
   }
 
-  .btn-icon {
+  .icon-btn {
+    background: #f1f5f9;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 0.85rem;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
   }
+  html.dark .icon-btn { background: #1e293b; color: #cbd5e1; }
 
-  .btn-theme {
-    display: inline-flex;
+  .theme-btn {
+    display: flex;
     align-items: center;
-    gap: 5px;
-    background: var(--bg-surface);
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 0.85rem;
+    background: #f1f5f9;
     border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 5px 10px;
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
+    color: var(--text-color);
+    font-size: 0.8rem;
     font-weight: 800;
     cursor: pointer;
   }
+  html.dark .theme-btn { background: #1e293b; color: #facc15; }
 
-  /* --- Sidebar Navigation Drawer --- */
-  .drawer-overlay {
+  /* Sidebar */
+  .menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(4px);
-    z-index: 50;
+    background: rgba(0,0,0,0.7);
+    z-index: 40;
   }
 
-  .drawer-sidebar {
+  .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 260px;
+    width: 280px;
     max-width: 80vw;
     height: 100%;
-    background: var(--bg-surface);
+    background: var(--card-bg);
     border-right: 1px solid var(--border-color);
-    z-index: 60;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 16px;
+    z-index: 50;
     transform: translateX(-100%);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s ease-out;
+    display: flex;
+    flex-col: column;
+    justify-content: space-between;
+    flex-direction: column;
   }
+  .sidebar.open { transform: translateX(0); }
 
-  .drawer-sidebar.open {
-    transform: translateX(0);
-  }
-
-  .drawer-header {
+  .sidebar-header {
+    padding: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
   }
 
-  .brand-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 1.15rem;
-    font-weight: 900;
-    color: var(--accent-pink);
-  }
+  .brand { display: flex; align-items: center; gap: 0.5rem; }
+  .emoji-logo { font-size: 1.5rem; }
+  .brand-name { font-weight: 900; color: var(--pink); font-size: 1.2rem; }
 
-  .drawer-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .drawer-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    color: var(--text-secondary);
+  .sidebar-nav { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .nav-item {
     text-decoration: none;
-    font-weight: 800;
+    padding: 0.75rem 1rem;
+    border-radius: 0.85rem;
+    color: var(--text-color);
+    font-weight: 700;
     font-size: 0.9rem;
+    transition: background 0.2s;
   }
+  .nav-item.active { background: rgba(255,101,132,0.12); color: var(--pink); }
+  .nav-item:hover { background: rgba(0,0,0,0.05); }
+  html.dark .nav-item:hover { background: rgba(255,255,255,0.05); }
+  .sidebar-footer { padding: 1rem; text-align: center; border-top: 1px solid var(--border-color); font-size: 0.75rem; opacity: 0.6; }
 
-  .drawer-link.active, .drawer-link:hover {
-    background: rgba(236, 72, 153, 0.12);
-    color: var(--accent-pink);
-  }
+  /* Featured Game Hero */
+  .main-content { padding: 1.5rem 1rem; }
+  .featured-section { display: flex; flex-direction: column; align-items: center; }
 
-  .drawer-footer {
-    font-size: 0.7rem;
-    color: var(--text-secondary);
-  }
-
-  /* --- 1. COMPACT & CENTERED HERO GAME --- */
-  .main-wrapper {
-    margin-top: 14px;
-  }
-
-  .hero-arena-wrapper {
-    display: flex;
-    justify-content: center;
+  .game-screen-box {
     width: 100%;
-    margin-bottom: 24px;
+    max-width: 800px;
+    background: #0B0F19;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 3px solid var(--border-color);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    position: relative;
   }
 
-  /* Small & Centered Box (Max width bounded) */
-  .hero-center-box {
-    width: 100%;
-    max-width: 860px; /* Game frame size controlled */
-    margin: 0 auto;
-  }
-
-  .game-viewport {
+  .aspect-video-box {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    max-height: 52vh; /* Compact screen height */
-    min-height: 200px;
-    background: #000;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .hero-facade {
+  .hero-cover {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1b1433 0%, #0e1322 50%, #1a0f1d 100%);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .hero-glow-blob1 {
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 250px;
+    height: 250px;
+    background: rgba(255,101,132,0.25);
+    border-radius: 50%;
+    filter: blur(50px);
+  }
+
+  .hero-glow-blob2 {
+    position: absolute;
+    bottom: -20%;
+    right: -10%;
+    width: 250px;
+    height: 250px;
+    background: rgba(140,122,230,0.25);
+    border-radius: 50%;
+    filter: blur(50px);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .hero-icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  .badge-featured {
+    background: var(--pink);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .hero-title {
+    color: #ffffff;
+    font-size: clamp(1.2rem, 4vw, 2.2rem);
+    font-weight: 900;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+
+  .btn-play-hero {
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 1rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255,101,132,0.4);
+    transition: transform 0.2s;
+  }
+  .btn-play-hero:hover { transform: scale(1.05); }
+
+  .game-iframe { width: 100%; height: 100%; border: none; }
+
+  .fullscreen-wrapper { margin-top: 0.75rem; }
+  .btn-fullscreen {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.2rem;
+    background: linear-gradient(to right, var(--purple), var(--pink));
+    color: white;
+    font-weight: 800;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 0.85rem;
+    cursor: pointer;
+  }
+
+  /* Games Grid */
+  .games-section { margin-top: 2.5rem; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+
+  .count-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .games-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  }
+  @media (min-width: 1024px) {
+    .games-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  .game-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    background-color: #0B0F19;
+  }
+  .game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    border-color: var(--pink);
+  }
+
+  .small-card { aspect-ratio: 16 / 11; }
+  .big-card {
+    grid-column: span 2;
+    aspect-ratio: 16 / 9;
+  }
+  @media (min-width: 640px) { .big-card { grid-column: span 3; } }
+  @media (min-width: 1024px) { .big-card { grid-column: span 3; } }
+
+  .card-badge {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    z-index: 10;
+    background: var(--pink);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+  }
+
+  .card-center-icon {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at center, #1b1938 0%, #080c16 100%);
-    cursor: pointer;
-    overflow: hidden;
+    font-size: 1.75rem;
+    transition: transform 0.3s;
   }
+  .big-icon { font-size: 2.75rem; }
+  .game-card:hover .card-center-icon { transform: scale(1.15); }
 
-  .facade-glow {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: rgba(236, 72, 153, 0.35);
-    filter: blur(70px);
-    border-radius: 50%;
-  }
-
-  .facade-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 12px;
-    gap: 6px;
-  }
-
-  .hero-emoji {
-    font-size: clamp(2rem, 4vw, 3rem);
-  }
-
-  .pill-badge {
-    background: rgba(236, 72, 153, 0.2);
-    color: var(--accent-pink);
-    border: 1px solid var(--accent-pink);
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-
-  .hero-heading {
-    font-size: clamp(1.1rem, 3.5vw, 1.8rem);
-    font-weight: 900;
-    color: #ffffff;
-    line-height: 1.2;
-  }
-
-  .btn-hero-play {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--accent-gradient);
-    color: #ffffff;
-    border: none;
-    padding: 8px 22px;
-    font-size: 0.9rem;
-    font-weight: 900;
-    border-radius: 999px;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4);
-    transition: transform 0.15s ease;
-    margin-top: 4px;
-  }
-
-  .btn-hero-play:hover {
-    transform: scale(1.04);
-  }
-
-  .hero-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  .hero-controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 8px;
-    padding: 0 4px;
-  }
-
-  .now-playing-tag {
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: var(--text-secondary);
-  }
-
-  .btn-control {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    font-size: 0.75rem;
-    font-weight: 800;
-    padding: 5px 10px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-  }
-
-  /* --- 2. MORE GAMES CATALOG (HOVER-ONLY DETAILS) --- */
-  .catalog-section {
-    margin-top: 10px;
-  }
-
-  .section-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-
-  .section-title-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .section-heading {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    font-weight: 900;
-  }
-
-  .badge-counter {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    color: var(--accent-pink);
-    font-size: 0.7rem;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 999px;
-  }
-
-  /* 100% Adaptive Grid Across All Devices */
-  .catalog-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on smallest mobile */
-    gap: 8px;
-  }
-
-  /* Small Mobile (380px+) -> 3 cols */
-  @media (min-width: 380px) {
-    .catalog-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-  }
-
-  /* Tablets (640px+) -> 4 cols */
-  @media (min-width: 640px) {
-    .catalog-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-    .card-item.span-2x {
-      grid-column: span 2;
-      aspect-ratio: 16 / 9;
-    }
-  }
-
-  /* Laptops / Desktops (900px+) -> 6 cols */
-  @media (min-width: 900px) {
-    .catalog-grid {
-      grid-template-columns: repeat(6, 1fr);
-      gap: 14px;
-    }
-  }
-
-  /* Big Screens (1200px+) -> 7 cols */
-  @media (min-width: 1200px) {
-    .catalog-grid {
-      grid-template-columns: repeat(7, 1fr);
-    }
-  }
-
-  /* Game Card Base */
-  .card-item {
-    position: relative;
-    aspect-ratio: 1 / 1; /* Square cute cards */
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    content-visibility: auto;
-    contain-intrinsic-size: 130px;
-    box-shadow: var(--shadow-card);
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-  }
-
-  .card-item:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.35);
-    z-index: 10;
-  }
-
-  .card-tag {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    z-index: 3;
-    background: rgba(0, 0, 0, 0.85);
-    color: #fbbf24;
-    font-size: 0.58rem;
-    font-weight: 900;
-    padding: 2px 5px;
-    border-radius: 4px;
-  }
-
-  .card-icon-area {
-    text-align: center;
-    z-index: 2;
-    transition: opacity 0.2s ease;
-  }
-
-  .card-emoji {
-    font-size: clamp(2.2rem, 5vw, 3rem);
-  }
-
-  .card-video-hover {
+  .hover-video {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    z-index: 1;
+    transition: opacity 0.3s;
     pointer-events: none;
-    transition: opacity 0.25s ease;
   }
+  .game-card:hover .hover-video { opacity: 1; }
 
-  .card-item:hover .card-video-hover {
-    opacity: 1;
-  }
-
-  /* --- TITLE SHOWN ON HOVER ONLY --- */
-  .card-meta-hover {
+  .card-bottom-info {
     position: absolute;
-    inset: 0;
-    z-index: 4;
-    background: rgba(11, 15, 25, 0.88);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    bottom: 0;
+    inset-inline: 0;
+    padding: 0.75rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 8px;
-    gap: 3px;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
+    justify-content: space-between;
+    z-index: 10;
   }
+  .card-bottom-info.compact { padding: 0.45rem 0.6rem; }
 
-  /* Hover & Touch Activate Info */
-  .card-item:hover .card-meta-hover,
-  .card-item:focus-within .card-meta-hover {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .card-name {
-    font-size: 0.78rem;
-    font-weight: 900;
-    color: #ffffff;
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-
-  .card-genre {
-    font-size: 0.62rem;
-    color: #94a3b8;
-    font-weight: 700;
-  }
+  .card-title-big { display: block; color: white; font-weight: 900; font-size: 1rem; }
+  .card-category { display: block; color: #cbd5e1; font-size: 0.75rem; }
+  .card-title-small { color: white; font-weight: 800; font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
 
   .btn-card-play {
-    background: var(--accent-pink);
-    color: #ffffff;
-    font-size: 0.62rem;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    color: white;
+    font-size: 0.75rem;
     font-weight: 900;
-    padding: 3px 10px;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.6rem;
+  }
+  .btn-card-play-sm {
+    background: var(--pink);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 0.15rem 0.45rem;
     border-radius: 999px;
-    margin-top: 4px;
-    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
   }
 
-  /* --- Explore Action --- */
-  .explore-action-box {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0 20px;
-  }
-
-  .btn-explore-all {
+  .explore-wrapper { margin-top: 2rem; text-align: center; }
+  .btn-explore {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    color: white;
     font-weight: 900;
-    font-size: 0.85rem;
-    padding: 10px 22px;
+    font-size: 1rem;
     border-radius: 999px;
-    cursor: pointer;
-    box-shadow: var(--shadow-card);
-  }
-
-  /* --- Footer --- */
-  .site-footer {
-    border-top: 1px solid var(--border-color);
-    margin-top: 30px;
-    padding: 24px 0 16px;
-    background: var(--bg-surface);
-  }
-
-  .partners-block {
-    text-align: center;
-    margin-bottom: 16px;
-  }
-
-  .partners-title {
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    letter-spacing: 0.8px;
-    margin-bottom: 10px;
-  }
-
-  .partners-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .partners-nav a {
-    color: var(--accent-pink);
-    font-size: 0.75rem;
-    text-decoration: none;
-    font-weight: 800;
-  }
-
-  .copyright-block {
-    text-align: center;
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-  }
-
-  /* --- Floating Button --- */
-  .btn-floating {
-    position: fixed;
-    bottom: 18px;
-    right: 18px;
-    z-index: 45;
-    background: var(--accent-pink);
-    color: #ffffff;
     border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255,101,132,0.3);
+  }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 4rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--card-bg);
+    padding: 2rem 0;
+  }
+
+  .footer-card {
+    background: rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  html.dark .footer-card { background: rgba(0,0,0,0.3); }
+
+  .footer-card h3 { font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; opacity: 0.6; margin-bottom: 0.5rem; }
+  .backlinks { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; font-size: 0.85rem; font-weight: 700; }
+  .backlinks a { color: inherit; text-decoration: none; }
+  .backlinks a:hover { color: var(--pink); }
+  .footer-bottom { text-align: center; font-size: 0.75rem; opacity: 0.6; }
+
+  /* Floating Button */
+  .btn-back-to-game {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 50;
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 7px 12px;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(to right, var(--pink), var(--purple));
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 800;
     border-radius: 999px;
-    font-size: 0.72rem;
-    font-weight: 900;
+    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 25px rgba(255,101,132,0.4);
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: opacity 0.3s, transform 0.3s;
   }
-
-  .hidden-float {
-    transform: translateY(60px);
+  .hidden-floating {
     opacity: 0;
     pointer-events: none;
+    transform: translateY(15px);
   }
-
-  .hidden {
-    display: none !important;
+  .bounce-icon {
+    animation: bounce 1s infinite alternate;
+  }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-4px); }
   }
 </style>
+
+<!-- ================= CLIENT JAVASCRIPT ================= -->
+<script>
+  // Theme Switcher
+  const themeBtn = document.getElementById('themeToggleBtn');
+  const sunIcon = document.getElementById('sunIcon');
+  const moonIcon = document.getElementById('moonIcon');
+  const themeText = document.getElementById('themeText');
+
+  function applyTheme(isDark: boolean) {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+      if (themeText) themeText.textContent = 'Dark Mode';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+      if (themeText) themeText.textContent = 'Light Mode';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  if (localStorage.getItem('theme') === 'light') applyTheme(false);
+  else applyTheme(true);
+
+  themeBtn?.addEventListener('click', () => {
+    applyTheme(!document.documentElement.classList.contains('dark'));
+  });
+
+  // Sidebar Menu
+  const sidebar = document.getElementById('sidebar');
+  const menuOverlay = document.getElementById('menuOverlay');
+  document.getElementById('openMenuBtn')?.addEventListener('click', () => {
+    menuOverlay?.classList.remove('hidden');
+    sidebar?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  const closeMenu = () => {
+    sidebar?.classList.remove('open');
+    menuOverlay?.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+  document.getElementById('closeMenuBtn')?.addEventListener('click', closeMenu);
+  menuOverlay?.addEventListener('click', closeMenu);
+
+  // Iframe Play Now & Fullscreen
+  const cover = document.getElementById('gameCoverOverlay');
+  const iframe = document.getElementById('gameIframe') as HTMLIFrameElement;
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const container = document.getElementById('gameScreenContainer');
+
+  cover?.addEventListener('click', () => {
+    if (iframe && !iframe.src && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.classList.remove('hidden');
+      cover.classList.add('hidden');
+    }
+  });
+
+  fullscreenBtn?.addEventListener('click', () => {
+    if (iframe && !iframe.src && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.classList.remove('hidden');
+      cover?.classList.add('hidden');
+    }
+    if (!document.fullscreenElement) {
+      container?.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  // Smart Video Hover
+  document.querySelectorAll('.game-card').forEach(card => {
+    const video = card.querySelector<HTMLVideoElement>('.hover-video');
+    if (!video) return;
+    card.addEventListener('mouseenter', () => {
+      if (!video.src && video.dataset.src) video.src = video.dataset.src;
+      video.play().catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+
+  // Back to Game Scroll Button
+  const backBtn = document.getElementById('backToGameBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 350) {
+      backBtn?.classList.remove('hidden-floating');
+    } else {
+      backBtn?.classList.add('hidden-floating');
+    }
+  }, { passive: true });
+
+  backBtn?.addEventListener('click', () => {
+    container ? container.scrollIntoView({ behavior: 'smooth', block: 'center' }) : window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
