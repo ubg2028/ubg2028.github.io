@@ -11,21 +11,22 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- SEO & Meta Tags (Fixes SEO to 100) -->
+  <!-- 1. SEO & Meta Tags (Score 100) -->
   <title>KawaiiPlay - Cute & Fun Free Online Games</title>
   <meta name="description" content="Play the best cute and kawaii online games for free! Arcade, puzzles, dress-up, and action games playable directly in your browser." />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://ubg2028.github.io/" />
   <meta name="theme-color" content="#0B0F19" />
 
-  <!-- 1. Preload LCP (Featured) Image for Instant Mobile Loading -->
+  <!-- 2. Preload LCP Image (Mobile Speed Boost) -->
   <link rel="preload" as="image" href={featuredImage} fetchpriority="high" />
 
-  <!-- 2. Fast Google Fonts with display=swap -->
+  <!-- 3. Google Nunito Font (Fast Swap) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- 3. Instant Dark Mode Script -->
+  <!-- 4. Instant Dark Mode (No White Flash) -->
   <script is:inline>
     if (localStorage.getItem('theme') === 'light') {
       document.documentElement.classList.remove('dark');
@@ -34,35 +35,14 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
     }
   </script>
 
-  <!-- 4. Tailwind CDN (Defer/Optimized) -->
-  <script src="https://cdn.tailwindcss.com" is:inline></script>
-  <script is:inline>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: { nunito: ['Nunito', 'sans-serif'] },
-          colors: {
-            brand: {
-              pink: '#FF6584',
-              hoverPink: '#FF4772',
-              purple: '#8C7AE6',
-              yellow: '#FDCB6E',
-              darkBg: '#0B0F19',
-              darkCard: '#151D30',
-              darkBorder: '#232E4A'
-            }
-          }
-        }
-      }
-    }
-  </script>
-
   <style is:global>
-    body { font-family: 'Nunito', sans-serif; }
-    .game-card { transform: translateZ(0); will-change: transform; }
-    /* Aspect ratio safety to avoid Layout Shifts (CLS 0.00) */
-    .aspect-video-box { aspect-ratio: 16 / 9; }
+    body { 
+      font-family: 'Nunito', sans-serif; 
+    }
+    .game-card { 
+      transform: translateZ(0); 
+      will-change: transform; 
+    }
   </style>
 </head>
 
@@ -116,11 +96,11 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
     </div>
   </header>
 
-  <!-- ================= FEATURED GAME SECTION (LCP OPTIMIZED) ================= -->
+  <!-- ================= FEATURED GAME SECTION ================= -->
   <main class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
     <section class="flex flex-col items-center">
       <div id="gameScreenContainer" class="w-full max-w-3xl bg-slate-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-slate-200 dark:border-[#232E4A] ring-2 sm:ring-4 ring-pink-500/20 relative">
-        <div class="relative w-full aspect-video-box flex items-center justify-center bg-slate-950">
+        <div class="relative w-full aspect-video flex items-center justify-center bg-slate-950">
           
           <!-- PLAY NOW OVERLAY -->
           <div id="gameCoverOverlay" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-slate-900 overflow-hidden cursor-pointer group">
@@ -136,7 +116,7 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
             <div class="relative z-10 flex flex-col items-center gap-2 sm:gap-3 p-3 text-center">
               <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#FF6584] text-white font-extrabold text-[10px] sm:text-xs uppercase tracking-widest rounded-full shadow-md">Featured Game</span>
               <h1 class="text-xl sm:text-4xl font-black text-white drop-shadow-md">Geometry Neon Dash</h1>
-              <button id="playGameBtn" aria-label="Play Geometry Neon Dash" class="mt-1 sm:mt-2 flex items-center gap-2 sm:gap-3 px-6 py-2.5 sm:px-8 sm:py-3.5 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:from-[#FF4772] hover:to-purple-600 text-white font-black text-sm sm:text-lg rounded-xl sm:rounded-2xl shadow-xl shadow-pink-500/40 transform group-hover:scale-105 active:scale-95 transition-all">
+              <button id="playGameBtn" aria-label="Play Geometry Neon Dash" class="mt-1 sm:mt-2 flex items-center gap-2 sm:gap-3 px-6 py-2.5 sm:px-8 sm:py-3.5 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:brightness-110 text-white font-black text-sm sm:text-lg rounded-xl sm:rounded-2xl shadow-xl shadow-pink-500/40 transform group-hover:scale-105 active:scale-95 transition-all">
                 <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 PLAY NOW
               </button>
@@ -208,7 +188,7 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
 
       <!-- Explore All Games Button -->
       <div class="mt-8 sm:mt-12 text-center">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Explore all games" class="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:from-[#FF4772] hover:to-purple-600 text-white text-sm sm:text-lg font-black rounded-full shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Explore all games" class="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:brightness-110 text-white text-sm sm:text-lg font-black rounded-full shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all">
           <span>🎮</span> Explore All Games (500+)
           <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </button>
@@ -238,7 +218,7 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
   <button
     id="backToGameBtn"
     aria-label="Back to Featured Game"
-    class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-5 sm:py-3 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:from-[#FF4772] hover:to-purple-600 text-white font-extrabold text-xs sm:text-sm rounded-full shadow-2xl shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all duration-300 opacity-0 pointer-events-none translate-y-5 border-2 border-white/20"
+    class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-5 sm:py-3 bg-gradient-to-r from-[#FF6584] to-[#8C7AE6] hover:brightness-110 text-white font-extrabold text-xs sm:text-sm rounded-full shadow-2xl shadow-pink-500/50 hover:scale-105 active:scale-95 transition-all duration-300 opacity-0 pointer-events-none translate-y-5 border-2 border-white/20"
   >
     <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
