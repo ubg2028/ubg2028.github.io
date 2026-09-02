@@ -1,8 +1,5 @@
 ---
-// 1. CSS Import karein (Sabse Upar)
-import '../styles/global.css';
-
-// 2. JSON Data Import karein
+// 1. JSON DATA IMPORT
 import gamesData from '../data/games.json';
 
 const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=75";
@@ -14,27 +11,47 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- 1. SEO & Meta Tags (Score 100) -->
   <title>KawaiiPlay - Cute & Fun Free Online Games</title>
   <meta name="description" content="Play the best cute and kawaii online games for free! Arcade, puzzles, dress-up, and action games playable directly in your browser." />
-  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://ubg2028.github.io/" />
-  <meta name="theme-color" content="#0B0F19" />
 
-  <!-- 2. Preload LCP Image (Mobile Speed Boost) -->
-  <link rel="preload" as="image" href={featuredImage} fetchpriority="high" />
-
-  <!-- 3. Google Nunito Font (Fast Swap) -->
+  <!-- 1. Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- 4. Instant Dark Mode (No White Flash) -->
+  <!-- 2. Instant Dark Mode Script -->
   <script is:inline>
     if (localStorage.getItem('theme') === 'light') {
       document.documentElement.classList.remove('dark');
     } else {
       document.documentElement.classList.add('dark');
+    }
+  </script>
+
+  <!-- 3. Tailwind CSS CDN (Guaranteed Styling Fix) -->
+  <script src="https://cdn.tailwindcss.com" is:inline></script>
+  <script is:inline>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            nunito: ['Nunito', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              pink: '#FF6584',
+              hoverPink: '#FF4772',
+              purple: '#8C7AE6',
+              yellow: '#FDCB6E',
+              darkBg: '#0B0F19',
+              darkCard: '#151D30',
+              darkBorder: '#232E4A'
+            }
+          }
+        }
+      }
     }
   </script>
 
@@ -112,8 +129,6 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
               alt="Geometry Neon Dash Featured Game" 
               width="800" 
               height="450"
-              fetchpriority="high"
-              decoding="async"
               class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500" 
             />
             <div class="relative z-10 flex flex-col items-center gap-2 sm:gap-3 p-3 text-center">
@@ -166,7 +181,7 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
           game.isBig ? (
             <div class="game-card group relative col-span-2 sm:col-span-3 md:col-span-3 bg-white dark:bg-[#151D30] rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer aspect-[16/9] border-2 border-pink-400/40 dark:border-[#FF6584]/50">
               <span class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#FF6584] text-white font-black text-[10px] sm:text-xs uppercase tracking-widest rounded-full shadow-lg">{game.badge}</span>
-              <img src={game.image} alt={game.title} width="600" height="338" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" loading="lazy" decoding="async" />
+              <img src={game.image} alt={game.title} width="600" height="338" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" loading="lazy" />
               <video class="hover-video absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" loop muted playsinline preload="none" data-src={game.video}></video>
               <div class="absolute bottom-0 inset-x-0 p-3 sm:p-4 bg-gradient-to-t from-black/95 via-black/70 to-transparent flex items-center justify-between">
                 <div>
@@ -178,7 +193,7 @@ const featuredImage = "https://images.unsplash.com/photo-1550745165-9bc0b252726f
             </div>
           ) : (
             <div class="game-card group relative bg-white dark:bg-[#151D30] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer aspect-[16/11] border-2 border-slate-200 dark:border-[#232E4A] hover:border-[#FF6584] dark:hover:border-[#FF6584]">
-              <img src={game.image} alt={game.title} width="300" height="206" class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-0" loading="lazy" decoding="async" />
+              <img src={game.image} alt={game.title} width="300" height="206" class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-0" loading="lazy" />
               <video class="hover-video absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" loop muted playsinline preload="none" data-src={game.video}></video>
               <div class="absolute bottom-0 inset-x-0 p-2 sm:p-2.5 bg-gradient-to-t from-black/90 via-black/60 to-transparent sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-between">
                 <span class="text-white font-extrabold text-[11px] sm:text-xs truncate max-w-[70%]">{game.title}</span>
