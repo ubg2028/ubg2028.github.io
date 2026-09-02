@@ -1,58 +1,56 @@
 ---
-// ================= 1. JSON DATA IMPORT =================
-import gamesData from '../data/games.json';
-
-// Pure CSS Card Themes & Emojis
-const cardStyles: Record<number, { bg: string; icon: string }> = {
-  1: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🐱' },
-  2: { bg: 'linear-gradient(135deg, rgba(6,182,212,0.3), rgba(59,130,246,0.2), #0B0F19)', icon: '⚡' },
-  3: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🍬' },
-  4: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.3), rgba(20,184,166,0.2), #0B0F19)', icon: '🎮' },
-  5: { bg: 'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🔮' },
-  6: { bg: 'linear-gradient(135deg, rgba(217,70,239,0.3), rgba(244,63,94,0.2), #0B0F19)', icon: '🏃‍♀️' },
-  7: { bg: 'linear-gradient(135deg, rgba(239,68,68,0.3), rgba(249,115,22,0.2), #0B0F19)', icon: '🏎️' },
-  8: { bg: 'linear-gradient(135deg, rgba(234,179,8,0.3), rgba(245,158,11,0.2), #0B0F19)', icon: '⭐' },
-  9: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(244,63,94,0.2), #0B0F19)', icon: '🧁' },
-  10: { bg: 'linear-gradient(135deg, rgba(132,204,22,0.3), rgba(16,185,129,0.2), #0B0F19)', icon: '🦖' },
-  11: { bg: 'linear-gradient(135deg, rgba(244,63,94,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '👗' },
-  12: { bg: 'linear-gradient(135deg, rgba(139,92,246,0.3), rgba(99,102,241,0.2), #0B0F19)', icon: '⚔️' },
-  13: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.35), rgba(239,68,68,0.25), #0B0F19)', icon: '🦆' },
-  14: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(20,184,166,0.25), #0B0F19)', icon: '🍉' },
-  15: { bg: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(6,182,212,0.2), #0B0F19)', icon: '🤖' },
-  16: { bg: 'linear-gradient(135deg, rgba(140,122,230,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🫧' },
-  17: { bg: 'linear-gradient(135deg, rgba(249,115,22,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🍩' },
-  18: { bg: 'linear-gradient(135deg, rgba(20,184,166,0.3), rgba(16,185,129,0.2), #0B0F19)', icon: '🧩' },
-  19: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.3), rgba(234,179,8,0.2), #0B0F19)', icon: '🐹' },
-  20: { bg: 'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🌈' },
-  21: { bg: 'linear-gradient(135deg, rgba(239,68,68,0.3), rgba(255,101,132,0.2), #0B0F19)', icon: '🐼' },
-  22: { bg: 'linear-gradient(135deg, rgba(6,182,212,0.3), rgba(99,102,241,0.2), #0B0F19)', icon: '🪐' },
-  23: { bg: 'linear-gradient(135deg, rgba(217,70,239,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🦄' },
-  24: { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '👾' },
-  25: { bg: 'linear-gradient(135deg, rgba(140,122,230,0.3), rgba(59,130,246,0.2), #0B0F19)', icon: '🍮' },
-  26: { bg: 'linear-gradient(135deg, rgba(244,63,94,0.3), rgba(245,158,11,0.2), #0B0F19)', icon: '🐾' }
-};
+// src/pages/index.astro
+// Frontmatter: Saare 26 games ka lightweight data array
+const games = [
+  { id: 1, title: "Cyber Kitty", icon: "🐱", bg: "rgba(255,101,132,0.25)", video: "https://videos.crazygames.com/ragdoll-archers/5/ragdoll-archers-landscape-1920x1080_30fps.mp4" },
+  { id: 2, title: "Neon Pop", icon: "⚡", bg: "rgba(6,182,212,0.25)", video: "https://videos.crazygames.com/marble-jump-fux/1/marble-jump-fux-landscape-1280x720_30fps.mp4" },
+  { id: 3, title: "Candy Bounce", icon: "🍬", bg: "rgba(245,158,11,0.25)", video: "https://videos.crazygames.com/veck-io/4/veck-io-landscape-1280x720_30fps.mp4" },
+  { id: 4, title: "Pixel Arcade", icon: "🎮", bg: "rgba(16,185,129,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4" },
+  { id: 5, title: "Marble Dash", icon: "🔮", bg: "rgba(99,102,241,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
+  { id: 6, title: "Dream Run", icon: "🏃‍♀️", bg: "rgba(217,70,239,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+  { id: 7, title: "Cute Racers", icon: "🏎️", bg: "rgba(239,68,68,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
+  { id: 8, title: "Star Jump", icon: "⭐", bg: "rgba(234,179,8,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+  { id: 9, title: "Bakery Chef", icon: "🧁", bg: "rgba(255,101,132,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
+  { id: 10, title: "Pocket Dino", icon: "🦖", bg: "rgba(132,204,22,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" },
+  { id: 11, title: "Anime Dressup", icon: "👗", bg: "rgba(244,63,94,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+  { id: 12, title: "Sword Kawaii", icon: "⚔️", bg: "rgba(139,92,246,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+  { id: 13, title: "Ninja Duck Legends", icon: "🦆", isBig: true, badge: "🔥 MEGA HIT", category: "Action • 3D Adventure", bg: "rgba(245,158,11,0.3)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+  { id: 14, title: "Fruit Ninja Kawaii", icon: "🍉", isBig: true, badge: "⭐ POPULAR", category: "Arcade • Slice & Fun", bg: "rgba(16,185,129,0.3)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4" },
+  { id: 15, title: "Robo Quest", icon: "🤖", bg: "rgba(59,130,246,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
+  { id: 16, title: "Bubble Fairy", icon: "🫧", bg: "rgba(140,122,230,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+  { id: 17, title: "Donut Rush", icon: "🍩", bg: "rgba(249,115,22,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
+  { id: 18, title: "Fluffy Match", icon: "🧩", bg: "rgba(20,184,166,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+  { id: 19, title: "Hamster Run", icon: "🐹", bg: "rgba(245,158,11,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
+  { id: 20, title: "Rainbow Blocks", icon: "🌈", bg: "rgba(99,102,241,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" },
+  { id: 21, title: "Drift Panda", icon: "🐼", bg: "rgba(239,68,68,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+  { id: 22, title: "Space Bubble", icon: "🪐", bg: "rgba(6,182,212,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+  { id: 23, title: "Pony Galaxy", icon: "🦄", bg: "rgba(217,70,239,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+  { id: 24, title: "Chibi Jump", icon: "👾", bg: "rgba(255,101,132,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4" },
+  { id: 25, title: "Jelly Splash", icon: "🍮", bg: "rgba(140,122,230,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
+  { id: 26, title: "Kitty Runner", icon: "🐾", bg: "rgba(244,63,94,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" }
+];
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>KawaiiPlay - Cute & Fun Free Online Games</title>
   <meta name="description" content="Play the best cute and kawaii online games for free! Arcade, puzzles, dress-up, and action games playable directly in your browser." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://ubg2028.github.io/" />
   <meta name="theme-color" content="#0B0F19" />
 
-  <!-- Google Nunito Font -->
+  <!-- Google Font with instant display swap -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Instant Dark Mode Script (No White Flash) -->
+  <!-- Instant Theme Loader (Zero White Flash) -->
   <script is:inline>
-    if (localStorage.getItem('theme') === 'light') {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'light') {
       document.documentElement.classList.remove('dark');
     } else {
       document.documentElement.classList.add('dark');
@@ -61,22 +59,20 @@ const cardStyles: Record<number, { bg: string; icon: string }> = {
 </head>
 
 <body>
-
-  <!-- ================= SIDEBAR MENU ================= -->
+  <!-- ================= MOBILE SIDEBAR MENU ================= -->
   <div id="menuOverlay" class="menu-overlay hidden"></div>
-
+  
   <aside id="sidebar" class="sidebar">
-    <div>
+    <div class="sidebar-top">
       <div class="sidebar-header">
         <div class="brand">
           <span class="emoji-logo">🎀</span>
           <span class="brand-name">CuteGames</span>
         </div>
         <button id="closeMenuBtn" aria-label="Close Menu" class="icon-btn">
-          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
-
       <nav class="sidebar-nav">
         <a href="/" class="nav-item active">🔥 Home</a>
         <a href="#more-games" class="nav-item">🎮 Arcade & Action</a>
@@ -89,12 +85,12 @@ const cardStyles: Record<number, { bg: string; icon: string }> = {
     </div>
   </aside>
 
-  <!-- ================= TOP NAVBAR ================= -->
+  <!-- ================= TOP NAVIGATION NAVBAR ================= -->
   <header class="top-navbar">
     <div class="container nav-content">
       <div class="nav-left">
         <button id="openMenuBtn" aria-label="Open Menu" class="icon-btn">
-          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
         <a href="/" class="site-logo">
           <span>🐱</span> KawaiiPlay
@@ -103,52 +99,49 @@ const cardStyles: Record<number, { bg: string; icon: string }> = {
 
       <!-- Theme Switcher -->
       <button id="themeToggleBtn" aria-label="Toggle Theme" class="theme-btn">
-        <svg id="moonIcon" class="hidden" width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        <svg id="moonIcon" class="hidden" width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+        <svg id="sunIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
         <span id="themeText">Dark Mode</span>
       </button>
     </div>
   </header>
 
-  <!-- ================= FEATURED GAME SECTION ================= -->
+  <!-- ================= FEATURED GAME HERO ================= -->
   <main class="container main-content">
     <section class="featured-section">
       <div id="gameScreenContainer" class="game-screen-box">
         <div class="aspect-video-box">
-          
-          <!-- PLAY NOW OVERLAY (PURE CSS HERO) -->
+          <!-- Click to play cover facade -->
           <div id="gameCoverOverlay" class="hero-cover">
             <div class="hero-glow-blob1"></div>
             <div class="hero-glow-blob2"></div>
-            
             <div class="hero-content">
               <div class="hero-icon-box">🚀</div>
               <span class="badge-featured">Featured Game</span>
               <h1 class="hero-title">Geometry Neon Dash</h1>
               <button id="playGameBtn" class="btn-play-hero">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 PLAY NOW
               </button>
             </div>
           </div>
 
-          <!-- IFRAME -->
+          <!-- Lazy Iframe (Zero Data usage on slow networks until played) -->
           <iframe 
-            id="gameIframe"
-            class="game-iframe hidden"
-            data-src="https://geometrydashlite.io/"
-            title="Featured Game"
-            allow="fullscreen; autoplay; gamepad"
+            id="gameIframe" 
+            class="game-iframe hidden" 
+            data-src="https://geometrydashlite.io/" 
+            title="Featured Game" 
+            allow="fullscreen; autoplay; gamepad" 
             loading="lazy">
           </iframe>
-
         </div>
       </div>
 
       <!-- Fullscreen Button -->
       <div class="fullscreen-wrapper">
         <button id="fullscreenBtn" class="btn-fullscreen">
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
           Full Screen Mode
         </button>
       </div>
@@ -161,47 +154,35 @@ const cardStyles: Record<number, { bg: string; icon: string }> = {
           <span>⭐</span>
           <h2>More Fun Games</h2>
         </div>
-        <span class="count-badge">{gamesData.length} Games</span>
+        <span class="count-badge">{games.length} Games</span>
       </div>
 
-      <!-- Responsive Dynamic Grid -->
+      <!-- Responsive Dynamic Auto-Fit Grid -->
       <div class="games-grid">
-        {gamesData.map((game) => {
-          const style = cardStyles[game.id] || { bg: 'linear-gradient(135deg, rgba(255,101,132,0.3), rgba(140,122,230,0.2), #0B0F19)', icon: '🎮' };
-          
-          return game.isBig ? (
-            <div class="game-card big-card" style={`background: ${style.bg};`}>
-              <span class="card-badge">{game.badge}</span>
-              <div class="card-center-icon big-icon">{style.icon}</div>
-              <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
-              
-              <div class="card-bottom-info">
-                <div>
-                  <span class="card-title-big">{game.title}</span>
-                  <span class="card-category">{game.category}</span>
-                </div>
-                <span class="btn-card-play">PLAY</span>
+        {games.map((game) => (
+          <div class={`game-card ${game.isBig ? 'big-card' : 'small-card'}`} style={`--card-glow: ${game.bg};`}>
+            {game.badge && <span class="card-badge">{game.badge}</span>}
+            <div class="card-center-icon">{game.icon}</div>
+            
+            <!-- Video preloads nothing on page load -->
+            <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
+            
+            <div class={`card-bottom-info ${game.isBig ? '' : 'compact'}`}>
+              <div class="card-text-box">
+                <span class="card-title">{game.title}</span>
+                {game.category && <span class="card-category">{game.category}</span>}
               </div>
+              <span class="btn-card-play">PLAY</span>
             </div>
-          ) : (
-            <div class="game-card small-card" style={`background: ${style.bg};`}>
-              <div class="card-center-icon small-icon">{style.icon}</div>
-              <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
-              
-              <div class="card-bottom-info compact">
-                <span class="card-title-small">{game.title}</span>
-                <span class="btn-card-play-sm">PLAY</span>
-              </div>
-            </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
 
-      <!-- Explore All Games Button -->
+      <!-- Explore More Button -->
       <div class="explore-wrapper">
         <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-explore">
           <span>🎮</span> Explore All Games (500+)
-          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </button>
       </div>
     </section>
@@ -213,10 +194,10 @@ const cardStyles: Record<number, { bg: string; icon: string }> = {
       <div class="footer-card">
         <h3>OUR PARTNER NETWORKS & BACKLINKS</h3>
         <div class="backlinks">
-          <a href="https://example.com/crazy-games" target="_blank" rel="noopener dofollow">CrazyGames Portal</a>
-          <a href="https://example.com/poki-clone" target="_blank" rel="noopener dofollow">Poki Free Games</a>
-          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener dofollow">HTML5 Game Hub</a>
-          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener dofollow">Unblocked Games 76</a>
+          <a href="https://example.com/crazy-games" target="_blank" rel="noopener">CrazyGames Portal</a>
+          <a href="https://example.com/poki-clone" target="_blank" rel="noopener">Poki Free Games</a>
+          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener">HTML5 Game Hub</a>
+          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener">Unblocked Games 76</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -227,401 +208,506 @@ const cardStyles: Record<number, { bg: string; icon: string }> = {
 
   <!-- ================= FLOATING BACK TO GAME BUTTON ================= -->
   <button id="backToGameBtn" aria-label="Back to Game" class="btn-back-to-game hidden-floating">
-    <svg class="bounce-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
     </svg>
     <span>Back to Game</span>
   </button>
 
+  <!-- ================= CLIENT JAVASCRIPT ================= -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Dark/Light Mode Switcher
+      const themeBtn = document.getElementById("themeToggleBtn");
+      const sunIcon = document.getElementById("sunIcon");
+      const moonIcon = document.getElementById("moonIcon");
+      const themeText = document.getElementById("themeText");
+
+      function updateTheme(isDark) {
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+          sunIcon?.classList.remove("hidden");
+          moonIcon?.classList.add("hidden");
+          if (themeText) themeText.textContent = "Dark Mode";
+          localStorage.setItem("theme", "dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+          sunIcon?.classList.add("hidden");
+          moonIcon?.classList.remove("hidden");
+          if (themeText) themeText.textContent = "Light Mode";
+          localStorage.setItem("theme", "light");
+        }
+      }
+
+      updateTheme(localStorage.getItem("theme") !== "light");
+      themeBtn?.addEventListener("click", () => {
+        updateTheme(!document.documentElement.classList.contains("dark"));
+      });
+
+      // 2. Mobile Responsive Sidebar Menu
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("menuOverlay");
+      const openBtn = document.getElementById("openMenuBtn");
+      const closeBtn = document.getElementById("closeMenuBtn");
+
+      function toggleMenu(show) {
+        if (show) {
+          sidebar?.classList.add("open");
+          overlay?.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        } else {
+          sidebar?.classList.remove("open");
+          overlay?.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+      }
+
+      openBtn?.addEventListener("click", () => toggleMenu(true));
+      closeBtn?.addEventListener("click", () => toggleMenu(false));
+      overlay?.addEventListener("click", () => toggleMenu(false));
+
+      // 3. Iframe On-Demand Loading (Save 5MB on load)
+      const cover = document.getElementById("gameCoverOverlay");
+      const iframe = document.getElementById("gameIframe");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const container = document.getElementById("gameScreenContainer");
+
+      function launchGame() {
+        if (iframe && !iframe.src && iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+          iframe.classList.remove("hidden");
+          cover?.classList.add("hidden");
+        }
+      }
+
+      cover?.addEventListener("click", launchGame);
+
+      fullscreenBtn?.addEventListener("click", () => {
+        launchGame();
+        if (!document.fullscreenElement) {
+          container?.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen();
+        }
+      });
+
+      // 4. Video Hover / Touch Play (Lazy network stream)
+      document.querySelectorAll(".game-card").forEach((card) => {
+        const video = card.querySelector(".hover-video");
+        if (!video) return;
+
+        const startVideo = () => {
+          if (!video.src && video.dataset.src) video.src = video.dataset.src;
+          video.play().catch(() => {});
+        };
+
+        const stopVideo = () => {
+          video.pause();
+          video.currentTime = 0;
+        };
+
+        card.addEventListener("mouseenter", startVideo, { passive: true });
+        card.addEventListener("mouseleave", stopVideo, { passive: true });
+        card.addEventListener("touchstart", startVideo, { passive: true });
+      });
+
+      // 5. Back to Top / Game Button
+      const backBtn = document.getElementById("backToGameBtn");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 350) {
+          backBtn?.classList.remove("hidden-floating");
+        } else {
+          backBtn?.classList.add("hidden-floating");
+        }
+      }, { passive: true });
+
+      backBtn?.addEventListener("click", () => {
+        if (container) {
+          container.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
 
 <!-- ================= 100% PURE SCOPED CSS (ZERO DEPENDENCY) ================= -->
 <style is:global>
-  /* Root CSS Variables for Light & Dark Mode */
+  /* --- Colors & Design Tokens --- */
   :root {
-    --bg-color: #f8fafc;
-    --text-color: #1e293b;
-    --card-bg: #ffffff;
-    --border-color: #e2e8f0;
-    --pink: #FF6584;
-    --hover-pink: #FF4772;
-    --purple: #8C7AE6;
-    --nav-bg: rgba(255, 255, 255, 0.95);
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: rgba(255, 255, 255, 0.9);
+    --border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --primary: #ec4899;
+    --primary-gradient: linear-gradient(135deg, #ec4899, #8b5cf6);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
   }
 
   html.dark {
-    --bg-color: #0B0F19;
-    --text-color: #f8fafc;
-    --card-bg: #151D30;
-    --border-color: #232E4A;
-    --nav-bg: rgba(21, 29, 48, 0.95);
+    --bg-main: #0b0f19;
+    --bg-card: #131b2e;
+    --bg-nav: rgba(11, 15, 25, 0.9);
+    --border: rgba(255, 255, 255, 0.08);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
   }
 
-  * {
+  /* --- Global Reset --- */
+  *, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
   body {
-    font-family: 'Nunito', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.2s, color 0.2s;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.5;
     overflow-x: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   .container {
-    max-width: 1280px;
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 clamp(10px, 2.5vw, 20px);
   }
 
-  .hidden { display: none !important; }
-
-  /* Navbar */
+  /* --- Top Navbar --- */
   .top-navbar {
     position: sticky;
     top: 0;
-    z-index: 30;
-    background: var(--nav-bg);
-    border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(8px);
-    height: 60px;
-    display: flex;
-    align-items: center;
+    z-index: 40;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-nav);
+    border-bottom: 1px solid var(--border);
+    height: 56px;
   }
 
   .nav-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    justify-content: space-between;
+    height: 100%;
   }
 
   .nav-left {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 10px;
   }
 
   .site-logo {
-    text-decoration: none;
-    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
     font-weight: 900;
-    background: linear-gradient(to right, var(--pink), var(--purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
+    color: var(--primary);
+    text-decoration: none;
   }
 
-  .icon-btn {
-    background: #f1f5f9;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    padding: 0.5rem;
-    border-radius: 0.85rem;
+  .icon-btn, .theme-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  html.dark .icon-btn { background: #1e293b; color: #cbd5e1; }
-
-  .theme-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.45rem 0.85rem;
-    border-radius: 0.85rem;
-    background: #f1f5f9;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
     font-size: 0.8rem;
-    font-weight: 800;
-    cursor: pointer;
+    font-weight: 700;
   }
-  html.dark .theme-btn { background: #1e293b; color: #facc15; }
 
-  /* Sidebar */
+  /* --- Sidebar Drawer --- */
   .menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.7);
-    z-index: 40;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 50;
   }
 
   .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 280px;
-    max-width: 80vw;
+    width: 270px;
+    max-width: 82vw;
     height: 100%;
-    background: var(--card-bg);
-    border-right: 1px solid var(--border-color);
-    z-index: 50;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    z-index: 60;
     transform: translateX(-100%);
-    transition: transform 0.3s ease-out;
+    transition: transform 0.25s ease-out;
     display: flex;
-    flex-col: column;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
   }
-  .sidebar.open { transform: translateX(0); }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
 
   .sidebar-header {
-    padding: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
   }
 
-  .brand { display: flex; align-items: center; gap: 0.5rem; }
-  .emoji-logo { font-size: 1.5rem; }
-  .brand-name { font-weight: 900; color: var(--pink); font-size: 1.2rem; }
+  .brand {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--primary);
+  }
 
-  .sidebar-nav { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
   .nav-item {
+    display: block;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
     text-decoration: none;
-    padding: 0.75rem 1rem;
-    border-radius: 0.85rem;
-    color: var(--text-color);
     font-weight: 700;
-    font-size: 0.9rem;
-    transition: background 0.2s;
+    font-size: 0.95rem;
   }
-  .nav-item.active { background: rgba(255,101,132,0.12); color: var(--pink); }
-  .nav-item:hover { background: rgba(0,0,0,0.05); }
-  html.dark .nav-item:hover { background: rgba(255,255,255,0.05); }
-  .sidebar-footer { padding: 1rem; text-align: center; border-top: 1px solid var(--border-color); font-size: 0.75rem; opacity: 0.6; }
 
-  /* Featured Game Hero */
-  .main-content { padding: 1.5rem 1rem; }
-  .featured-section { display: flex; flex-direction: column; align-items: center; }
+  .nav-item.active, .nav-item:hover {
+    background: rgba(236, 72, 153, 0.12);
+    color: var(--primary);
+  }
+
+  .sidebar-footer {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* --- Featured Section --- */
+  .main-content {
+    margin-top: 14px;
+  }
 
   .game-screen-box {
     width: 100%;
-    max-width: 800px;
-    background: #0B0F19;
-    border-radius: 1.5rem;
+    background: #000;
+    border-radius: var(--radius-md);
     overflow: hidden;
-    border: 3px solid var(--border-color);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    position: relative;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px -6px rgba(0,0,0,0.4);
   }
 
   .aspect-video-box {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    max-height: 65vh;
+    min-height: 200px;
+    background: #07090e;
   }
 
   .hero-cover {
     position: absolute;
     inset: 0;
-    z-index: 20;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1b1433 0%, #0e1322 50%, #1a0f1d 100%);
     cursor: pointer;
+    background: radial-gradient(circle at center, #1e1b4b 0%, #0b0f19 100%);
     overflow: hidden;
   }
 
-  .hero-glow-blob1 {
+  .hero-glow-blob1, .hero-glow-blob2 {
     position: absolute;
-    top: -20%;
-    left: -10%;
-    width: 250px;
-    height: 250px;
-    background: rgba(255,101,132,0.25);
+    width: 220px;
+    height: 220px;
+    background: rgba(236, 72, 153, 0.35);
+    filter: blur(80px);
     border-radius: 50%;
-    filter: blur(50px);
   }
 
   .hero-glow-blob2 {
-    position: absolute;
-    bottom: -20%;
-    right: -10%;
-    width: 250px;
-    height: 250px;
-    background: rgba(140,122,230,0.25);
-    border-radius: 50%;
-    filter: blur(50px);
+    background: rgba(139, 92, 246, 0.25);
+    transform: translate(60px, 40px);
   }
 
   .hero-content {
     position: relative;
-    z-index: 10;
-    text-align: center;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
+    text-align: center;
+    padding: 12px;
+    gap: 6px;
   }
 
   .hero-icon-box {
-    width: 50px;
-    height: 50px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    font-size: clamp(2rem, 5vw, 3.2rem);
   }
 
   .badge-featured {
-    background: var(--pink);
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 0.25rem 0.75rem;
+    background: rgba(236, 72, 153, 0.2);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 2px 8px;
     border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 800;
   }
 
   .hero-title {
-    color: #ffffff;
-    font-size: clamp(1.2rem, 4vw, 2.2rem);
+    font-size: clamp(1.1rem, 3.8vw, 2rem);
     font-weight: 900;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    color: #ffffff;
   }
 
   .btn-play-hero {
-    margin-top: 0.5rem;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.8rem;
-    background: linear-gradient(to right, var(--pink), var(--purple));
-    color: #ffffff;
-    font-weight: 900;
-    font-size: 1rem;
+    gap: 6px;
+    background: var(--primary-gradient);
+    color: #fff;
     border: none;
-    border-radius: 1rem;
+    padding: 9px 22px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    border-radius: 999px;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(255,101,132,0.4);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    transition: transform 0.15s ease;
   }
-  .btn-play-hero:hover { transform: scale(1.05); }
 
-  .game-iframe { width: 100%; height: 100%; border: none; }
+  .btn-play-hero:hover {
+    transform: scale(1.05);
+  }
 
-  .fullscreen-wrapper { margin-top: 0.75rem; }
+  .game-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .fullscreen-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+  }
+
   .btn-fullscreen {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.55rem 1.2rem;
-    background: linear-gradient(to right, var(--purple), var(--pink));
-    color: white;
-    font-weight: 800;
-    font-size: 0.8rem;
-    border: none;
-    border-radius: 0.85rem;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
   }
 
-  /* Games Grid */
-  .games-section { margin-top: 2.5rem; }
+  /* --- Dynamic Games Grid --- */
+  .games-section {
+    margin-top: 24px;
+  }
+
   .section-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    align-items: center;
+    margin-bottom: 12px;
   }
 
   .section-title {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.2rem;
+    gap: 6px;
+    font-size: 1.1rem;
     font-weight: 900;
   }
 
   .count-badge {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--primary);
     font-size: 0.75rem;
     font-weight: 800;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    padding: 0.25rem 0.75rem;
+    padding: 2px 8px;
     border-radius: 999px;
   }
 
   .games-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
-
-  @media (min-width: 640px) {
-    .games-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  }
-  @media (min-width: 1024px) {
-    .games-grid { grid-template-columns: repeat(6, 1fr); }
+    grid-template-columns: repeat(auto-fill, minmax(clamp(130px, 18vw, 180px), 1fr));
+    gap: clamp(8px, 1.8vw, 14px);
   }
 
   .game-card {
     position: relative;
-    border-radius: 1rem;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--card-glow), var(--bg-card));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     overflow: hidden;
     cursor: pointer;
-    border: 2px solid var(--border-color);
-    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-    background-color: #0B0F19;
-  }
-  .game-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-    border-color: var(--pink);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px;
+    content-visibility: auto; /* Browser off-screen speed rendering */
+    contain-intrinsic-size: 140px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .small-card { aspect-ratio: 16 / 11; }
-  .big-card {
-    grid-column: span 2;
-    aspect-ratio: 16 / 9;
+  .game-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px -4px rgba(0,0,0,0.25);
   }
-  @media (min-width: 640px) { .big-card { grid-column: span 3; } }
-  @media (min-width: 1024px) { .big-card { grid-column: span 3; } }
+
+  @media (min-width: 640px) {
+    .game-card.big-card {
+      grid-column: span 2;
+      aspect-ratio: 16 / 9;
+    }
+  }
 
   .card-badge {
     position: absolute;
-    top: 0.6rem;
-    left: 0.6rem;
-    z-index: 10;
-    background: var(--pink);
-    color: white;
-    font-size: 0.65rem;
+    top: 6px;
+    left: 6px;
+    z-index: 3;
+    background: #000000;
+    color: #fbbf24;
+    font-size: 0.6rem;
     font-weight: 900;
-    padding: 0.2rem 0.55rem;
-    border-radius: 999px;
+    padding: 2px 5px;
+    border-radius: 4px;
   }
 
   .card-center-icon {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.75rem;
-    transition: transform 0.3s;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    margin: auto 0;
+    text-align: center;
+    z-index: 2;
   }
-  .big-icon { font-size: 2.75rem; }
-  .game-card:hover .card-center-icon { transform: scale(1.15); }
 
   .hover-video {
     position: absolute;
@@ -630,217 +716,153 @@ const cardStyles: Record<number, { bg: string; icon: string }> = {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 0.3s;
+    z-index: 1;
+    transition: opacity 0.2s ease;
     pointer-events: none;
   }
-  .game-card:hover .hover-video { opacity: 1; }
+
+  .game-card:hover .hover-video {
+    opacity: 1;
+  }
 
   .card-bottom-info {
-    position: absolute;
-    bottom: 0;
-    inset-inline: 0;
-    padding: 0.75rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+    position: relative;
+    z-index: 2;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    z-index: 10;
+    align-items: center;
+    background: rgba(11, 15, 25, 0.7);
+    backdrop-filter: blur(4px);
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    gap: 4px;
   }
-  .card-bottom-info.compact { padding: 0.45rem 0.6rem; }
 
-  .card-title-big { display: block; color: white; font-weight: 900; font-size: 1rem; }
-  .card-category { display: block; color: #cbd5e1; font-size: 0.75rem; }
-  .card-title-small { color: white; font-weight: 800; font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
+  .card-text-box {
+    overflow: hidden;
+  }
+
+  .card-title {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+
+  @media (min-width: 640px) {
+    .card-title {
+      max-width: 140px;
+    }
+  }
+
+  .card-category {
+    display: block;
+    font-size: 0.6rem;
+    color: #94a3b8;
+  }
 
   .btn-card-play {
-    background: linear-gradient(to right, var(--pink), var(--purple));
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 900;
-    padding: 0.35rem 0.75rem;
-    border-radius: 0.6rem;
-  }
-  .btn-card-play-sm {
-    background: var(--pink);
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
     font-size: 0.6rem;
     font-weight: 900;
-    padding: 0.15rem 0.45rem;
-    border-radius: 999px;
+    padding: 2px 6px;
+    border-radius: 4px;
   }
 
-  .explore-wrapper { margin-top: 2rem; text-align: center; }
+  /* --- Explore Wrapper --- */
+  .explore-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
   .btn-explore {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.8rem;
-    background: linear-gradient(to right, var(--pink), var(--purple));
-    color: white;
-    font-weight: 900;
-    font-size: 1rem;
+    gap: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 10px 20px;
     border-radius: 999px;
-    border: none;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(255,101,132,0.3);
   }
 
-  /* Footer */
+  /* --- Footer --- */
   .site-footer {
-    margin-top: 4rem;
-    border-top: 1px solid var(--border-color);
-    background: var(--card-bg);
-    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+    padding: 24px 0 16px;
+    background: var(--bg-card);
   }
 
   .footer-card {
-    background: rgba(0,0,0,0.03);
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
+    text-align: center;
+    margin-bottom: 16px;
   }
-  html.dark .footer-card { background: rgba(0,0,0,0.3); }
 
-  .footer-card h3 { font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; opacity: 0.6; margin-bottom: 0.5rem; }
-  .backlinks { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; font-size: 0.85rem; font-weight: 700; }
-  .backlinks a { color: inherit; text-decoration: none; }
-  .backlinks a:hover { color: var(--pink); }
-  .footer-bottom { text-align: center; font-size: 0.75rem; opacity: 0.6; }
+  .footer-card h3 {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
 
-  /* Floating Button */
+  .backlinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .backlinks a {
+    color: var(--primary);
+    font-size: 0.75rem;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  /* --- Floating Button --- */
   .btn-back-to-game {
     position: fixed;
-    bottom: 1.25rem;
-    right: 1.25rem;
-    z-index: 50;
+    bottom: 18px;
+    right: 18px;
+    z-index: 45;
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.6rem 1.2rem;
-    background: linear-gradient(to right, var(--pink), var(--purple));
-    color: white;
-    font-size: 0.8rem;
-    font-weight: 800;
+    gap: 6px;
+    padding: 8px 12px;
     border-radius: 999px;
-    border: 2px solid rgba(255,255,255,0.2);
-    box-shadow: 0 10px 25px rgba(255,101,132,0.4);
+    font-size: 0.75rem;
+    font-weight: 800;
     cursor: pointer;
-    transition: opacity 0.3s, transform 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, opacity 0.2s ease;
   }
+
   .hidden-floating {
+    transform: translateY(70px);
     opacity: 0;
     pointer-events: none;
-    transform: translateY(15px);
   }
-  .bounce-icon {
-    animation: bounce 1s infinite alternate;
-  }
-  @keyframes bounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-4px); }
+
+  .hidden {
+    display: none !important;
   }
 </style>
-
-<!-- ================= CLIENT JAVASCRIPT ================= -->
-<script>
-  // Theme Switcher
-  const themeBtn = document.getElementById('themeToggleBtn');
-  const sunIcon = document.getElementById('sunIcon');
-  const moonIcon = document.getElementById('moonIcon');
-  const themeText = document.getElementById('themeText');
-
-  function applyTheme(isDark: boolean) {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      sunIcon?.classList.remove('hidden');
-      moonIcon?.classList.add('hidden');
-      if (themeText) themeText.textContent = 'Dark Mode';
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      sunIcon?.classList.add('hidden');
-      moonIcon?.classList.remove('hidden');
-      if (themeText) themeText.textContent = 'Light Mode';
-      localStorage.setItem('theme', 'light');
-    }
-  }
-
-  if (localStorage.getItem('theme') === 'light') applyTheme(false);
-  else applyTheme(true);
-
-  themeBtn?.addEventListener('click', () => {
-    applyTheme(!document.documentElement.classList.contains('dark'));
-  });
-
-  // Sidebar Menu
-  const sidebar = document.getElementById('sidebar');
-  const menuOverlay = document.getElementById('menuOverlay');
-  document.getElementById('openMenuBtn')?.addEventListener('click', () => {
-    menuOverlay?.classList.remove('hidden');
-    sidebar?.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
-  const closeMenu = () => {
-    sidebar?.classList.remove('open');
-    menuOverlay?.classList.add('hidden');
-    document.body.style.overflow = '';
-  };
-  document.getElementById('closeMenuBtn')?.addEventListener('click', closeMenu);
-  menuOverlay?.addEventListener('click', closeMenu);
-
-  // Iframe Play Now & Fullscreen
-  const cover = document.getElementById('gameCoverOverlay');
-  const iframe = document.getElementById('gameIframe') as HTMLIFrameElement;
-  const fullscreenBtn = document.getElementById('fullscreenBtn');
-  const container = document.getElementById('gameScreenContainer');
-
-  cover?.addEventListener('click', () => {
-    if (iframe && !iframe.src && iframe.dataset.src) {
-      iframe.src = iframe.dataset.src;
-      iframe.classList.remove('hidden');
-      cover.classList.add('hidden');
-    }
-  });
-
-  fullscreenBtn?.addEventListener('click', () => {
-    if (iframe && !iframe.src && iframe.dataset.src) {
-      iframe.src = iframe.dataset.src;
-      iframe.classList.remove('hidden');
-      cover?.classList.add('hidden');
-    }
-    if (!document.fullscreenElement) {
-      container?.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  });
-
-  // Smart Video Hover
-  document.querySelectorAll('.game-card').forEach(card => {
-    const video = card.querySelector<HTMLVideoElement>('.hover-video');
-    if (!video) return;
-    card.addEventListener('mouseenter', () => {
-      if (!video.src && video.dataset.src) video.src = video.dataset.src;
-      video.play().catch(() => {});
-    });
-    card.addEventListener('mouseleave', () => {
-      video.pause();
-      video.currentTime = 0;
-    });
-  });
-
-  // Back to Game Scroll Button
-  const backBtn = document.getElementById('backToGameBtn');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 350) {
-      backBtn?.classList.remove('hidden-floating');
-    } else {
-      backBtn?.classList.add('hidden-floating');
-    }
-  }, { passive: true });
-
-  backBtn?.addEventListener('click', () => {
-    container ? container.scrollIntoView({ behavior: 'smooth', block: 'center' }) : window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-</script>
