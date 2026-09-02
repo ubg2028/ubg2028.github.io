@@ -1,7 +1,7 @@
 ---
 // ==========================================
-// MOTO X3M UNBLOCKED - SINGLE FILE ASTRO PAGE
-// File Path: src/pages/moto.astro
+// MOTO X3M UNBLOCKED - ASTRO + TAILWIND CSS
+// File: src/pages/moto.astro
 // ==========================================
 
 const seo = {
@@ -33,15 +33,15 @@ const moreGames = [
     title: "Spooky Land",
     tag: "Spooky",
     rating: "4.7",
-    category: "🎃 Adventure",
+    category: "🎃 Action",
     url: "https://motox3m.co/moto-x3m-spooky-land.embed",
     thumb: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=400&q=70"
   },
   {
     title: "Bike Hero Stunt",
-    tag: "Action",
+    tag: "Fast",
     rating: "4.8",
-    category: "⚡ Fast",
+    category: "⚡ Nitro",
     url: "https://motox3m.co/moto-x3m.embed",
     thumb: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=400&q=70"
   }
@@ -49,7 +49,7 @@ const moreGames = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,10 +58,54 @@ const moreGames = [
     <meta name="keywords" content="moto x3m unblocked, moto x3m game, unblocked games, bike stunts, free online games" />
     <link rel="canonical" href={seo.canonical} />
 
-    <!-- Google Fonts Optimized for CWV (Zero Render-Blocking) -->
+    <!-- Google Fonts Optimized for CWV -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CDN with Custom Cute Theme Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script is:inline>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#FFF7F0',
+                100: '#FFEAD8',
+                200: '#FFD5B2',
+                400: '#FF9432',
+                500: '#FF7A00', // Cute Primary Orange
+                600: '#E66800',
+              },
+              accent: {
+                yellow: '#FFC000',
+                dark: '#2D231E',
+                muted: '#7A6B63',
+              }
+            },
+            fontFamily: {
+              fredoka: ['Fredoka', 'cursive'],
+              quicksand: ['Quicksand', 'sans-serif'],
+            },
+            boxShadow: {
+              'cute': '0 10px 25px -5px rgba(255, 122, 0, 0.12), 0 8px 10px -6px rgba(255, 122, 0, 0.08)',
+              'cute-hover': '0 20px 30px -10px rgba(255, 122, 0, 0.25)',
+              'btn-3d': '0 5px 0px #D86300',
+            },
+            animation: {
+              'cute-pulse': 'cutePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              cutePulse: {
+                '0%, 100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.06)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
 
     <!-- SEO Schema Markup -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -75,44 +119,60 @@ const moreGames = [
     })} />
   </head>
 
-  <body>
-    <!-- HEADER -->
-    <header class="navbar-wrapper">
-      <div class="navbar">
-        <a href="/moto" class="logo">
-          <div class="logo-icon">🏍️</div>
-          <span>MotoPlay</span>
+  <body class="bg-brand-50 text-accent-dark font-quicksand min-h-screen flex flex-col antialiased selection:bg-brand-200 selection:text-brand-600">
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-brand-100 shadow-sm">
+      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="/moto" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-xl shadow-md group-hover:rotate-12 transition-transform">
+            🏍️
+          </div>
+          <span class="font-fredoka text-2xl font-bold text-brand-500 tracking-wide">MotoPlay</span>
         </a>
-        <div class="nav-badge">✨ Fast & Cute UI</div>
-      </div>
+
+        <!-- Cute Badge -->
+        <div class="bg-brand-100 text-brand-600 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-wide flex items-center gap-1.5 border border-brand-200/50">
+          <span>✨</span> <span class="hidden sm:inline">Fast &</span> Cute UI
+        </div>
+      </nav>
     </header>
 
-    <!-- MAIN CONTAINER -->
-    <main class="container">
-      
-      <!-- HERO TITLE -->
-      <section class="game-header">
-        <h1>Moto X3M Unblocked <span class="badge-pill">Hot 🔥</span></h1>
-      </section>
+    <!-- ================= MAIN CONTENT CONTAINER ================= -->
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
-      <!-- ZERO CLS 16:9 GAME CONTAINER -->
-      <div class="game-viewport" id="gameContainer">
-        <!-- Click-to-Play Overlay Poster (Instant LCP) -->
+      <!-- HERO HEADING -->
+      <div class="text-center mb-5 sm:mb-6">
+        <h1 class="font-fredoka text-2xl sm:text-3xl md:text-4xl text-brand-500 font-bold inline-flex items-center justify-center gap-2 flex-wrap">
+          Moto X3M Unblocked
+          <span class="bg-accent-yellow text-amber-950 text-xs sm:text-sm px-2.5 py-1 rounded-full uppercase tracking-wider font-bold shadow-sm">
+            HOT 🔥
+          </span>
+        </h1>
+      </div>
+
+      <!-- ================= GAME CONTAINER (0 CLS: aspect-video) ================= -->
+      <div id="gameContainer" class="relative w-full aspect-video bg-neutral-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-cute border-4 border-white">
+        
+        <!-- Lazy Poster Overlay -->
         <div 
-          class="game-poster" 
           id="gamePoster" 
+          class="absolute inset-0 z-10 bg-cover bg-center flex items-center justify-center cursor-pointer transition-opacity duration-300"
           style={`background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.65)), url('${seo.posterImage}')`}
         >
-          <button class="play-btn-large" id="playBtn" aria-label="Play Moto X3M Now">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <button id="playBtn" class="animate-cute-pulse bg-gradient-to-b from-brand-400 to-brand-500 hover:from-brand-500 hover:to-brand-600 text-white font-fredoka font-bold text-lg sm:text-2xl px-6 sm:px-10 py-3 sm:py-4 rounded-full shadow-btn-3d flex items-center gap-3 border-2 border-white/40 active:translate-y-1 transition-all" aria-label="Play Moto X3M Now">
+            <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
             PLAY NOW
           </button>
         </div>
-        
-        <!-- Deferred iframe (Loads only when clicked) -->
+
+        <!-- Deferred Iframe -->
         <iframe 
           id="gameIframe" 
-          class="game-iframe" 
+          class="w-full h-full border-0 hidden"
           data-src={seo.gameUrl}
           title="Moto X3M Unblocked Game" 
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
@@ -120,50 +180,72 @@ const moreGames = [
         </iframe>
       </div>
 
-      <!-- GAME CONTROL BAR -->
-      <div class="game-bar">
-        <div class="game-info-mini">
-          <div class="stars">★★★★★</div>
-          <span class="rating-text">4.9 / 5</span>
+      <!-- ================= GAME CONTROL BAR ================= -->
+      <div class="mt-3 sm:mt-4 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-cute flex items-center justify-between gap-2 border border-brand-100">
+        <div class="flex items-center gap-2">
+          <span class="text-accent-yellow text-sm sm:text-base">★★★★★</span>
+          <span class="text-xs sm:text-sm font-bold text-accent-muted">4.9 / 5</span>
         </div>
-        <div class="game-actions">
-          <button class="action-btn" id="fsBtn" aria-label="Fullscreen">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-            Fullscreen
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button id="fsBtn" class="bg-brand-100 hover:bg-brand-500 text-brand-600 hover:text-white font-fredoka font-semibold px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 transition-all active:translate-y-0.5" aria-label="Fullscreen">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+            <span>Fullscreen</span>
           </button>
-          <button class="action-btn" id="reloadBtn" aria-label="Restart Game">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-            Restart
+
+          <button id="reloadBtn" class="bg-brand-100 hover:bg-brand-500 text-brand-600 hover:text-white font-fredoka font-semibold px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 transition-all active:translate-y-0.5" aria-label="Restart">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            <span class="hidden sm:inline">Restart</span>
           </button>
         </div>
       </div>
 
-      <!-- SEO DESCRIPTION BOX -->
-      <article class="game-description">
-        <h2>About Moto X3M Unblocked</h2>
-        <p>
-          Welcome to <strong>Moto X3M Unblocked</strong>! Grab your helmet, rev your engine, and race through challenging obstacle courses full of massive loops, dangerous spikes, and explosive barrels. Perform insane flips to shave seconds off your time and earn 3 stars on all levels!
+      <!-- ================= SEO DESCRIPTION ================= -->
+      <article class="mt-8 bg-white rounded-2xl p-5 sm:p-7 shadow-cute border-l-4 border-brand-500">
+        <h2 class="font-fredoka text-xl sm:text-2xl text-brand-500 font-bold mb-2">
+          About Moto X3M Unblocked
+        </h2>
+        <p class="text-accent-dark/80 text-sm sm:text-base leading-relaxed">
+          Welcome to <strong>Moto X3M Unblocked</strong>! Put on your racing helmet, grip the handlebars, and speed through challenging obstacle tracks packed with massive loops, deadly spikes, and explosive TNT traps. Perform insane flips in the air to save precious seconds and achieve 3 stars on every level!
         </p>
       </article>
 
-      <!-- MORE GAMES SECTION -->
-      <section class="more-games">
-        <h2 class="section-title">
-          <span>🎮</span> More Awesome Games
-        </h2>
+      <!-- ================= MORE GAMES RESPONSIVE GRID ================= -->
+      <section class="mt-10 sm:mt-12">
+        <div class="flex items-center gap-2 mb-5">
+          <span class="text-2xl">🎮</span>
+          <h2 class="font-fredoka text-2xl sm:text-3xl font-bold text-accent-dark">More Awesome Games</h2>
+        </div>
 
-        <div class="games-grid">
+        <!-- Fully Responsive: 2 cols on mobile, 3 on tablet, 4 on desktop -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5 sm:gap-5">
           {moreGames.map((game) => (
-            <div class="game-card" data-url={game.url}>
-              <div class="card-thumb">
-                <span class="card-tag">{game.tag}</span>
-                <img src={game.thumb} alt={game.title} loading="lazy" width="200" height="140" />
+            <div 
+              class="game-card group bg-white rounded-2xl overflow-hidden shadow-cute hover:shadow-cute-hover transition-all duration-300 hover:-translate-y-1.5 cursor-pointer border border-transparent hover:border-brand-200 flex flex-col"
+              data-url={game.url}
+            >
+              <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100">
+                <span class="absolute top-2 right-2 z-10 bg-black/60 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  {game.tag}
+                </span>
+                <img 
+                  src={game.thumb} 
+                  alt={game.title} 
+                  loading="lazy" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                />
               </div>
-              <div class="card-details">
-                <h3 class="card-title">{game.title}</h3>
-                <div class="card-meta">
+              <div class="p-3 sm:p-3.5 flex flex-col justify-between flex-1">
+                <h3 class="font-fredoka text-sm sm:text-base font-bold text-accent-dark truncate group-hover:text-brand-500 transition-colors">
+                  {game.title}
+                </h3>
+                <div class="flex items-center justify-between text-xs text-accent-muted font-bold mt-2">
                   <span>{game.category}</span>
-                  <span>⭐ {game.rating}</span>
+                  <span class="text-amber-500">⭐ {game.rating}</span>
                 </div>
               </div>
             </div>
@@ -173,12 +255,14 @@ const moreGames = [
 
     </main>
 
-    <!-- FOOTER -->
-    <footer>
-      <p>© 2025 MotoPlay - Fast, Cute & Safe Gaming Playground.</p>
+    <!-- ================= FOOTER ================= -->
+    <footer class="mt-12 bg-white border-t-2 border-brand-100 py-6 text-center text-xs sm:text-sm text-accent-muted">
+      <div class="max-w-6xl mx-auto px-4">
+        <p>© 2025 MotoPlay - Fast, Cute & Safe Gaming Playground.</p>
+      </div>
     </footer>
 
-    <!-- INTERACTION SCRIPT -->
+    <!-- ================= CLIENT JAVASCRIPT ================= -->
     <script>
       const iframe = document.getElementById('gameIframe') as HTMLIFrameElement;
       const poster = document.getElementById('gamePoster') as HTMLElement;
@@ -188,20 +272,19 @@ const moreGames = [
       const reloadBtn = document.getElementById('reloadBtn') as HTMLButtonElement;
       const gameCards = document.querySelectorAll('.game-card');
 
-      // Click to Play function
       function loadGame(customUrl?: string) {
         poster.style.display = 'none';
-        iframe.style.display = 'block';
-        const urlToLoad = customUrl || iframe.getAttribute('data-src');
-        if (urlToLoad && iframe.src !== urlToLoad) {
-          iframe.src = urlToLoad;
+        iframe.classList.remove('hidden');
+        const targetUrl = customUrl || iframe.getAttribute('data-src');
+        if (targetUrl && iframe.src !== targetUrl) {
+          iframe.src = targetUrl;
         }
       }
 
       playBtn?.addEventListener('click', () => loadGame());
       poster?.addEventListener('click', () => loadGame());
 
-      // Fullscreen Mode
+      // Fullscreen
       fsBtn?.addEventListener('click', () => {
         if (!document.fullscreenElement) {
           container.requestFullscreen?.();
@@ -210,7 +293,7 @@ const moreGames = [
         }
       });
 
-      // Reload Active Game
+      // Reload Game
       reloadBtn?.addEventListener('click', () => {
         if (iframe.src) {
           const current = iframe.src;
@@ -232,350 +315,3 @@ const moreGames = [
     </script>
   </body>
 </html>
-
-<!-- CUTE ORANGE STYLING (Scoped & Global) -->
-<style is:global>
-  :root {
-    --primary: #FF7A00;
-    --primary-hover: #FF9432;
-    --primary-light: #FFEAD8;
-    --bg-color: #FFF7F0;
-    --card-bg: #FFFFFF;
-    --text-main: #2D231E;
-    --text-muted: #7A6B63;
-    --accent-yellow: #FFC000;
-    --radius-lg: 24px;
-    --radius-md: 16px;
-    --radius-sm: 10px;
-    --shadow-soft: 0 10px 25px -5px rgba(255, 122, 0, 0.12), 0 8px 10px -6px rgba(255, 122, 0, 0.08);
-    --shadow-btn: 0 6px 0px #D86300;
-    --transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    line-height: 1.5;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  .container {
-    max-width: 1050px;
-    margin: 0 auto;
-    padding: 24px 16px;
-    width: 100%;
-    flex: 1;
-  }
-
-  /* Header */
-  .navbar-wrapper {
-    background: var(--card-bg);
-    box-shadow: 0 4px 20px rgba(255, 122, 0, 0.06);
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 2px solid var(--primary-light);
-  }
-
-  .navbar {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 12px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    font-family: 'Fredoka', cursive;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-  }
-
-  .logo-icon {
-    background: var(--primary);
-    color: white;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    font-size: 1.4rem;
-  }
-
-  .nav-badge {
-    background: var(--primary-light);
-    color: var(--primary);
-    padding: 6px 14px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-  }
-
-  /* Game Viewport */
-  .game-header {
-    text-align: center;
-    margin-bottom: 18px;
-  }
-
-  .game-header h1 {
-    font-family: 'Fredoka', cursive;
-    font-size: 2.2rem;
-    color: var(--primary);
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .badge-pill {
-    background: var(--accent-yellow);
-    color: #5B3F00;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  .game-viewport {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    aspect-ratio: 16 / 9;
-    background: #111;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-soft);
-    border: 4px solid #fff;
-  }
-
-  .game-poster {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 5;
-    cursor: pointer;
-  }
-
-  .play-btn-large {
-    background: linear-gradient(180deg, #FF9E44 0%, var(--primary) 100%);
-    color: white;
-    font-family: 'Fredoka', cursive;
-    font-size: 1.5rem;
-    font-weight: 700;
-    padding: 16px 40px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    box-shadow: var(--shadow-btn), 0 10px 20px rgba(255, 122, 0, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    animation: cutePulse 2s infinite;
-  }
-
-  @keyframes cutePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
-
-  .game-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: none;
-  }
-
-  .game-bar {
-    max-width: 900px;
-    margin: 14px auto 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--card-bg);
-    padding: 12px 20px;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .game-info-mini {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .stars { color: var(--accent-yellow); font-size: 1.1rem; }
-  .rating-text { font-weight: 700; font-size: 0.9rem; }
-
-  .game-actions {
-    display: flex;
-    gap: 10px;
-  }
-
-  .action-btn {
-    background: var(--primary-light);
-    color: var(--primary);
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 8px 14px;
-    font-family: 'Fredoka', cursive;
-    font-size: 0.95rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 600;
-    transition: var(--transition);
-  }
-
-  .action-btn:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-2px);
-  }
-
-  /* SEO Description */
-  .game-description {
-    background: var(--card-bg);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    margin-top: 30px;
-    box-shadow: var(--shadow-soft);
-    border-left: 6px solid var(--primary);
-  }
-
-  .game-description h2 {
-    font-family: 'Fredoka', cursive;
-    color: var(--primary);
-    margin-bottom: 8px;
-  }
-
-  /* More Games */
-  .more-games { margin-top: 48px; }
-
-  .section-title {
-    font-family: 'Fredoka', cursive;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-  }
-
-  .game-card {
-    background: var(--card-bg);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: var(--shadow-soft);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    border: 2px solid transparent;
-    aspect-ratio: 1 / 1.15;
-  }
-
-  .game-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--primary-light);
-    box-shadow: 0 15px 30px rgba(255, 122, 0, 0.18);
-  }
-
-  .card-thumb {
-    width: 100%;
-    height: 65%;
-    position: relative;
-    background: #f0f0f0;
-    overflow: hidden;
-  }
-
-  .card-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-
-  .game-card:hover .card-thumb img {
-    transform: scale(1.08);
-  }
-
-  .card-tag {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 12px;
-  }
-
-  .card-details {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
-  }
-
-  .card-title {
-    font-family: 'Fredoka', cursive;
-    font-size: 1.05rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .card-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-weight: 600;
-  }
-
-  footer {
-    background: var(--card-bg);
-    border-top: 2px solid var(--primary-light);
-    padding: 24px 20px;
-    text-align: center;
-    margin-top: 40px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-  }
-
-  @media (max-width: 600px) {
-    .game-header h1 { font-size: 1.6rem; }
-    .play-btn-large { font-size: 1.2rem; padding: 12px 28px; }
-    .games-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  }
-</style>
