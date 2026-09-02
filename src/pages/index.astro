@@ -1,34 +1,16 @@
 ---
-// src/pages/index.astro
-// Frontmatter: Saare 26 games ka lightweight data array
-const games = [
-  { id: 1, title: "Cyber Kitty", icon: "🐱", bg: "rgba(255,101,132,0.25)", video: "https://videos.crazygames.com/ragdoll-archers/5/ragdoll-archers-landscape-1920x1080_30fps.mp4" },
-  { id: 2, title: "Neon Pop", icon: "⚡", bg: "rgba(6,182,212,0.25)", video: "https://videos.crazygames.com/marble-jump-fux/1/marble-jump-fux-landscape-1280x720_30fps.mp4" },
-  { id: 3, title: "Candy Bounce", icon: "🍬", bg: "rgba(245,158,11,0.25)", video: "https://videos.crazygames.com/veck-io/4/veck-io-landscape-1280x720_30fps.mp4" },
-  { id: 4, title: "Pixel Arcade", icon: "🎮", bg: "rgba(16,185,129,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4" },
-  { id: 5, title: "Marble Dash", icon: "🔮", bg: "rgba(99,102,241,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
-  { id: 6, title: "Dream Run", icon: "🏃‍♀️", bg: "rgba(217,70,239,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
-  { id: 7, title: "Cute Racers", icon: "🏎️", bg: "rgba(239,68,68,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
-  { id: 8, title: "Star Jump", icon: "⭐", bg: "rgba(234,179,8,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
-  { id: 9, title: "Bakery Chef", icon: "🧁", bg: "rgba(255,101,132,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
-  { id: 10, title: "Pocket Dino", icon: "🦖", bg: "rgba(132,204,22,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" },
-  { id: 11, title: "Anime Dressup", icon: "👗", bg: "rgba(244,63,94,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-  { id: 12, title: "Sword Kawaii", icon: "⚔️", bg: "rgba(139,92,246,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-  { id: 13, title: "Ninja Duck Legends", icon: "🦆", isBig: true, badge: "🔥 MEGA HIT", category: "Action • 3D Adventure", bg: "rgba(245,158,11,0.3)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-  { id: 14, title: "Fruit Ninja Kawaii", icon: "🍉", isBig: true, badge: "⭐ POPULAR", category: "Arcade • Slice & Fun", bg: "rgba(16,185,129,0.3)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4" },
-  { id: 15, title: "Robo Quest", icon: "🤖", bg: "rgba(59,130,246,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
-  { id: 16, title: "Bubble Fairy", icon: "🫧", bg: "rgba(140,122,230,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
-  { id: 17, title: "Donut Rush", icon: "🍩", bg: "rgba(249,115,22,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
-  { id: 18, title: "Fluffy Match", icon: "🧩", bg: "rgba(20,184,166,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
-  { id: 19, title: "Hamster Run", icon: "🐹", bg: "rgba(245,158,11,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
-  { id: 20, title: "Rainbow Blocks", icon: "🌈", bg: "rgba(99,102,241,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" },
-  { id: 21, title: "Drift Panda", icon: "🐼", bg: "rgba(239,68,68,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-  { id: 22, title: "Space Bubble", icon: "🪐", bg: "rgba(6,182,212,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-  { id: 23, title: "Pony Galaxy", icon: "🦄", bg: "rgba(217,70,239,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-  { id: 24, title: "Chibi Jump", icon: "👾", bg: "rgba(255,101,132,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4" },
-  { id: 25, title: "Jelly Splash", icon: "🍮", bg: "rgba(140,122,230,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
-  { id: 26, title: "Kitty Runner", icon: "🐾", bg: "rgba(244,63,94,0.25)", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" }
-];
+// ========================================================
+// 1. JSON FETCH / IMPORT (Astro Build-Time Fast Fetch)
+// ========================================================
+import gamesList from '../data/games.json';
+
+const featuredGame = {
+  title: "Geometry Neon Dash",
+  icon: "🚀",
+  badge: "Featured Game",
+  iframeUrl: "https://geometrydashlite.io/",
+  category: "Arcade • Neon Action"
+};
 ---
 
 <!DOCTYPE html>
@@ -37,20 +19,19 @@ const games = [
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>KawaiiPlay - Cute & Fun Free Online Games</title>
-  <meta name="description" content="Play the best cute and kawaii online games for free! Arcade, puzzles, dress-up, and action games playable directly in your browser." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://ubg2028.github.io/" />
+  <meta name="description" content="Play cute and kawaii online games for free! Arcade, puzzles, and action games in your browser." />
   <meta name="theme-color" content="#0B0F19" />
+  <link rel="canonical" href="https://ubg2028.github.io/" />
 
-  <!-- Google Font with instant display swap -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Instant Theme Loader (Zero White Flash) -->
+  <!-- Instant Theme Script (Zero White Flash) -->
   <script is:inline>
-    const theme = localStorage.getItem('theme');
-    if (theme === 'light') {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
       document.documentElement.classList.remove('dark');
     } else {
       document.documentElement.classList.add('dark');
@@ -59,130 +40,171 @@ const games = [
 </head>
 
 <body>
-  <!-- ================= MOBILE SIDEBAR MENU ================= -->
-  <div id="menuOverlay" class="menu-overlay hidden"></div>
+  <!-- ================= SIDEBAR DRAWER ================= -->
+  <div id="menuOverlay" class="drawer-overlay hidden" aria-hidden="true"></div>
   
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-top">
-      <div class="sidebar-header">
-        <div class="brand">
-          <span class="emoji-logo">🎀</span>
-          <span class="brand-name">CuteGames</span>
+  <aside id="sidebar" class="drawer-sidebar" aria-label="Main Navigation">
+    <div class="drawer-content">
+      <header class="drawer-header">
+        <div class="brand-badge">
+          <span>🎀</span>
+          <span class="brand-title">CuteGames</span>
         </div>
-        <button id="closeMenuBtn" aria-label="Close Menu" class="icon-btn">
-          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+        <button id="closeMenuBtn" class="btn-icon" aria-label="Close Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
-      </div>
-      <nav class="sidebar-nav">
-        <a href="/" class="nav-item active">🔥 Home</a>
-        <a href="#more-games" class="nav-item">🎮 Arcade & Action</a>
-        <a href="#more-games" class="nav-item">🧩 Cute Puzzle</a>
-        <a href="#more-games" class="nav-item">👗 Dress Up & Girls</a>
+      </header>
+
+      <nav class="drawer-nav">
+        <a href="/" class="drawer-link active"><span>🔥</span> Home</a>
+        <a href="#games-section" class="drawer-link"><span>🎮</span> Arcade & Action</a>
+        <a href="#games-section" class="drawer-link"><span>🧩</span> Cute Puzzle</a>
+        <a href="#games-section" class="drawer-link"><span>👗</span> Dress Up & Girls</a>
       </nav>
     </div>
-    <div class="sidebar-footer">
+
+    <footer class="drawer-footer">
       <p>© 2026 KawaiiPlay Zone</p>
-    </div>
+    </footer>
   </aside>
 
-  <!-- ================= TOP NAVIGATION NAVBAR ================= -->
-  <header class="top-navbar">
-    <div class="container nav-content">
-      <div class="nav-left">
-        <button id="openMenuBtn" aria-label="Open Menu" class="icon-btn">
-          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+  <!-- ================= TOP HEADER NAVBAR ================= -->
+  <header class="site-header">
+    <div class="site-container header-inner">
+      <div class="header-left">
+        <button id="openMenuBtn" class="btn-icon" aria-label="Open Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
         </button>
-        <a href="/" class="site-logo">
-          <span>🐱</span> KawaiiPlay
+        <a href="/" class="site-brand">
+          <span class="site-logo">🐱</span>
+          <span class="site-name">KawaiiPlay</span>
         </a>
       </div>
 
-      <!-- Theme Switcher -->
-      <button id="themeToggleBtn" aria-label="Toggle Theme" class="theme-btn">
-        <svg id="moonIcon" class="hidden" width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
-        <svg id="sunIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-        <span id="themeText">Dark Mode</span>
-      </button>
+      <div class="header-right">
+        <button id="themeToggleBtn" class="btn-theme" aria-label="Toggle Dark/Light Theme">
+          <svg id="moonIcon" class="icon hidden" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg id="sunIcon" class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- ================= FEATURED GAME HERO ================= -->
-  <main class="container main-content">
-    <section class="featured-section">
-      <div id="gameScreenContainer" class="game-screen-box">
-        <div class="aspect-video-box">
-          <!-- Click to play cover facade -->
-          <div id="gameCoverOverlay" class="hero-cover">
-            <div class="hero-glow-blob1"></div>
-            <div class="hero-glow-blob2"></div>
-            <div class="hero-content">
-              <div class="hero-icon-box">🚀</div>
-              <span class="badge-featured">Featured Game</span>
-              <h1 class="hero-title">Geometry Neon Dash</h1>
-              <button id="playGameBtn" class="btn-play-hero">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                PLAY NOW
-              </button>
-            </div>
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="site-container main-wrapper">
+    
+    <!-- Hero Game Arena -->
+    <section class="hero-arena" aria-label="Featured Game Arena">
+      <figure id="gameScreenContainer" class="game-viewport">
+        <!-- Zero initial bandwidth usage until Play is clicked -->
+        <div id="gameCoverOverlay" class="hero-facade" role="button" tabindex="0" aria-label="Play Featured Game">
+          <div class="facade-glow-1"></div>
+          <div class="facade-glow-2"></div>
+          <div class="facade-content">
+            <span class="hero-emoji">{featuredGame.icon}</span>
+            <span class="pill-badge">{featuredGame.badge}</span>
+            <h1 class="hero-heading">{featuredGame.title}</h1>
+            <p class="hero-subtext">{featuredGame.category}</p>
+            <button id="playGameBtn" class="btn-hero-play">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              PLAY NOW
+            </button>
           </div>
-
-          <!-- Lazy Iframe (Zero Data usage on slow networks until played) -->
-          <iframe 
-            id="gameIframe" 
-            class="game-iframe hidden" 
-            data-src="https://geometrydashlite.io/" 
-            title="Featured Game" 
-            allow="fullscreen; autoplay; gamepad" 
-            loading="lazy">
-          </iframe>
         </div>
-      </div>
 
-      <!-- Fullscreen Button -->
-      <div class="fullscreen-wrapper">
-        <button id="fullscreenBtn" class="btn-fullscreen">
-          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
-          Full Screen Mode
+        <iframe 
+          id="gameIframe" 
+          class="hero-iframe hidden" 
+          data-src={featuredGame.iframeUrl} 
+          title={featuredGame.title} 
+          allow="fullscreen; autoplay; gamepad" 
+          loading="lazy">
+        </iframe>
+      </figure>
+
+      <div class="hero-controls">
+        <button id="fullscreenBtn" class="btn-control">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+          Full Screen
         </button>
       </div>
     </section>
 
-    <!-- ================= MORE GAMES SECTION ================= -->
-    <section id="more-games" class="games-section">
-      <div class="section-header">
-        <div class="section-title">
-          <span>⭐</span>
-          <h2>More Fun Games</h2>
+    <!-- More Games Section (Rendered from JSON) -->
+    <section id="games-section" class="catalog-section" aria-label="More Games">
+      <header class="section-top">
+        <div class="section-title-group">
+          <span class="section-icon">⭐</span>
+          <h2 class="section-heading">More Fun Games</h2>
         </div>
-        <span class="count-badge">{games.length} Games</span>
-      </div>
+        <span class="badge-counter">{gamesList.length} Games</span>
+      </header>
 
-      <!-- Responsive Dynamic Auto-Fit Grid -->
-      <div class="games-grid">
-        {games.map((game) => (
-          <div class={`game-card ${game.isBig ? 'big-card' : 'small-card'}`} style={`--card-glow: ${game.bg};`}>
-            {game.badge && <span class="card-badge">{game.badge}</span>}
-            <div class="card-center-icon">{game.icon}</div>
+      <!-- Dynamic Grid from JSON data -->
+      <div class="catalog-grid">
+        {gamesList.map((game) => (
+          <article 
+            class={`card-item ${game.isFeaturedSpan ? 'span-2x' : ''}`} 
+            style={`background: ${game.bg};`}
+          >
+            {game.badge && <span class="card-tag">{game.badge}</span>}
             
-            <!-- Video preloads nothing on page load -->
-            <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
-            
-            <div class={`card-bottom-info ${game.isBig ? '' : 'compact'}`}>
-              <div class="card-text-box">
-                <span class="card-title">{game.title}</span>
-                {game.category && <span class="card-category">{game.category}</span>}
-              </div>
-              <span class="btn-card-play">PLAY</span>
+            <div class="card-icon-area">
+              <span class="card-emoji">{game.icon}</span>
             </div>
-          </div>
+
+            <!-- Video preview streams only on hover/touch -->
+            <video 
+              class="card-video-hover" 
+              loop 
+              muted 
+              playsinline 
+              preload="none" 
+              data-src={game.video}
+            ></video>
+
+            <footer class="card-meta">
+              <div class="card-info">
+                <strong class="card-name">{game.title}</strong>
+                {game.category && <small class="card-genre">{game.category}</small>}
+              </div>
+              <button class="btn-play-sm" aria-label={`Play ${game.title}`}>PLAY</button>
+            </footer>
+          </article>
         ))}
       </div>
 
-      <!-- Explore More Button -->
-      <div class="explore-wrapper">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-explore">
-          <span>🎮</span> Explore All Games (500+)
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      <div class="explore-action-box">
+        <button class="btn-explore-all" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          <span>🎮</span> Explore All (500+)
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
         </button>
       </div>
     </section>
@@ -190,68 +212,69 @@ const games = [
 
   <!-- ================= FOOTER ================= -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-card">
-        <h3>OUR PARTNER NETWORKS & BACKLINKS</h3>
-        <div class="backlinks">
-          <a href="https://example.com/crazy-games" target="_blank" rel="noopener">CrazyGames Portal</a>
-          <a href="https://example.com/poki-clone" target="_blank" rel="noopener">Poki Free Games</a>
-          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener">HTML5 Game Hub</a>
-          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener">Unblocked Games 76</a>
-        </div>
+    <div class="site-container footer-content">
+      <div class="partners-block">
+        <h3 class="partners-title">OUR PARTNER NETWORKS & BACKLINKS</h3>
+        <nav class="partners-nav" aria-label="Partner Links">
+          <a href="https://example.com/crazy-games" target="_blank" rel="noopener noreferrer">CrazyGames Portal</a>
+          <a href="https://example.com/poki-clone" target="_blank" rel="noopener noreferrer">Poki Free Games</a>
+          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener noreferrer">HTML5 Game Hub</a>
+          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener noreferrer">Unblocked Games 76</a>
+        </nav>
       </div>
-      <div class="footer-bottom">
-        <span>🐱 KawaiiPlay © 2026. Fast & Cute Gaming Experience.</span>
+      <div class="copyright-block">
+        <p>🐱 KawaiiPlay © 2026. Loaded dynamically via JSON.</p>
       </div>
     </div>
   </footer>
 
-  <!-- ================= FLOATING BACK TO GAME BUTTON ================= -->
-  <button id="backToGameBtn" aria-label="Back to Game" class="btn-back-to-game hidden-floating">
-    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+  <!-- Floating Scroll To Top -->
+  <button id="backToTopBtn" class="btn-floating hidden-float" aria-label="Scroll Back to Top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
     </svg>
-    <span>Back to Game</span>
+    <span>Top</span>
   </button>
 
-  <!-- ================= CLIENT JAVASCRIPT ================= -->
+  <!-- ================= JAVASCRIPT ================= -->
   <script is:inline>
     document.addEventListener("DOMContentLoaded", () => {
       // 1. Dark/Light Mode Switcher
       const themeBtn = document.getElementById("themeToggleBtn");
       const sunIcon = document.getElementById("sunIcon");
       const moonIcon = document.getElementById("moonIcon");
-      const themeText = document.getElementById("themeText");
+      const themeLabel = document.getElementById("themeLabel");
 
-      function updateTheme(isDark) {
+      const applyTheme = (isDark) => {
         if (isDark) {
           document.documentElement.classList.add("dark");
           sunIcon?.classList.remove("hidden");
           moonIcon?.classList.add("hidden");
-          if (themeText) themeText.textContent = "Dark Mode";
+          if (themeLabel) themeLabel.textContent = "Dark";
           localStorage.setItem("theme", "dark");
         } else {
           document.documentElement.classList.remove("dark");
           sunIcon?.classList.add("hidden");
           moonIcon?.classList.remove("hidden");
-          if (themeText) themeText.textContent = "Light Mode";
+          if (themeLabel) themeLabel.textContent = "Light";
           localStorage.setItem("theme", "light");
         }
-      }
+      };
 
-      updateTheme(localStorage.getItem("theme") !== "light");
+      applyTheme(localStorage.getItem("theme") !== "light");
       themeBtn?.addEventListener("click", () => {
-        updateTheme(!document.documentElement.classList.contains("dark"));
+        applyTheme(!document.documentElement.classList.contains("dark"));
       });
 
-      // 2. Mobile Responsive Sidebar Menu
+      // 2. Mobile Responsive Drawer
       const sidebar = document.getElementById("sidebar");
       const overlay = document.getElementById("menuOverlay");
       const openBtn = document.getElementById("openMenuBtn");
       const closeBtn = document.getElementById("closeMenuBtn");
 
-      function toggleMenu(show) {
-        if (show) {
+      const toggleDrawer = (open) => {
+        if (open) {
           sidebar?.classList.add("open");
           overlay?.classList.remove("hidden");
           document.body.style.overflow = "hidden";
@@ -260,30 +283,29 @@ const games = [
           overlay?.classList.add("hidden");
           document.body.style.overflow = "";
         }
-      }
+      };
 
-      openBtn?.addEventListener("click", () => toggleMenu(true));
-      closeBtn?.addEventListener("click", () => toggleMenu(false));
-      overlay?.addEventListener("click", () => toggleMenu(false));
+      openBtn?.addEventListener("click", () => toggleDrawer(true));
+      closeBtn?.addEventListener("click", () => toggleDrawer(false));
+      overlay?.addEventListener("click", () => toggleDrawer(false));
 
-      // 3. Iframe On-Demand Loading (Save 5MB on load)
+      // 3. Facade Iframe Launcher
       const cover = document.getElementById("gameCoverOverlay");
       const iframe = document.getElementById("gameIframe");
-      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const fsBtn = document.getElementById("fullscreenBtn");
       const container = document.getElementById("gameScreenContainer");
 
-      function launchGame() {
+      const triggerGame = () => {
         if (iframe && !iframe.src && iframe.dataset.src) {
           iframe.src = iframe.dataset.src;
           iframe.classList.remove("hidden");
           cover?.classList.add("hidden");
         }
-      }
+      };
 
-      cover?.addEventListener("click", launchGame);
-
-      fullscreenBtn?.addEventListener("click", () => {
-        launchGame();
+      cover?.addEventListener("click", triggerGame);
+      fsBtn?.addEventListener("click", () => {
+        triggerGame();
         if (!document.fullscreenElement) {
           container?.requestFullscreen().catch(() => {});
         } else {
@@ -291,19 +313,19 @@ const games = [
         }
       });
 
-      // 4. Video Hover / Touch Play (Lazy network stream)
-      document.querySelectorAll(".game-card").forEach((card) => {
-        const video = card.querySelector(".hover-video");
-        if (!video) return;
+      // 4. Video Hover / Touch Play
+      document.querySelectorAll(".card-item").forEach((card) => {
+        const vid = card.querySelector(".card-video-hover");
+        if (!vid) return;
 
         const startVideo = () => {
-          if (!video.src && video.dataset.src) video.src = video.dataset.src;
-          video.play().catch(() => {});
+          if (!vid.src && vid.dataset.src) vid.src = vid.dataset.src;
+          vid.play().catch(() => {});
         };
 
         const stopVideo = () => {
-          video.pause();
-          video.currentTime = 0;
+          vid.pause();
+          vid.currentTime = 0;
         };
 
         card.addEventListener("mouseenter", startVideo, { passive: true });
@@ -311,55 +333,53 @@ const games = [
         card.addEventListener("touchstart", startVideo, { passive: true });
       });
 
-      // 5. Back to Top / Game Button
-      const backBtn = document.getElementById("backToGameBtn");
+      // 5. Scroll Floating Button
+      const floatBtn = document.getElementById("backToTopBtn");
       window.addEventListener("scroll", () => {
-        if (window.scrollY > 350) {
-          backBtn?.classList.remove("hidden-floating");
+        if (window.scrollY > 300) {
+          floatBtn?.classList.remove("hidden-float");
         } else {
-          backBtn?.classList.add("hidden-floating");
+          floatBtn?.classList.add("hidden-float");
         }
       }, { passive: true });
 
-      backBtn?.addEventListener("click", () => {
-        if (container) {
-          container.scrollIntoView({ behavior: "smooth", block: "center" });
-        } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+      floatBtn?.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
     });
   </script>
 </body>
 </html>
 
-<!-- ================= 100% PURE SCOPED CSS (ZERO DEPENDENCY) ================= -->
+<!-- ================= CSS3 STYLES ================= -->
 <style is:global>
-  /* --- Colors & Design Tokens --- */
   :root {
-    --bg-main: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-nav: rgba(255, 255, 255, 0.9);
-    --border: #e2e8f0;
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --primary: #ec4899;
-    --primary-gradient: linear-gradient(135deg, #ec4899, #8b5cf6);
+    --font-stack: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --bg-body: #f4f6fb;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: rgba(255, 255, 255, 0.9);
+    --border-color: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent-pink: #ec4899;
+    --accent-purple: #8b5cf6;
+    --accent-gradient: linear-gradient(135deg, #ec4899, #8b5cf6);
     --radius-sm: 8px;
     --radius-md: 14px;
     --radius-lg: 20px;
+    --shadow-soft: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
   }
 
   html.dark {
-    --bg-main: #0b0f19;
-    --bg-card: #131b2e;
-    --bg-nav: rgba(11, 15, 25, 0.9);
-    --border: rgba(255, 255, 255, 0.08);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
+    --bg-body: #0b0f19;
+    --bg-surface: #131b2e;
+    --bg-surface-elevated: rgba(11, 15, 25, 0.9);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --shadow-soft: 0 12px 30px -6px rgba(0, 0, 0, 0.5);
   }
 
-  /* --- Global Reset --- */
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -367,304 +387,336 @@ const games = [
   }
 
   body {
-    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg-main);
-    color: var(--text-main);
+    font-family: var(--font-stack);
+    background-color: var(--bg-body);
+    color: var(--text-primary);
     line-height: 1.5;
     overflow-x: hidden;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
-  .container {
+  .site-container {
     width: 100%;
-    max-width: 1240px;
+    max-width: 1260px;
     margin: 0 auto;
-    padding: 0 clamp(10px, 2.5vw, 20px);
+    padding: 0 clamp(12px, 3vw, 24px);
   }
 
-  /* --- Top Navbar --- */
-  .top-navbar {
+  /* Sticky Top Header */
+  .site-header {
     position: sticky;
     top: 0;
     z-index: 40;
+    height: 60px;
+    background: var(--bg-surface-elevated);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: var(--bg-nav);
-    border-bottom: 1px solid var(--border);
-    height: 56px;
+    border-bottom: 1px solid var(--border-color);
   }
 
-  .nav-content {
+  .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
   }
 
-  .nav-left {
+  .header-left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .site-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
   }
 
   .site-logo {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
-    font-weight: 900;
-    color: var(--primary);
-    text-decoration: none;
+    font-size: 1.4rem;
   }
 
-  .icon-btn, .theme-btn {
+  .site-name {
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 900;
+    color: var(--accent-pink);
+    letter-spacing: -0.5px;
+  }
+
+  .btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .btn-theme {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    padding: 6px 10px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 6px 12px;
     border-radius: var(--radius-sm);
-    cursor: pointer;
     font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: 800;
+    cursor: pointer;
   }
 
-  /* --- Sidebar Drawer --- */
-  .menu-overlay {
+  /* Sidebar Drawer */
+  .drawer-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
     z-index: 50;
   }
 
-  .sidebar {
+  .drawer-sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 270px;
-    max-width: 82vw;
+    width: 280px;
+    max-width: 80vw;
     height: 100%;
-    background: var(--bg-card);
-    border-right: 1px solid var(--border);
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border-color);
     z-index: 60;
-    transform: translateX(-100%);
-    transition: transform 0.25s ease-out;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 16px;
+    padding: 20px;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .sidebar.open {
+  .drawer-sidebar.open {
     transform: translateX(0);
   }
 
-  .sidebar-header {
+  .drawer-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 
-  .brand {
-    font-size: 1.2rem;
+  .brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.25rem;
     font-weight: 900;
-    color: var(--primary);
+    color: var(--accent-pink);
   }
 
-  .sidebar-nav {
+  .drawer-nav {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
-  .nav-item {
-    display: block;
-    padding: 10px 12px;
+  .drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
     border-radius: var(--radius-sm);
-    color: var(--text-muted);
+    color: var(--text-secondary);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 0.95rem;
   }
 
-  .nav-item.active, .nav-item:hover {
+  .drawer-link.active, .drawer-link:hover {
     background: rgba(236, 72, 153, 0.12);
-    color: var(--primary);
+    color: var(--accent-pink);
   }
 
-  .sidebar-footer {
+  .drawer-footer {
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
   }
 
-  /* --- Featured Section --- */
-  .main-content {
-    margin-top: 14px;
+  /* Main & Featured Hero */
+  .main-wrapper {
+    margin-top: 16px;
   }
 
-  .game-screen-box {
-    width: 100%;
-    background: #000;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 24px -6px rgba(0,0,0,0.4);
-  }
-
-  .aspect-video-box {
+  .game-viewport {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    max-height: 65vh;
-    min-height: 200px;
-    background: #07090e;
+    max-height: 68vh;
+    min-height: 220px;
+    background: #000;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
   }
 
-  .hero-cover {
+  .hero-facade {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: radial-gradient(circle at center, #1e1b4b 0%, #080c16 100%);
     cursor: pointer;
-    background: radial-gradient(circle at center, #1e1b4b 0%, #0b0f19 100%);
     overflow: hidden;
   }
 
-  .hero-glow-blob1, .hero-glow-blob2 {
+  .facade-glow-1, .facade-glow-2 {
     position: absolute;
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
     background: rgba(236, 72, 153, 0.35);
     filter: blur(80px);
     border-radius: 50%;
   }
 
-  .hero-glow-blob2 {
+  .facade-glow-2 {
     background: rgba(139, 92, 246, 0.25);
     transform: translate(60px, 40px);
   }
 
-  .hero-content {
+  .facade-content {
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 12px;
-    gap: 6px;
+    padding: 16px;
+    gap: 8px;
   }
 
-  .hero-icon-box {
-    font-size: clamp(2rem, 5vw, 3.2rem);
+  .hero-emoji {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
   }
 
-  .badge-featured {
+  .pill-badge {
     background: rgba(236, 72, 153, 0.2);
-    color: var(--primary);
-    border: 1px solid var(--primary);
-    padding: 2px 8px;
+    color: var(--accent-pink);
+    border: 1px solid var(--accent-pink);
+    padding: 2px 10px;
     border-radius: 999px;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 800;
+    text-transform: uppercase;
   }
 
-  .hero-title {
-    font-size: clamp(1.1rem, 3.8vw, 2rem);
+  .hero-heading {
+    font-size: clamp(1.2rem, 4.5vw, 2.2rem);
     font-weight: 900;
     color: #ffffff;
+    line-height: 1.2;
   }
 
-  .btn-play-hero {
-    display: flex;
+  .hero-subtext {
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+
+  .btn-hero-play {
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: var(--primary-gradient);
-    color: #fff;
+    gap: 8px;
+    background: var(--accent-gradient);
+    color: #ffffff;
     border: none;
-    padding: 9px 22px;
-    font-size: 0.9rem;
+    padding: 10px 26px;
+    font-size: 0.95rem;
     font-weight: 900;
     border-radius: 999px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.45);
     transition: transform 0.15s ease;
   }
 
-  .btn-play-hero:hover {
+  .btn-hero-play:hover {
     transform: scale(1.05);
   }
 
-  .game-iframe {
+  .hero-iframe {
     width: 100%;
     height: 100%;
     border: none;
   }
 
-  .fullscreen-wrapper {
+  .hero-controls {
     display: flex;
     justify-content: flex-end;
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
-  .btn-fullscreen {
+  .btn-control {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
     font-size: 0.75rem;
-    padding: 5px 10px;
+    font-weight: 800;
+    padding: 6px 12px;
     border-radius: var(--radius-sm);
     cursor: pointer;
   }
 
-  /* --- Dynamic Games Grid --- */
-  .games-section {
-    margin-top: 24px;
+  /* Games Catalog Grid */
+  .catalog-section {
+    margin-top: 32px;
   }
 
-  .section-header {
+  .section-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
-  .section-title {
+  .section-title-group {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 1.1rem;
+    gap: 8px;
+  }
+
+  .section-heading {
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
     font-weight: 900;
   }
 
-  .count-badge {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--primary);
+  .badge-counter {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--accent-pink);
     font-size: 0.75rem;
     font-weight: 800;
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 999px;
   }
 
-  .games-grid {
+  .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(130px, 18vw, 180px), 1fr));
-    gap: clamp(8px, 1.8vw, 14px);
+    grid-template-columns: repeat(auto-fill, minmax(clamp(135px, 18vw, 185px), 1fr));
+    gap: clamp(10px, 2vw, 16px);
   }
 
-  .game-card {
+  .card-item {
     position: relative;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(135deg, var(--card-glow), var(--bg-card));
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     overflow: hidden;
     cursor: pointer;
@@ -672,44 +724,47 @@ const games = [
     flex-direction: column;
     justify-content: space-between;
     padding: 8px;
-    content-visibility: auto; /* Browser off-screen speed rendering */
+    content-visibility: auto;
     contain-intrinsic-size: 140px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
   }
 
-  .game-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 18px -4px rgba(0,0,0,0.25);
+  .card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px -4px rgba(0, 0, 0, 0.3);
   }
 
   @media (min-width: 640px) {
-    .game-card.big-card {
+    .card-item.span-2x {
       grid-column: span 2;
       aspect-ratio: 16 / 9;
     }
   }
 
-  .card-badge {
+  .card-tag {
     position: absolute;
     top: 6px;
     left: 6px;
     z-index: 3;
-    background: #000000;
+    background: #000;
     color: #fbbf24;
-    font-size: 0.6rem;
+    font-size: 0.62rem;
     font-weight: 900;
-    padding: 2px 5px;
+    padding: 2px 6px;
     border-radius: 4px;
   }
 
-  .card-center-icon {
-    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  .card-icon-area {
     margin: auto 0;
     text-align: center;
     z-index: 2;
   }
 
-  .hover-video {
+  .card-emoji {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  .card-video-hover {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -717,32 +772,32 @@ const games = [
     object-fit: cover;
     opacity: 0;
     z-index: 1;
-    transition: opacity 0.2s ease;
     pointer-events: none;
+    transition: opacity 0.25s ease;
   }
 
-  .game-card:hover .hover-video {
+  .card-item:hover .card-video-hover {
     opacity: 1;
   }
 
-  .card-bottom-info {
+  .card-meta {
     position: relative;
     z-index: 2;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(11, 15, 25, 0.7);
-    backdrop-filter: blur(4px);
-    padding: 5px 8px;
+    background: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(6px);
+    padding: 6px 8px;
     border-radius: var(--radius-sm);
-    gap: 4px;
+    gap: 6px;
   }
 
-  .card-text-box {
+  .card-info {
     overflow: hidden;
   }
 
-  .card-title {
+  .card-name {
     display: block;
     font-size: 0.75rem;
     font-weight: 800;
@@ -750,113 +805,116 @@ const games = [
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 80px;
+    max-width: 85px;
   }
 
   @media (min-width: 640px) {
-    .card-title {
-      max-width: 140px;
+    .card-name {
+      max-width: 150px;
     }
   }
 
-  .card-category {
+  .card-genre {
     display: block;
-    font-size: 0.6rem;
+    font-size: 0.62rem;
     color: #94a3b8;
   }
 
-  .btn-card-play {
-    background: var(--primary);
+  .btn-play-sm {
+    background: var(--accent-pink);
     color: #ffffff;
-    font-size: 0.6rem;
+    border: none;
+    font-size: 0.62rem;
     font-weight: 900;
-    padding: 2px 6px;
+    padding: 3px 8px;
     border-radius: 4px;
-  }
-
-  /* --- Explore Wrapper --- */
-  .explore-wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 24px 0;
-  }
-
-  .btn-explore {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    font-weight: 800;
-    font-size: 0.85rem;
-    padding: 10px 20px;
-    border-radius: 999px;
     cursor: pointer;
   }
 
-  /* --- Footer --- */
+  /* Explore Action */
+  .explore-action-box {
+    display: flex;
+    justify-content: center;
+    margin: 36px 0;
+  }
+
+  .btn-explore-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-weight: 900;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Footer */
   .site-footer {
-    border-top: 1px solid var(--border);
-    margin-top: 30px;
-    padding: 24px 0 16px;
-    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    margin-top: 40px;
+    padding: 30px 0 20px;
+    background: var(--bg-surface);
   }
 
-  .footer-card {
+  .partners-block {
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
-  .footer-card h3 {
+  .partners-title {
     font-size: 0.75rem;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
-    margin-bottom: 10px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
   }
 
-  .backlinks {
+  .partners-nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .backlinks a {
-    color: var(--primary);
-    font-size: 0.75rem;
+  .partners-nav a {
+    color: var(--accent-pink);
+    font-size: 0.8rem;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 800;
   }
 
-  .footer-bottom {
+  .copyright-block {
     text-align: center;
-    font-size: 0.7rem;
-    color: var(--text-muted);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
   }
 
-  /* --- Floating Button --- */
-  .btn-back-to-game {
+  /* Floating Button */
+  .btn-floating {
     position: fixed;
-    bottom: 18px;
-    right: 18px;
+    bottom: 20px;
+    right: 20px;
     z-index: 45;
-    background: var(--primary);
+    background: var(--accent-pink);
     color: #ffffff;
     border: none;
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 12px;
+    padding: 8px 14px;
     border-radius: 999px;
     font-size: 0.75rem;
-    font-weight: 800;
+    font-weight: 900;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease, opacity 0.25s ease;
   }
 
-  .hidden-floating {
+  .hidden-float {
     transform: translateY(70px);
     opacity: 0;
     pointer-events: none;
