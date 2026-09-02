@@ -1,0 +1,584 @@
+---
+// ================= 1. JSON DATA IMPORT =================
+import gamesData from '../data/games.json';
+
+// Greenish / Forest / Mint / Neon Pure CSS Card Themes
+const cardStyles: Record<number, { bg: string; icon: string }> = {
+  1: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(6,182,212,0.2), #06120E)', icon: '🐸' },
+  2: { bg: 'linear-gradient(135deg, rgba(34,197,94,0.35), rgba(16,185,129,0.2), #06120E)', icon: '🍃' },
+  3: { bg: 'linear-gradient(135deg, rgba(132,204,22,0.35), rgba(234,179,8,0.2), #06120E)', icon: '🦖' },
+  4: { bg: 'linear-gradient(135deg, rgba(20,184,166,0.35), rgba(6,182,212,0.2), #06120E)', icon: '🎮' },
+  5: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(110,231,183,0.25), #06120E)', icon: '🍀' },
+  6: { bg: 'linear-gradient(135deg, rgba(5,150,105,0.35), rgba(16,185,129,0.2), #06120E)', icon: '🏃‍♂️' },
+  7: { bg: 'linear-gradient(135deg, rgba(34,197,94,0.35), rgba(245,158,11,0.2), #06120E)', icon: '🏎️' },
+  8: { bg: 'linear-gradient(135deg, rgba(234,179,8,0.35), rgba(132,204,22,0.2), #06120E)', icon: '⭐' },
+  9: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(20,184,166,0.2), #06120E)', icon: '🥑' },
+  10: { bg: 'linear-gradient(135deg, rgba(132,204,22,0.35), rgba(34,197,94,0.2), #06120E)', icon: '🌲' },
+  11: { bg: 'linear-gradient(135deg, rgba(20,184,166,0.35), rgba(16,185,129,0.2), #06120E)', icon: '👗' },
+  12: { bg: 'linear-gradient(135deg, rgba(34,197,94,0.35), rgba(6,182,212,0.2), #06120E)', icon: '⚔️' },
+  13: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.4), rgba(34,197,94,0.3), #06120E)', icon: '🐢' },
+  14: { bg: 'linear-gradient(135deg, rgba(6,182,212,0.4), rgba(20,184,166,0.3), #06120E)', icon: '🥝' },
+  15: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(59,130,246,0.2), #06120E)', icon: '🤖' },
+  16: { bg: 'linear-gradient(135deg, rgba(20,184,166,0.35), rgba(16,185,129,0.2), #06120E)', icon: '🫧' },
+  17: { bg: 'linear-gradient(135deg, rgba(132,204,22,0.35), rgba(245,158,11,0.2), #06120E)', icon: '🍏' },
+  18: { bg: 'linear-gradient(135deg, rgba(34,197,94,0.35), rgba(20,184,166,0.2), #06120E)', icon: '🧩' },
+  19: { bg: 'linear-gradient(135deg, rgba(245,158,11,0.35), rgba(132,204,22,0.2), #06120E)', icon: '🐹' },
+  20: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(6,182,212,0.2), #06120E)', icon: '🌿' },
+  21: { bg: 'linear-gradient(135deg, rgba(34,197,94,0.35), rgba(239,68,68,0.2), #06120E)', icon: '🐼' },
+  22: { bg: 'linear-gradient(135deg, rgba(20,184,166,0.35), rgba(59,130,246,0.2), #06120E)', icon: '🪐' },
+  23: { bg: 'linear-gradient(135deg, rgba(110,231,183,0.35), rgba(16,185,129,0.2), #06120E)', icon: '🦄' },
+  24: { bg: 'linear-gradient(135deg, rgba(132,204,22,0.35), rgba(34,197,94,0.2), #06120E)', icon: '👾' },
+  25: { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(20,184,166,0.2), #06120E)', icon: '🍵' },
+  26: { bg: 'linear-gradient(135deg, rgba(34,197,94,0.35), rgba(245,158,11,0.2), #06120E)', icon: '🐾' }
+};
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Froggy Jump Quest - Cute Green Adventure Games</title>
+  <meta name="description" content="Play Froggy Jump Quest and explore the cutest green forest arcade games for free in your browser!" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ubg2028.github.io/froggy-jump" />
+  <meta name="theme-color" content="#06120E" />
+
+  <!-- Google Nunito Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Instant Dark Mode Script -->
+  <script is:inline>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- ================= SIDEBAR MENU ================= -->
+  <div id="menuOverlay" class="menu-overlay hidden"></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <div class="brand">
+          <span class="emoji-logo">🐸</span>
+          <span class="brand-name">FroggyPlay</span>
+        </div>
+        <button id="closeMenuBtn" aria-label="Close Menu" class="icon-btn">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="/" class="nav-item">🌸 Pink Kawaii Hub</a>
+        <a href="/froggy-jump" class="nav-item active">🍀 Froggy Forest</a>
+        <a href="#more-games" class="nav-item">🎮 Arcade & Action</a>
+        <a href="#more-games" class="nav-item">🧩 Cute Puzzle</a>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <p>© 2026 FroggyPlay Zone</p>
+    </div>
+  </aside>
+
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="top-navbar">
+    <div class="container nav-content">
+      <div class="nav-left">
+        <button id="openMenuBtn" aria-label="Open Menu" class="icon-btn">
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        <a href="/froggy-jump" class="site-logo">
+          <span>🐸</span> FroggyPlay
+        </a>
+      </div>
+
+      <!-- Theme Switcher -->
+      <button id="themeToggleBtn" aria-label="Toggle Theme" class="theme-btn">
+        <svg id="moonIcon" class="hidden" width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        <span id="themeText">Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= FEATURED GAME SECTION (GREEN NEON HERO) ================= -->
+  <main class="container main-content">
+    <section class="featured-section">
+      <div id="gameScreenContainer" class="game-screen-box">
+        <div class="aspect-video-box">
+          
+          <!-- PLAY NOW OVERLAY (PURE GREEN CSS HERO) -->
+          <div id="gameCoverOverlay" class="hero-cover">
+            <div class="hero-glow-blob1"></div>
+            <div class="hero-glow-blob2"></div>
+            
+            <div class="hero-content">
+              <div class="hero-icon-box">🐸</div>
+              <span class="badge-featured">🍀 Featured Quest</span>
+              <h1 class="hero-title">Froggy Forest Jump</h1>
+              <button id="playGameBtn" class="btn-play-hero">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                PLAY NOW
+              </button>
+            </div>
+          </div>
+
+          <!-- IFRAME -->
+          <iframe 
+            id="gameIframe"
+            class="game-iframe hidden"
+            data-src="https://geometrydashlite.io/"
+            title="Froggy Forest Jump Game"
+            allow="fullscreen; autoplay; gamepad"
+            loading="lazy">
+          </iframe>
+
+        </div>
+      </div>
+
+      <!-- Fullscreen Button -->
+      <div class="fullscreen-wrapper">
+        <button id="fullscreenBtn" class="btn-fullscreen">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+          Full Screen Mode
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= MORE GAMES SECTION ================= -->
+    <section id="more-games" class="games-section">
+      <div class="section-header">
+        <div class="section-title">
+          <span>🌿</span>
+          <h2>Forest & Arcade Games</h2>
+        </div>
+        <span class="count-badge">{gamesData.length} Games</span>
+      </div>
+
+      <!-- Responsive Dynamic Grid -->
+      <div class="games-grid">
+        {gamesData.map((game) => {
+          const style = cardStyles[game.id] || { bg: 'linear-gradient(135deg, rgba(16,185,129,0.35), rgba(6,182,212,0.2), #06120E)', icon: '🍀' };
+          
+          return game.isBig ? (
+            <div class="game-card big-card" style={`background: ${style.bg};`}>
+              <span class="card-badge">{game.badge}</span>
+              <div class="card-center-icon big-icon">{style.icon}</div>
+              <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
+              
+              <div class="card-bottom-info">
+                <div>
+                  <span class="card-title-big">{game.title}</span>
+                  <span class="card-category">{game.category}</span>
+                </div>
+                <span class="btn-card-play">PLAY</span>
+              </div>
+            </div>
+          ) : (
+            <div class="game-card small-card" style={`background: ${style.bg};`}>
+              <div class="card-center-icon small-icon">{style.icon}</div>
+              <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
+              
+              <div class="card-bottom-info compact">
+                <span class="card-title-small">{game.title}</span>
+                <span class="btn-card-play-sm">PLAY</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Explore All Games Button -->
+      <div class="explore-wrapper">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-explore">
+          <span>🍀</span> Explore All Forest Games
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-card">
+        <h3>OUR PARTNER NETWORKS & BACKLINKS</h3>
+        <div class="backlinks">
+          <a href="https://example.com/crazy-games" target="_blank" rel="noopener dofollow">CrazyGames Portal</a>
+          <a href="https://example.com/poki-clone" target="_blank" rel="noopener dofollow">Poki Free Games</a>
+          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener dofollow">HTML5 Game Hub</a>
+          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener dofollow">Unblocked Games 76</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>🐸 FroggyPlay © 2026. Ultra-Fast Green Gaming Hub.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING BACK TO GAME BUTTON ================= -->
+  <button id="backToGameBtn" aria-label="Back to Game" class="btn-back-to-game hidden-floating">
+    <svg class="bounce-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+    <span>Back to Game</span>
+  </button>
+
+</body>
+</html>
+
+<!-- ================= 100% PURE GREENISH CSS ================= -->
+<style is:global>
+  :root {
+    --primary-green: #10B981;
+    --hover-green: #059669;
+    --neon-green: #22C55E;
+    --mint-green: #6EE7B7;
+    --bg-color: #F0FDF4;
+    --text-color: #064E3B;
+    --card-bg: #FFFFFF;
+    --border-color: #D1FAE5;
+    --nav-bg: rgba(255, 255, 255, 0.95);
+  }
+
+  html.dark {
+    --primary-green: #10B981;
+    --hover-green: #059669;
+    --neon-green: #22C55E;
+    --mint-green: #6EE7B7;
+    --bg-color: #06120E;
+    --text-color: #ECFDF5;
+    --card-bg: #0B1E17;
+    --border-color: #163B2D;
+    --nav-bg: rgba(11, 30, 23, 0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.2s, color 0.2s;
+    overflow-x: hidden;
+  }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+  .hidden { display: none !important; }
+
+  /* Navbar */
+  .top-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(8px);
+    height: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+  .nav-left { display: flex; align-items: center; gap: 0.75rem; }
+
+  .site-logo {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 900;
+    background: linear-gradient(to right, var(--neon-green), var(--primary-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .icon-btn {
+    background: #dcfce7;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  html.dark .icon-btn { background: #0e2920; color: #a7f3d0; }
+
+  .theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 0.85rem;
+    background: #dcfce7;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  html.dark .theme-btn { background: #0e2920; color: #facc15; }
+
+  /* Sidebar */
+  .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 40; }
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; max-width: 80vw; height: 100%;
+    background: var(--card-bg); border-right: 1px solid var(--border-color);
+    z-index: 50; transform: translateX(-100%); transition: transform 0.3s ease-out;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-header { padding: 1.2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); }
+  .brand { display: flex; align-items: center; gap: 0.5rem; }
+  .emoji-logo { font-size: 1.5rem; }
+  .brand-name { font-weight: 900; color: var(--primary-green); font-size: 1.2rem; }
+  .sidebar-nav { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .nav-item { text-decoration: none; padding: 0.75rem 1rem; border-radius: 0.85rem; color: var(--text-color); font-weight: 700; font-size: 0.9rem; }
+  .nav-item.active { background: rgba(16,185,129,0.15); color: var(--neon-green); }
+  .nav-item:hover { background: rgba(16,185,129,0.08); }
+  .sidebar-footer { padding: 1rem; text-align: center; border-top: 1px solid var(--border-color); font-size: 0.75rem; opacity: 0.6; }
+
+  /* Hero Section */
+  .main-content { padding: 1.5rem 1rem; }
+  .featured-section { display: flex; flex-direction: column; align-items: center; }
+
+  .game-screen-box {
+    width: 100%; max-width: 800px; background: #06120E;
+    border-radius: 1.5rem; overflow: hidden;
+    border: 3px solid var(--border-color);
+    box-shadow: 0 20px 45px rgba(16,185,129,0.15);
+    position: relative;
+  }
+
+  .aspect-video-box { position: relative; width: 100%; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; }
+
+  .hero-cover {
+    position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #092119 0%, #06120E 50%, #0d2e23 100%);
+    cursor: pointer; overflow: hidden;
+  }
+
+  .hero-glow-blob1 { position: absolute; top: -20%; left: -10%; width: 250px; height: 250px; background: rgba(16,185,129,0.3); border-radius: 50%; filter: blur(50px); }
+  .hero-glow-blob2 { position: absolute; bottom: -20%; right: -10%; width: 250px; height: 250px; background: rgba(34,197,94,0.3); border-radius: 50%; filter: blur(50px); }
+
+  .hero-content { position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem; }
+  .hero-icon-box {
+    width: 50px; height: 50px; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 1rem;
+    display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  .badge-featured { background: var(--primary-green); color: white; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; padding: 0.25rem 0.75rem; border-radius: 999px; }
+  .hero-title { color: #ffffff; font-size: clamp(1.2rem, 4vw, 2.2rem); font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+  .btn-play-hero {
+    margin-top: 0.5rem; display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.8rem; background: linear-gradient(to right, var(--neon-green), var(--primary-green));
+    color: #ffffff; font-weight: 900; font-size: 1rem; border: none; border-radius: 1rem;
+    cursor: pointer; box-shadow: 0 10px 25px rgba(16,185,129,0.4); transition: transform 0.2s;
+  }
+  .btn-play-hero:hover { transform: scale(1.05); }
+
+  .game-iframe { width: 100%; height: 100%; border: none; }
+  .fullscreen-wrapper { margin-top: 0.75rem; }
+  .btn-fullscreen {
+    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.2rem;
+    background: linear-gradient(to right, var(--primary-green), #059669);
+    color: white; font-weight: 800; font-size: 0.8rem; border: none; border-radius: 0.85rem; cursor: pointer;
+  }
+
+  /* Games Grid */
+  .games-section { margin-top: 2.5rem; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .section-title { display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; font-weight: 900; }
+  .count-badge { font-size: 0.75rem; font-weight: 800; background: var(--card-bg); border: 1px solid var(--border-color); padding: 0.25rem 0.75rem; border-radius: 999px; }
+
+  .games-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  @media (min-width: 640px) { .games-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; } }
+  @media (min-width: 1024px) { .games-grid { grid-template-columns: repeat(6, 1fr); } }
+
+  .game-card {
+    position: relative; border-radius: 1rem; overflow: hidden; cursor: pointer;
+    border: 2px solid var(--border-color); transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    background-color: #06120E;
+  }
+  .game-card:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(16,185,129,0.25); border-color: var(--neon-green); }
+
+  .small-card { aspect-ratio: 16 / 11; }
+  .big-card { grid-column: span 2; aspect-ratio: 16 / 9; }
+  @media (min-width: 640px) { .big-card { grid-column: span 3; } }
+  @media (min-width: 1024px) { .big-card { grid-column: span 3; } }
+
+  .card-badge {
+    position: absolute; top: 0.6rem; left: 0.6rem; z-index: 10;
+    background: var(--primary-green); color: white; font-size: 0.65rem; font-weight: 900;
+    padding: 0.2rem 0.55rem; border-radius: 999px;
+  }
+
+  .card-center-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; transition: transform 0.3s; }
+  .big-icon { font-size: 2.75rem; }
+  .game-card:hover .card-center-icon { transform: scale(1.15); }
+
+  .hover-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .game-card:hover .hover-video { opacity: 1; }
+
+  .card-bottom-info {
+    position: absolute; bottom: 0; inset-inline: 0; padding: 0.75rem;
+    background: linear-gradient(to top, rgba(6,18,14,0.95), transparent);
+    display: flex; align-items: center; justify-content: space-between; z-index: 10;
+  }
+  .card-bottom-info.compact { padding: 0.45rem 0.6rem; }
+  .card-title-big { display: block; color: white; font-weight: 900; font-size: 1rem; }
+  .card-category { display: block; color: #a7f3d0; font-size: 0.75rem; }
+  .card-title-small { color: white; font-weight: 800; font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
+
+  .btn-card-play { background: linear-gradient(to right, var(--neon-green), var(--primary-green)); color: white; font-size: 0.75rem; font-weight: 900; padding: 0.35rem 0.75rem; border-radius: 0.6rem; }
+  .btn-card-play-sm { background: var(--primary-green); color: white; font-size: 0.6rem; font-weight: 900; padding: 0.15rem 0.45rem; border-radius: 999px; }
+
+  .explore-wrapper { margin-top: 2rem; text-align: center; }
+  .btn-explore {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.8rem;
+    background: linear-gradient(to right, var(--neon-green), var(--primary-green));
+    color: white; font-weight: 900; font-size: 1rem; border-radius: 999px; border: none; cursor: pointer;
+    box-shadow: 0 10px 25px rgba(16,185,129,0.3);
+  }
+
+  /* Footer */
+  .site-footer { margin-top: 4rem; border-top: 1px solid var(--border-color); background: var(--card-bg); padding: 2rem 0; }
+  .footer-card { background: rgba(0,0,0,0.03); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1rem; margin-bottom: 1.5rem; }
+  html.dark .footer-card { background: rgba(6,18,14,0.6); }
+  .footer-card h3 { font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; opacity: 0.6; margin-bottom: 0.5rem; }
+  .backlinks { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; font-size: 0.85rem; font-weight: 700; }
+  .backlinks a { color: inherit; text-decoration: none; }
+  .backlinks a:hover { color: var(--neon-green); }
+  .footer-bottom { text-align: center; font-size: 0.75rem; opacity: 0.6; }
+
+  /* Floating Back Button */
+  .btn-back-to-game {
+    position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 50;
+    display: flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.2rem;
+    background: linear-gradient(to right, var(--neon-green), var(--primary-green));
+    color: white; font-size: 0.8rem; font-weight: 800; border-radius: 999px;
+    border: 2px solid rgba(255,255,255,0.2); box-shadow: 0 10px 25px rgba(16,185,129,0.4);
+    cursor: pointer; transition: opacity 0.3s, transform 0.3s;
+  }
+  .hidden-floating { opacity: 0; pointer-events: none; transform: translateY(15px); }
+  .bounce-icon { animation: bounce 1s infinite alternate; }
+  @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+</style>
+
+<!-- ================= CLIENT JAVASCRIPT ================= -->
+<script>
+  // Theme Switcher
+  const themeBtn = document.getElementById('themeToggleBtn');
+  const sunIcon = document.getElementById('sunIcon');
+  const moonIcon = document.getElementById('moonIcon');
+  const themeText = document.getElementById('themeText');
+
+  function applyTheme(isDark: boolean) {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+      if (themeText) themeText.textContent = 'Dark Mode';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+      if (themeText) themeText.textContent = 'Light Mode';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  if (localStorage.getItem('theme') === 'light') applyTheme(false);
+  else applyTheme(true);
+
+  themeBtn?.addEventListener('click', () => {
+    applyTheme(!document.documentElement.classList.contains('dark'));
+  });
+
+  // Sidebar Menu
+  const sidebar = document.getElementById('sidebar');
+  const menuOverlay = document.getElementById('menuOverlay');
+  document.getElementById('openMenuBtn')?.addEventListener('click', () => {
+    menuOverlay?.classList.remove('hidden');
+    sidebar?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  const closeMenu = () => {
+    sidebar?.classList.remove('open');
+    menuOverlay?.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+  document.getElementById('closeMenuBtn')?.addEventListener('click', closeMenu);
+  menuOverlay?.addEventListener('click', closeMenu);
+
+  // Iframe Play Now & Fullscreen
+  const cover = document.getElementById('gameCoverOverlay');
+  const iframe = document.getElementById('gameIframe') as HTMLIFrameElement;
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const container = document.getElementById('gameScreenContainer');
+
+  cover?.addEventListener('click', () => {
+    if (iframe && !iframe.src && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.classList.remove('hidden');
+      cover.classList.add('hidden');
+    }
+  });
+
+  fullscreenBtn?.addEventListener('click', () => {
+    if (iframe && !iframe.src && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.classList.remove('hidden');
+      cover?.classList.add('hidden');
+    }
+    if (!document.fullscreenElement) {
+      container?.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  // Smart Video Hover
+  document.querySelectorAll('.game-card').forEach(card => {
+    const video = card.querySelector<HTMLVideoElement>('.hover-video');
+    if (!video) return;
+    card.addEventListener('mouseenter', () => {
+      if (!video.src && video.dataset.src) video.src = video.dataset.src;
+      video.play().catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+
+  // Back to Game Scroll Button
+  const backBtn = document.getElementById('backToGameBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 350) {
+      backBtn?.classList.remove('hidden-floating');
+    } else {
+      backBtn?.classList.add('hidden-floating');
+    }
+  }, { passive: true });
+
+  backBtn?.addEventListener('click', () => {
+    container ? container.scrollIntoView({ behavior: 'smooth', block: 'center' }) : window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
