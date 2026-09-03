@@ -3,184 +3,519 @@
 ---
 
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Crise de la Quarantaine chez l'Homme : Le Guide Ultime</title>
-  <meta name="description" content="Le guide ultime pour traverser l'orage, reprendre le contrôle et réinventer sa vie pendant la crise du milieu de vie." />
-
-  <!-- Google Fonts: Inter & Plus Jakarta Sans pour un look frais & cute -->
+  <meta name="description" content="Le guide ultime pour traverser l'orage, reprendre le contrôle et réinventer sa vie." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            body: ['"Inter"', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              50: '#fff7f2',
-              100: '#ffede4',
-              200: '#ffd8c7',
-              300: '#ffbca1',
-              400: '#ff8f6b',
-              500: '#f9683a', // Pêche vif / Orange néo-moderne
-              600: '#e54d1f',
-            },
-            softslate: {
-              50: '#f8fafc',
-              100: '#f1f5f9',
-              800: '#1e293b',
-              900: '#0f172a',
-            }
-          },
-          boxShadow: {
-            'cute': '0 12px 34px -8px rgba(249, 104, 58, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
-            'cute-hover': '0 20px 40px -10px rgba(249, 104, 58, 0.22), 0 8px 20px -4px rgba(0, 0, 0, 0.06)',
-            'card': '0 4px 20px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.05)',
-          }
-        }
-      }
+  <style is:global>
+    /* RESET & VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-  </script>
-  <style>
+
+    :root {
+      --bg-warm: #FFFDF9;
+      --card-bg: #FFFFFF;
+      --brand-primary: #FF6B4A;
+      --brand-hover: #E85331;
+      --brand-light: #FFF0EB;
+      --brand-border: #FFE2D6;
+      --accent-amber: #FEF3C7;
+      --text-main: #1E293B;
+      --text-body: #475569;
+      --text-muted: #64748B;
+      --border-subtle: #F1F5F9;
+      --shadow-cute: 0 12px 30px -10px rgba(255, 107, 74, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
+      --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+    }
+
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-warm);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    .article-body p {
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 253, 249, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--brand-border);
+      padding: 1rem 1.5rem;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .logo-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand-primary), #FFA07A);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(255, 107, 74, 0.3);
+    }
+    .logo span span {
+      color: var(--brand-primary);
+    }
+    .btn-header {
+      background: var(--text-main);
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    .btn-header:hover {
+      background: var(--brand-primary);
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 1.5rem 2.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #FFFFFF;
+      border: 1px solid var(--brand-border);
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--brand-primary);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-card);
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: #0F172A;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    @media (min-width: 640px) {
+      .hero h1 { font-size: 2.9rem; }
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+
+    /* CONTAINER */
+    .main-content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    /* ARTICLE STYLES */
+    .article-intro {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 2.2rem;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 3rem;
+    }
+    .article-intro p {
       font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
       line-height: 1.8;
+      color: var(--text-body);
+      margin-bottom: 1.2rem;
+    }
+    .article-intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-body);
+      margin-bottom: 1.3rem;
+    }
+    strong {
+      color: #0F172A;
+      font-weight: 600;
+    }
+    em {
+      font-style: italic;
       color: #334155;
     }
-    .article-body strong {
-      color: #0f172a;
+
+    /* HEADINGS */
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin: 3.5rem 0 1.3rem;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
-    .glow-bg {
-      background: radial-gradient(circle at 50% 0%, rgba(255, 188, 161, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+    h3 {
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 2rem 0 0.8rem;
+    }
+    h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brand-primary);
+      margin: 1.5rem 0 0.6rem;
+    }
+
+    /* CARDS & CONTAINERS */
+    .cute-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 1.8rem 0;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s ease;
+    }
+    .cute-card:hover {
+      box-shadow: var(--shadow-cute);
+    }
+
+    /* LISTS */
+    ul {
+      list-style: none;
+      margin: 1.2rem 0 1.5rem;
+      padding-left: 0.2rem;
+    }
+    ul li {
+      position: relative;
+      padding-left: 1.6rem;
+      margin-bottom: 0.8rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.02rem;
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0.2rem;
+      top: -0.1rem;
+      color: var(--brand-primary);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* QUOTES */
+    blockquote, .highlight-box {
+      background: var(--brand-light);
+      border-left: 5px solid var(--brand-primary);
+      padding: 1.4rem 1.6rem;
+      border-radius: 0 16px 16px 0;
+      margin: 1.8rem 0;
+      font-style: italic;
+      color: #1E293B;
+      font-size: 1.02rem;
+      line-height: 1.7;
+    }
+
+    /* PLACEHOLDER BOXES */
+    .placeholder-box {
+      background: #FFF7F2;
+      border: 2px dashed #FFBCA1;
+      border-radius: 16px;
+      padding: 1.4rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .placeholder-box p {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--brand-hover);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ASCII DIAGRAM PRE */
+    pre {
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 18px;
+      padding: 1.5rem;
+      font-size: 0.78rem;
+      overflow-x: auto;
+      line-height: 1.5;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      margin: 1.8rem 0;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    /* TABLE */
+    .table-container {
+      overflow-x: auto;
+      background: #FFFFFF;
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      margin: 2rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th {
+      background: #FFF5F0;
+      padding: 1.1rem 1.2rem;
+      font-weight: 700;
+      color: #0F172A;
+      border-bottom: 1px solid var(--brand-border);
+    }
+    td {
+      padding: 1.1rem 1.2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+      color: var(--text-body);
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover td {
+      background: #FFFAF8;
+    }
+
+    /* FAQ ACCORDION */
+    details {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      margin-bottom: 0.9rem;
+      padding: 1.1rem 1.4rem;
+      box-shadow: var(--shadow-card);
+      transition: all 0.2s ease;
+    }
+    details[open] {
+      border-color: #FFBCA1;
+      box-shadow: var(--shadow-cute);
+    }
+    summary {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #0F172A;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::after {
+      content: "↓";
+      color: var(--brand-primary);
+      font-weight: 800;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    details p {
+      margin-top: 0.9rem;
+      margin-bottom: 0;
+      font-size: 0.98rem;
+    }
+
+    /* COMMENT CTA BOX */
+    .cta-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--brand-border);
+      box-shadow: var(--shadow-cute);
+      text-align: center;
+      margin-top: 3.5rem;
+    }
+    .cta-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.7rem;
+    }
+    .cta-form {
+      max-width: 480px;
+      margin: 1.8rem auto 0;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #CBD5E1;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: #F8FAFC;
+      transition: all 0.2s ease;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--brand-primary);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(255, 107, 74, 0.15);
+    }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--brand-primary), #FFA07A);
+      color: white;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 107, 74, 0.3);
+      transition: transform 0.2s ease;
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      background: #FFFFFF;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
   </style>
 </head>
-<body class="bg-[#FFFDFB] text-slate-800 antialiased min-h-screen selection:bg-brand-200 selection:text-brand-600">
+<body>
 
-  <!-- Header / Navigation Bar Sticky & Minimaliste -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-orange-100/60 transition-all">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2.5 text-slate-900 font-extrabold text-lg tracking-tight group">
-        <span class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-brand-500 to-amber-400 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
-          🌱
-        </span>
-        <span>Cap<span class="text-brand-500">Quarantaine</span></span>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <div class="logo-badge">🌱</div>
+        <span>Cap<span>Quarantaine</span></span>
       </a>
-      <div class="flex items-center gap-3">
-        <span class="hidden sm:inline-flex text-xs font-semibold px-3 py-1 bg-brand-50 text-brand-600 rounded-full border border-brand-200">
-          Guide Ultime • 2500+ Mots
-        </span>
-        <a href="#comments" class="text-xs font-bold px-4 py-2 rounded-xl bg-slate-900 hover:bg-brand-500 text-white transition-all shadow-sm">
-          Partager mon avis ✨
-        </a>
-      </div>
+      <a href="#comments" class="btn-header">Partager mon avis ✨</a>
     </div>
   </header>
 
-  <!-- Hero Section Chaleureux & "Cute UI" -->
-  <div class="relative glow-bg pt-12 pb-10 border-b border-orange-50 overflow-hidden">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-orange-100 shadow-sm text-xs font-semibold text-brand-600 mb-6 animate-pulse">
-        <span>🧭</span> Transition de vie & Psychologie
-      </div>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.2] mb-6">
-        La Crise de la Quarantaine chez l'Homme : Le Guide Ultime pour Traverser l'Orage, Reprendre le Contrôle et Réinventer sa Vie
-      </h1>
-      <div class="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-500 font-medium">
-        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Guide Complet</span>
-        <span>•</span>
-        <span class="flex items-center gap-1">☕ Lecture bienveillante</span>
-        <span>•</span>
-        <span class="flex items-center gap-1">🌿 100% Transparent</span>
-      </div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="pill-badge">
+      <span>🧭</span> Guide Ultime & Psychologie Masculine
+    </div>
+    <h1>La Crise de la Quarantaine chez l'Homme : Le Guide Ultime pour Traverser l'Orage, Reprendre le Contrôle et Réinventer sa Vie</h1>
+    <div class="hero-meta">
+      <span>📘 2500+ Mots</span>
+      <span>•</span>
+      <span>☕ Lecture bienveillante</span>
+      <span>•</span>
+      <span>🌿 Solutions concrètes</span>
     </div>
   </div>
 
-  <!-- Conteneur Principal du Guide -->
-  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-10 article-body">
+  <!-- MAIN ARTICLE -->
+  <main class="main-content">
 
     <!-- INTRO -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-card border border-orange-50/80 mb-10 space-y-4">
-      <p class="text-lg text-slate-700 leading-relaxed font-medium">
-        Vous vous réveillez un matin, vers 42 ou 45 ans.
-      </p>
-      <p class="text-lg text-slate-700 leading-relaxed">
-        Vous vous regardez dans le miroir de la salle de bain. Une pensée glaciale vous traverse l'esprit : <strong>« Il me reste moins de temps à vivre que ce que j'ai déjà vécu. »</strong>
-      </p>
-      <p class="text-lg text-slate-700 leading-relaxed">
-        Un sentiment diffus de panique monte. Une forme d'apathie s'installe.
-      </p>
-      <p class="text-lg text-slate-700 leading-relaxed">
-        Rassurez-vous : vous n'êtes pas fou. Vous traversez simplement ce que le monde moderne appelle <strong>la crise du milieu de vie</strong> (ou <em>mid-life crisis</em>).
-      </p>
-      <p class="text-lg text-slate-700 leading-relaxed">
-        Dans ce guide complet, sans jargon médical soporifique mais avec un réalisme brut, nous allons analyser exactement ce qui vous arrive. Surtout, nous allons voir comment utiliser vos ressources pour traverser cette période et protéger l'équilibre de votre foyer.
-      </p>
+    <div class="article-intro">
+      <p>Vous vous réveillez un matin, vers 42 ou 45 ans.</p>
+      <p>Vous vous regardez dans le miroir de la salle de bain. Une pensée glaciale vous traverse l'esprit : <strong>« Il me reste moins de temps à vivre que ce que j'ai déjà vécu. »</strong></p>
+      <p>Un sentiment diffus de panique monte. Une forme d'apathie s'installe.</p>
+      <p>Rassurez-vous : vous n'êtes pas fou. Vous traversez simplement ce que le monde moderne appelle <strong>la crise du milieu de vie</strong> (ou <em>mid-life crisis</em>).</p>
+      <p>Dans ce guide complet, sans jargon médical soporifique mais avec un réalisme brut, nous allons analyser exactement ce qui vous arrive. Surtout, nous allons voir comment utiliser vos ressources pour traverser cette période et protéger l'équilibre de votre foyer.</p>
     </div>
 
-    <!-- H2 : Qu'est-ce que la crise... -->
-    <section class="mb-14">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">💡</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          Qu'est-ce que la crise de la quarantaine ? (Et pourquoi touche-t-elle principalement les hommes de cette façon ?)
-        </h2>
-      </div>
+    <!-- SECTION 1 -->
+    <section>
+      <h2>💡 Qu'est-ce que la crise de la quarantaine ? (Et pourquoi touche-t-elle principalement les hommes de cette façon ?)</h2>
 
-      <p class="mb-4">
-        Dans les dynamiques familiales traditionnelles, les femmes affrontent souvent des micro-crises continues au quotidien.
-      </p>
-      <p class="mb-4">
-        Leur investissement constant, leur charge mentale et leur sens du sacrifice créent une forme de résilience face aux transitions brutales.
-      </p>
-      <p class="mb-6">
-        Pour les hommes, le choc est souvent différent. Il frappe par vagues violentes, généralement entre <strong>3 ans et 10 à 12 ans</strong>.
-      </p>
-      <p class="mb-6">
-        Ce n'est pas une simple mauvaise passe de deux semaines. C'est une phase charnière où la prise de conscience de la finitude de la vie déclenche un sentiment aigu de perte d'adhérence.
-      </p>
+      <p>Dans les dynamiques familiales traditionnelles, les femmes affrontent souvent des micro-crises continues au quotidien.</p>
+      <p>Leur investissement constant, leur charge mentale et leur sens du sacrifice créent une forme de résilience face aux transitions brutales.</p>
+      <p>Pour les hommes, le choc est souvent différent. Il frappe par vagues violentes, généralement entre <strong>3 ans et 10 à 12 ans</strong>.</p>
+      <p>Ce n'est pas une simple mauvaise passe de deux semaines. C'est une phase charnière où la prise de conscience de la finitude de la vie déclenche un sentiment aigu de perte d'adhérence.</p>
 
-      <!-- Citation Cute -->
-      <div class="my-6 p-6 rounded-2xl bg-gradient-to-r from-brand-50 to-amber-50 border-l-4 border-brand-400 text-slate-800 italic shadow-sm">
+      <div class="highlight-box">
         <strong>Ce que dit la réalité :</strong> Presque tous les hommes passent par là. Ceux qui approchent la quarantaine s'y préparent sans le savoir. Ceux qui sont en plein dedans souffrent souvent en silence. Ceux qui en sont sortis reconnaissent les cicatrices.
       </div>
 
-      <!-- Placeholder Image -->
-      <div class="my-8 rounded-2xl border-2 border-dashed border-brand-200 bg-brand-50/50 p-6 text-center">
-        <span class="text-2xl block mb-2">📊</span>
-        <p class="text-xs font-bold text-brand-600 uppercase tracking-wider">[Insert Screenshot Placeholder: Schéma de la courbe du bonheur en U chez l'homme de 30 à 60 ans]</p>
+      <div class="placeholder-box">
+        <p>[Insert Screenshot Placeholder: Schéma de la courbe du bonheur en U chez l'homme de 30 à 60 ans]</p>
       </div>
     </section>
 
-    <!-- H2 : Les 5 symptômes -->
-    <section class="mb-14">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-lg">⚡</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          Les 5 symptômes révélateurs de la crise du milieu de vie
-        </h2>
-      </div>
+    <!-- SECTION 2 -->
+    <section>
+      <h2>⚡ Les 5 symptômes révélateurs de la crise du milieu de vie</h2>
 
-      <p class="mb-6">
-        Si vous vivez cette transition, vous reconnaîtrez immédiatement ces cinq déclencheurs.
-      </p>
+      <p>Si vous vivez cette transition, vous reconnaîtrez immédiatement ces cinq déclencheurs.</p>
 
-      <!-- Cute Diagram UI -->
-      <div class="p-6 rounded-2xl bg-slate-900 text-white font-mono text-xs overflow-x-auto shadow-cute mb-8">
-        <pre class="leading-relaxed">
+      <pre>
                   +-----------------------------------+
                   |  Les 5 Déclencheurs de la Crise  |
                   +-----------------------------------+
@@ -190,201 +525,96 @@
      v              v               v              v              v
 1. Perte de    2. Pression    3. Stagnation   4. Climat de   5. Rupture
   contrôle        totale     professionnelle   peur latente   physique
-        </pre>
+      </pre>
+
+      <!-- Symptome 1 -->
+      <div class="cute-card">
+        <h3>1. La sensation vertigineuse de perte de contrôle</h3>
+        <p>Autrefois, vos décisions tranchaient les débats. Vos directives étaient claires.</p>
+        <p>Aujourd'hui, vous avez l'impression que la dynamique familiale vous échappe complètement :</p>
+        <ul>
+          <li><strong>Votre épouse a ses propres priorités</strong> : elle est engagée sur sa trajectoire, ses projets, et ne partage plus toujours vos avis par défaut.</li>
+          <li><strong>Vos enfants grandissent</strong> : ils n'obéissent plus au doigt et à l'œil. Ils ont leur caractère, leurs opinions et s'affranchissent de votre autorité.</li>
+          <li><strong>Vos finances semblent se disperser</strong> : les dépenses s'accumulent sans que vous ayez l'impression d'en profiter directement.</li>
+        </ul>
+        <p>Vous n'êtes plus le capitaine tout-puissant du navire ; vous avez l'impression de subir les courants.</p>
       </div>
 
-      <!-- H3 Symptôme 1 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>1.</span> La sensation vertigineuse de perte de contrôle
-        </h3>
-        <p class="mb-4">
-          Autrefois, vos décisions tranchaient les débats. Vos directives étaient claires.
-        </p>
-        <p class="mb-4">
-          Aujourd'hui, vous avez l'impression que la dynamique familiale vous échappe complètement :
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Votre épouse a ses propres priorités</strong> : elle est engagée sur sa trajectoire, ses projets, et ne partage plus toujours vos avis par défaut.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Vos enfants grandissent</strong> : ils n'obéissent plus au doigt et à l'œil. Ils ont leur caractère, leurs opinions et s'affranchissent de votre autorité.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Vos finances semblent se disperser</strong> : les dépenses s'accumulent sans que vous ayez l'impression d'en profiter directement.</span>
-          </li>
+      <!-- Symptome 2 -->
+      <div class="cute-card">
+        <h3>2. Le syndrome de l'homme-orchestre (Trop d'attentes, zéro reconnaissance)</h3>
+        <p>C'est sans doute le point le plus lourd émotionnellement pour un homme dans sa quarantaine ou sa cinquantaine.</p>
+        <p>Tout le monde vous réclame quelque chose, mais personne ne prend le temps de vous demander comment vous allez.</p>
+        <ul>
+          <li><strong>Vos enfants</strong> ont besoin de financement, d'orientation, d'attention.</li>
+          <li><strong>Votre conjointe</strong> a des attentes légitimes et constantes en matière de présence et de logistique domestique.</li>
+          <li><strong>Vos parents vieillissent</strong> : ils rencontrent des problèmes de santé, des complications de succession, des démarches administratives chronophages.</li>
         </ul>
-        <p>
-          Vous n'êtes plus le capitaine tout-puissant du navire ; vous avez l'impression de subir les courants.
-        </p>
-      </div>
+        <p>Et lorsque vous courez chez vos parents pour régler un dossier urgent, des tensions peuvent éclater à la maison : <em>« Pourquoi est-ce toujours toi qui y vas ? Pourquoi pas ton frère ou ta sœur ? »</em></p>
+        <p>Pour couronner le tout, votre manager ou votre client arrive le lundi matin et vous lâche d'un air déçu : <em>« Écoute, je ne suis pas tout à fait satisfait de tes derniers résultats. »</em></p>
+        <p>Dans ces moments-là, vous avez juste envie de répondre :</p>
 
-      <!-- H3 Symptôme 2 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>2.</span> Le syndrome de l'homme-orchestre (Trop d'attentes, zéro reconnaissance)
-        </h3>
-        <p class="mb-4">
-          C'est sans doute le point le plus lourd émotionnellement pour un homme dans sa quarantaine ou sa cinquantaine.
-        </p>
-        <p class="mb-4">
-          Tout le monde vous réclame quelque chose, mais personne ne prend le temps de vous demander comment vous allez.
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Vos enfants</strong> ont besoin de financement, d'orientation, d'attention.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Votre conjointe</strong> a des attentes légitimes et constantes en matière de présence et de logistique domestique.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Vos parents vieillissent</strong> : ils rencontrent des problèmes de santé, des complications de succession, des démarches administratives chronophages.</span>
-          </li>
-        </ul>
-        <p class="mb-4">
-          Et lorsque vous courez chez vos parents pour régler un dossier urgent, des tensions peuvent éclater à la maison : <em>« Pourquoi est-ce toujours toi qui y vas ? Pourquoi pas ton frère ou ta sœur ? »</em>
-        </p>
-        <p class="mb-4">
-          Pour couronner le tout, votre manager ou votre client arrive le lundi matin et vous lâche d'un air déçu : <em>« Écoute, je ne suis pas tout à fait satisfait de tes derniers résultats. »</em>
-        </p>
-        <p class="mb-4">
-          Dans ces moments-là, vous avez juste envie de répondre :
-        </p>
-        <blockquote class="p-4 rounded-xl bg-orange-50 border-l-4 border-brand-500 text-slate-700 italic text-sm mb-4">
+        <blockquote>
           « Mon épouse n'est pas satisfaite de moi. Mes enfants ne sont pas satisfaits de moi. Mes parents ne sont pas satisfaits de moi. Même moi, je ne suis pas satisfait de moi-même. Alors croyez-moi, votre avis est le cadet de mes soucis. »
         </blockquote>
-        <p>
-          Cette absence totale d'applaudissements donne l'impression d'être vidé de son énergie sans jamais recevoir de recharge en retour.
-        </p>
-        <div class="mt-6 rounded-xl border border-dashed border-brand-200 bg-brand-50/40 p-4 text-center">
-          <p class="text-xs font-semibold text-brand-600">[Insert Screenshot Placeholder: Graphique illustrant la saturation de la charge mentale masculine à 45 ans]</p>
+
+        <p>Cette absence totale d'applaudissements donne l'impression d'être vidé de son énergie sans jamais recevoir de recharge en retour.</p>
+
+        <div class="placeholder-box">
+          <p>[Insert Screenshot Placeholder: Graphique illustrant la saturation de la charge mentale masculine à 45 ans]</p>
         </div>
       </div>
 
-      <!-- H3 Symptôme 3 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>3.</span> La stagnation professionnelle : Quand le moteur s'arrête
-        </h3>
-        <p class="mb-4">
-          Tant que vous grimpez les échelons, la crise de la quarantaine est souvent masquée.
-        </p>
-        <p class="mb-4">
-          La croissance, le pouvoir, les primes et l'adrénaline des promotions agissent comme des anesthésiants. Si vous progressez sans accroc, votre crise n'arrivera peut-être qu'à 55 ans au lieu de 42.
-        </p>
-        <p class="mb-4">
-          Mais un jour ou l'autre, <strong>le péage se referme pour tout le monde</strong> :
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>La promotion attendue vous passe sous le nez.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Vous comprenez que vous ne serez jamais le PDG ou que votre boîte stagne.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Les récits professionnels (« je suis très occupé, je pilote d'énormes projets ») ne fonctionnent plus auprès de vos proches.</span>
-          </li>
+      <!-- Symptome 3 -->
+      <div class="cute-card">
+        <h3>3. La stagnation professionnelle : Quand le moteur s'arrête</h3>
+        <p>Tant que vous grimpez les échelons, la crise de la quarantaine est souvent masquée.</p>
+        <p>La croissance, le pouvoir, les primes et l'adrénaline des promotions agissent comme des anesthésiants. Si vous progressez sans accroc, votre crise n'arrivera peut-être qu'à 55 ans au lieu de 42.</p>
+        <p>Mais un jour ou l'autre, <strong>le péage se referme pour tout le monde</strong> :</p>
+        <ul>
+          <li>La promotion attendue vous passe sous le nez.</li>
+          <li>Vous comprenez que vous ne serez jamais le PDG ou que votre boîte stagne.</li>
+          <li>Les récits professionnels (« je suis très occupé, je pilote d'énormes projets ») ne fonctionnent plus auprès de vos proches.</li>
         </ul>
-        <p>
-          Quand le train ralentit, votre entourage vous regarde et dit : <em>« Bon, maintenant que ton agenda est plus calme, occupe-toi enfin des problèmes de la maison. »</em> La confrontation avec le réel devient inévitable.
-        </p>
+        <p>Quand le train ralentit, votre entourage vous regarde et dit : <em>« Bon, maintenant que ton agenda est plus calme, occupe-toi enfin des problèmes de la maison. »</em> La confrontation avec le réel devient inévitable.</p>
       </div>
 
-      <!-- H3 Symptôme 4 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>4.</span> Un climat de peur et d'anxiété latente
-        </h3>
-        <p class="mb-4">
-          Ce n'est pas une simple inquiétude passagère qui dure une semaine. C'est une angoisse de fond, quotidienne, qui s'installe sur plusieurs années.
-        </p>
-        <p class="mb-4">
-          Vous vous retrouvez à ressasser des boucles négatives en boucle :
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><em>« Dans quelle université mon enfant va-t-il atterrir ? Comment vais-je payer ces frais ? »</em></span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><em>« Comment vivrons-nous une fois à la retraite ? Aurons-nous un toit sécurisé ? »</em></span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><em>« Que va devenir la santé de mes parents âgés ? Comment gérer les litiges de patrimoine ? »</em></span>
-          </li>
+      <!-- Symptome 4 -->
+      <div class="cute-card">
+        <h3>4. Un climat de peur et d'anxiété latente</h3>
+        <p>Ce n'est pas une simple inquiétude passagère qui dure une semaine. C'est une angoisse de fond, quotidienne, qui s'installe sur plusieurs années.</p>
+        <p>Vous vous retrouvez à ressasser des boucles négatives en boucle :</p>
+        <ul>
+          <li><em>« Dans quelle université mon enfant va-t-il atterrir ? Comment vais-je payer ces frais ? »</em></li>
+          <li><em>« Comment vivrons-nous une fois à la retraite ? Aurons-nous un toit sécurisé ? »</em></li>
+          <li><em>« Que va devenir la santé de mes parents âgés ? Comment gérer les litiges de patrimoine ? »</em></li>
         </ul>
-        <p>
-          Cette peur sourde s'incruste dans vos journées et pollue vos nuits.
-        </p>
+        <p>Cette peur sourde s'incruste dans vos journées et pollue vos nuits.</p>
       </div>
 
-      <!-- H3 Symptôme 5 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>5.</span> La rupture physique et l'usure corporelle
-        </h3>
-        <p class="mb-4">
-          Votre jeunesse vous quitte officiellement, et la vieillesse commence à se faire une place sans demander la permission.
-        </p>
-        <p class="mb-4">
-          Ce ne sont pas seulement quelques rides :
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Ce sont des réveils avec le dos raide.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Une léthargie constante l'après-midi.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Une irritabilité accrue.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Une pression artérielle qui commence à osciller.</span>
-          </li>
+      <!-- Symptome 5 -->
+      <div class="cute-card">
+        <h3>5. La rupture physique et l'usure corporelle</h3>
+        <p>Votre jeunesse vous quitte officiellement, et la vieillesse commence à se faire une place sans demander la permission.</p>
+        <p>Ce ne sont pas seulement quelques rides :</p>
+        <ul>
+          <li>Ce sont des réveils avec le dos raide.</li>
+          <li>Une léthargie constante l'après-midi.</li>
+          <li>Une irritabilité accrue.</li>
+          <li>Une pression artérielle qui commence à osciller.</li>
         </ul>
-        <p class="mb-4">
-          Vous encaissez tout à l'intérieur, car notre société continue de rabâcher aux hommes l'injonction : <strong>« Sois un homme, tais-toi et avance. »</strong>
-        </p>
-        <p>
-          Comme vous ne pouvez ni pleurer ni partager votre anxiété avec vos amis (de peur de paraître faible), le stress attaque directement vos organes et vos muscles.
-        </p>
+        <p>Vous encaissez tout à l'intérieur, car notre société continue de rabâcher aux hommes l'injonction : <strong>« Sois un homme, tais-toi et avance. »</strong></p>
+        <p>Comme vous ne pouvez ni pleurer ni partager votre anxiété avec vos amis (de peur de paraître faible), le stress attaque directement vos organes et vos muscles.</p>
       </div>
     </section>
 
-    <!-- H2 : Les deux pièges classiques -->
-    <section class="mb-14">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">⚠️</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          Les deux pièges classiques (et inefficaces) de l'homme en crise
-        </h2>
-      </div>
+    <!-- SECTION 3 -->
+    <section>
+      <h2>⚠️ Les deux pièges classiques (et inefficaces) de l'homme en crise</h2>
 
-      <p class="mb-6">
-        Quand ces cinq facteurs se rejoignent, le plaisir de vivre tombe à zéro. Pour combler ce vide émotionnel brutal, beaucoup d'hommes adoptent deux stratégies d'évitement.
-      </p>
+      <p>Quand ces cinq facteurs se rejoignent, le plaisir de vivre tombe à zéro. Pour combler ce vide émotionnel brutal, beaucoup d'hommes adoptent deux stratégies d'évitement.</p>
 
-      <!-- ASCII Table Box -->
-      <div class="p-6 rounded-2xl bg-slate-900 text-white font-mono text-xs overflow-x-auto shadow-cute mb-8">
-        <pre class="leading-relaxed">
+      <pre>
 +-------------------------------------------------------------+
 |               LES COMPORTEMENTS D'ÉVITEMENT                 |
 +------------------------------+------------------------------+
@@ -396,107 +626,53 @@
 | • Soulagement temporaire :   | • Épuisement articulaire et  |
 |   3 à 6 mois au maximum      |   négligence du foyer        |
 +------------------------------+------------------------------+
-        </pre>
-      </div>
+      </pre>
 
-      <!-- H3 Piège 1 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>🏍️</span> Le piège n°1 : Le cliché du motard rebelle
-        </h3>
-        <p class="mb-4">
-          Un jour, l'homme craque : <em>« J'ai travaillé dur toute ma vie, je n'ai rien vécu, il est temps que j'existe. »</em>
-        </p>
-        <p class="mb-4">
-          Il achète une veste en cuir, signe un chèque pour une grosse cylindrée et rejoint un groupe de balades le week-end sur des routes désertes.
-        </p>
-        <p class="mb-4">
-          Pendant 3 à 4 mois, cela fonctionne. Le son du moteur et l'odeur du bitume apportent une poussée de dopamine.
-        </p>
-        <p class="mb-4">
-          Puis la réalité revient au galop :
-        </p>
-        <ul class="space-y-2 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Aller acheter des légumes ou chercher le pain en moto de 300 kg devient ridicule.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Votre conjointe s'agace légitimement de vous voir fuir vos responsabilités familiales.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Les problèmes d'orientation de vos enfants sont toujours posés sur la table quand vous coupez le moteur.</span>
-          </li>
+      <div class="cute-card">
+        <h3>Le piège n°1 : Le cliché du motard rebelle</h3>
+        <p>Un jour, l'homme craque : <em>« J'ai travaillé dur toute ma vie, je n'ai rien vécu, il est temps que j'existe. »</em></p>
+        <p>Il achète une veste en cuir, signe un chèque pour une grosse cylindrée et rejoint un groupe de balades le week-end sur des routes désertes.</p>
+        <p>Pendant 3 à 4 mois, cela fonctionne. Le son du moteur et l'odeur du bitume apportent une poussée de dopamine.</p>
+        <p>Puis la réalité revient au galop :</p>
+        <ul>
+          <li>Aller acheter des légumes ou chercher le pain en moto de 300 kg devient ridicule.</li>
+          <li>Votre conjointe s'agace légitimement de vous voir fuir vos responsabilités familiales.</li>
+          <li>Les problèmes d'orientation de vos enfants sont toujours posés sur la table quand vous coupez le moteur.</li>
         </ul>
       </div>
 
-      <!-- H3 Piège 2 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>🏃</span> Le piège n°2 : L'obsession subite de la performance sportive
-        </h3>
-        <p class="mb-4">
-          À 20 ans, vous couriez à peine pour attraper le bus.
-        </p>
-        <p class="mb-4">
-          Et soudain, à 45 ans, vous décidez de préparer un marathon :
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Réveil à 5h du matin pour courir 15 kilomètres.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Teinture capillaire pour masquer le poivre et sel.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Inscription intensive en salle de musculation pour soulever de la fonte comme un adolescent.</span>
-          </li>
+      <div class="cute-card">
+        <h3>Le piège n°2 : L'obsession subite de la performance sportive</h3>
+        <p>À 20 ans, vous couriez à peine pour attraper le bus.</p>
+        <p>Et soudain, à 45 ans, vous décidez de préparer un marathon :</p>
+        <ul>
+          <li>Réveil à 5h du matin pour courir 15 kilomètres.</li>
+          <li>Teinture capillaire pour masquer le poivre et sel.</li>
+          <li>Inscription intensive en salle de musculation pour soulever de la fonte comme un adolescent.</li>
         </ul>
-        <p class="mb-6">
-          Attention : prendre soin de sa santé est essentiel. Mais s'épuiser physiquement pour fuir l'angoisse psychologique ne règle rien. À cet âge, ces excès de zèle se traduisent le plus souvent par des tendinites, de l'usure articulaire et un éloignement supplémentaire du foyer familial.
-        </p>
+        <p>Attention : prendre soin de sa santé est essentiel. Mais s'épuiser physiquement pour fuir l'angoisse psychologique ne règle rien. À cet âge, ces excès de zèle se traduisent le plus souvent par des tendinites, de l'usure articulaire et un éloignement supplémentaire du foyer familial.</p>
 
-        <div class="rounded-xl border border-dashed border-brand-200 bg-brand-50/40 p-4 text-center">
-          <p class="text-xs font-semibold text-brand-600">[Insert Screenshot Placeholder: Comparatif humoristique : Achat d'une moto versus Investissement familial sécurisé]</p>
+        <div class="placeholder-box">
+          <p>[Insert Screenshot Placeholder: Comparatif humoristique : Achat d'une moto versus Investissement familial sécurisé]</p>
         </div>
       </div>
     </section>
 
-    <!-- H2 : Le plan d'action -->
-    <section class="mb-14">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">🛡️</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          Le plan d'action : Comment gérer la crise avec lucidité
-        </h2>
-      </div>
+    <!-- SECTION 4 -->
+    <section>
+      <h2>🛡️ Le plan d'action : Comment gérer la crise avec lucidité</h2>
 
-      <p class="mb-4">
-        Alors, quelle est la vraie issue ?
-      </p>
-      <p class="mb-4">
-        La solution ne consiste pas à fuir à moto, ni à réciter des mantras de motivation superficiels. La solution repose sur une posture mentale claire et une allocation intelligente de vos ressources.
-      </p>
-      <p class="mb-4">
-        Dans son poème culte <em>« Si… »</em> (If), Rudyard Kipling écrivait ces vers fondateurs :
-      </p>
+      <p>Alors, quelle est la vraie issue ?</p>
+      <p>La solution ne consiste pas à fuir à moto, ni à réciter des mantras de motivation superficiels. La solution repose sur une posture mentale claire et une allocation intelligente de vos ressources.</p>
+      <p>Dans son poème culte <em>« Si… »</em> (If), Rudyard Kipling écrivait ces vers fondateurs :</p>
 
-      <blockquote class="p-5 rounded-2xl bg-amber-50 border-l-4 border-amber-400 text-slate-800 italic text-base mb-6 shadow-sm">
+      <blockquote>
         « Si tu peux garder ton calme quand tous autour de toi perdent le leur et t'en blâment… tu seras un homme, mon fils. »
       </blockquote>
 
-      <p class="mb-6">
-        Pendant cette phase critique, vous devez redevenir cet homme solide qui garde son sang-froid au cœur de la tempête.
-      </p>
+      <p>Pendant cette phase critique, vous devez redevenir cet homme solide qui garde son sang-froid au cœur de la tempête.</p>
 
-      <!-- Plan d'action ASCII cute box -->
-      <div class="p-6 rounded-2xl bg-slate-900 text-white font-mono text-xs overflow-x-auto shadow-cute mb-8">
-        <pre class="leading-relaxed">
+      <pre>
        +----------------------------------------------------+
        |       PLAN D'ACTION : SORTIR DE LA QUARANTAINE      |
        +----------------------------------------------------+
@@ -508,360 +684,204 @@
     • Jouer l'offensive                 • Rassurer sa conjointe
     • Acheter la paix d'esprit          • Décharger la pression scolaire
     • Sécuriser le noyau familial       • Offrir du temps à ses parents
-        </pre>
-      </div>
+      </pre>
 
-      <!-- H3 Étape 1 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>Étape 1 :</span> Utilisez votre argent comme un bouclier émotionnel
-        </h3>
-        <p class="mb-4">
-          Beaucoup de gens débattent sans fin des placements ou des investissements passifs.
-        </p>
-        <p class="mb-4">
-          Mais souvenez-vous d'une vérité fondamentale : <strong>l'argent sert avant tout à éliminer la panique.</strong>
-        </p>
-        <p class="mb-4">
-          Dans les textes traditionnels, la louange à la prospérité rappelle que <em>lorsque les ressources sont là, tout devient possible et l'esprit cesse de trembler.</em>
-        </p>
-        <p class="mb-6">
-          C'est exactement l'enjeu ici.
-        </p>
+      <!-- Étape 1 -->
+      <div class="cute-card">
+        <h3>Étape 1 : Utilisez votre argent comme un bouclier émotionnel</h3>
+        <p>Beaucoup de gens débattent sans fin des placements ou des investissements passifs.</p>
+        <p>Mais souvenez-vous d'une vérité fondamentale : <strong>l'argent sert avant tout à éliminer la panique.</strong></p>
+        <p>Dans les textes traditionnels, la louange à la prospérité rappelle que <em>lorsque les ressources sont là, tout devient possible et l'esprit cesse de trembler.</em></p>
+        <p>C'est exactement l'enjeu ici.</p>
 
-        <!-- H4 Sous-titre -->
-        <h4 class="text-lg font-bold text-brand-600 mb-3">Passez en mode offensif avec vos finances</h4>
-        <p class="mb-4">
-          Ne jouez pas la défense passive en vous recroquevillant sur chaque euro. Jouez l'attaque, avec panache, pour détendre l'atmosphère.
-        </p>
-        <ul class="space-y-2 mb-6 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Ne mettez pas 20 000 euros dans un caprice égoïste</strong> : ne cherchez pas une moto tape-à-l'œil qui créera des rancœurs familiales.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Investissez pour restaurer la joie collective</strong> : améliorez le confort de votre maison, rénovez la cuisine, emmenez votre famille en voyage régulier, offrez des équipements pratiques à vos proches.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Cessez de reporter le bonheur</strong> : vos 40-50 ans représentent la toute dernière fenêtre où vos enfants habitent encore sous votre toit et où vos parents sont encore en vie. Dans dix ans, cette configuration aura disparu à jamais.</span>
-          </li>
+        <h4>Passez en mode offensif avec vos finances</h4>
+        <p>Ne jouez pas la défense passive en vous recroquevillant sur chaque euro. Jouez l'attaque, avec panache, pour détendre l'atmosphère.</p>
+        <ul>
+          <li><strong>Ne mettez pas 20 000 euros dans un caprice égoïste</strong> : ne cherchez pas une moto tape-à-l'œil qui créera des rancœurs familiales.</li>
+          <li><strong>Investissez pour restaurer la joie collective</strong> : améliorez le confort de votre maison, rénovez la cuisine, emmenez votre famille en voyage régulier, offrez des équipements pratiques à vos proches.</li>
+          <li><strong>Cessez de reporter le bonheur</strong> : vos 40-50 ans représentent la toute dernière fenêtre où vos enfants habitent encore sous votre toit et où vos parents sont encore en vie. Dans dix ans, cette configuration aura disparu à jamais.</li>
         </ul>
 
-        <div class="rounded-xl border border-dashed border-brand-200 bg-brand-50/40 p-4 text-center">
-          <p class="text-xs font-semibold text-brand-600">[Insert Screenshot Placeholder: Modèle de budget de crise : Réallocation de l'épargne dormante vers le bien-être domestique]</p>
+        <div class="placeholder-box">
+          <p>[Insert Screenshot Placeholder: Modèle de budget de crise : Réallocation de l'épargne dormante vers le bien-être domestique]</p>
         </div>
       </div>
 
-      <!-- H3 Étape 2 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>Étape 2 :</span> Acceptez sans amertume votre rôle de pourvoyeur
-        </h3>
-        <p class="mb-4">
-          À ce stade de votre vie, une pensée amère peut survenir : <em>« Je ne suis qu'un distributeur de billets. On insère une carte dans ma bouche, l'argent sort, et personne ne me dit merci. »</em>
-        </p>
-        <p class="mb-4">
-          <strong>Acceptez-le pleinement.</strong>
-        </p>
-        <p class="mb-4">
-          Soyez le distributeur de billets le plus fiable, le plus solide et le plus calme qui soit.
-        </p>
-        <p class="mb-4">
-          N'essayez pas de tout thésauriser pour vos 75 ans au détriment de l'harmonie présente :
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Si vos placements réalisés à 25 ou 35 ans sont solides, laissez-les travailler.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Si vos liquidités doivent servir aujourd'hui à financer des études, des soins pour vos aînés ou le confort de votre femme, utilisez-les sans rechigner.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Ce que vous économisez au prix du bien-être de votre famille pendant cette décennie ne pourra jamais être rattrapé plus tard avec des intérêts bancaires.</span>
-          </li>
+      <!-- Étape 2 -->
+      <div class="cute-card">
+        <h3>Étape 2 : Acceptez sans amertume votre rôle de pourvoyeur</h3>
+        <p>À ce stade de votre vie, une pensée amère peut survenir : <em>« Je ne suis qu'un distributeur de billets. On insère une carte dans ma bouche, l'argent sort, et personne ne me dit merci. »</em></p>
+        <p><strong>Acceptez-le pleinement.</strong></p>
+        <p>Soyez le distributeur de billets le plus fiable, le plus solide et le plus calme qui soit.</p>
+        <p>N'essayez pas de tout thésauriser pour vos 75 ans au détriment de l'harmonie présente :</p>
+        <ul>
+          <li>Si vos placements réalisés à 25 ou 35 ans sont solides, laissez-les travailler.</li>
+          <li>Si vos liquidités doivent servir aujourd'hui à financer des études, des soins pour vos aînés ou le confort de votre femme, utilisez-les sans rechigner.</li>
+          <li>Ce que vous économisez au prix du bien-être de votre famille pendant cette décennie ne pourra jamais être rattrapé plus tard avec des intérêts bancaires.</li>
         </ul>
       </div>
 
-      <!-- H3 Étape 3 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>Étape 3 :</span> Désamorcez l'anxiété de votre épouse
-        </h3>
-        <p class="mb-4">
-          C'est la règle d'or de la dynamique domestique : <strong>lorsque votre épouse est apaisée, 90 % du stress de votre maison disparaît instantanément.</strong>
-        </p>
-        <p class="mb-4">
-          Les femmes portent une charge mentale très lourde concernant l'avenir des enfants :
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Leurs notes scolaires.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Les concours et les orientations.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span>Leur insertion sur le marché du travail.</span>
-          </li>
+      <!-- Étape 3 -->
+      <div class="cute-card">
+        <h3>Étape 3 : Désamorcez l'anxiété de votre épouse</h3>
+        <p>C'est la règle d'or de la dynamique domestique : <strong>lorsque votre épouse est apaisée, 90 % du stress de votre maison disparaît instantanément.</strong></p>
+        <p>Les femmes portent une charge mentale très lourde concernant l'avenir des enfants :</p>
+        <ul>
+          <li>Leurs notes scolaires.</li>
+          <li>Les concours et les orientations.</li>
+          <li>Leur insertion sur le marché du travail.</li>
         </ul>
 
-        <h4 class="text-lg font-bold text-brand-600 mb-3">La phrase magique à intégrer</h4>
-        <p class="mb-4">
-          Prenez votre conjointe par la main, regardez-la dans les yeux avec une sérénité totale, et dites-lui :
-        </p>
-        <blockquote class="p-5 rounded-2xl bg-amber-50 border-l-4 border-brand-500 text-slate-800 italic text-base mb-4 shadow-sm">
+        <h4>La phrase magique à intégrer</h4>
+        <p>Prenez votre conjointe par la main, regardez-la dans les yeux avec une sérénité totale, et dites-lui :</p>
+        <blockquote>
           « Ne t'inquiète plus pour les enfants. Je prends la responsabilité totale de leur avenir. Même s'ils ont de mauvaises notes, même si le marché est difficile, j'ai un plan et je m'en occupe. Relaxe-toi. »
         </blockquote>
-        <p class="mb-4">
-          Votre rôle n'est pas de stresser vos adolescents en leur mettant une pression scolaire démesurée à la table du dîner.
-        </p>
-        <p>
-          Votre rôle est d'absorber l'angoisse de votre femme. Si elle sent votre assurance, son niveau de tension va chuter, le foyer va s'adoucir, et vos enfants se détendront d'eux-mêmes.
-        </p>
+        <p>Votre rôle n'est pas de stresser vos adolescents en leur mettant une pression scolaire démesurée à la table du dîner.</p>
+        <p>Votre rôle est d'absorber l'angoisse de votre femme. Si elle sent votre assurance, son niveau de tension va chuter, le foyer va s'adoucir, et vos enfants se détendront d'eux-mêmes.</p>
       </div>
 
-      <!-- H3 Étape 4 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>Étape 4 :</span> Évacuez la pression du « plan parfait » pour vos enfants
-        </h3>
-        <p class="mb-4">
-          Voici une stratégie mentale radicale pour faire chuter votre stress intérieur :
-        </p>
-        <p class="mb-4">
-          <strong>Préparez-vous psychologiquement au pire scénario.</strong>
-        </p>
-        <p class="mb-4">
-          Dites-vous : <em>« Même si mon enfant ne décroche pas un parcours prestigieux, même s'il met des années à trouver sa voie, ce sera à moi de construire des ponts, de lui apprendre un métier ou de l'aider à bâtir son activité. »</em>
-        </p>
-        <p class="mb-4">
-          En acceptant que vous devrez peut-être être son filet de sécurité, vous cessez d'exiger des miracles scolaires immédiats.
-        </p>
-        <p>
-          Vous gagnez trois à cinq ans de recul. Très souvent, les solutions d'orientation ne deviennent claires qu'après 20 ou 22 ans. S'inquiéter quand l'enfant a 14 ans est une perte d'énergie stérile.
-        </p>
+      <!-- Étape 4 -->
+      <div class="cute-card">
+        <h3>Étape 4 : Évacuez la pression du « plan parfait » pour vos enfants</h3>
+        <p>Voici une stratégie mentale radicale pour faire chuter votre stress intérieur :</p>
+        <p><strong>Préparez-vous psychologiquement au pire scénario.</strong></p>
+        <p>Dites-vous : <em>« Même si mon enfant ne décroche pas un parcours prestigieux, même s'il met des années à trouver sa voie, ce sera à moi de construire des ponts, de lui apprendre un métier ou de l'aider à bâtir son activité. »</em></p>
+        <p>En acceptant que vous devrez peut-être être son filet de sécurité, vous cessez d'exiger des miracles scolaires immédiats.</p>
+        <p>Vous gagnez trois à cinq ans de recul. Très souvent, les solutions d'orientation ne deviennent claires qu'après 20 ou 22 ans. S'inquiéter quand l'enfant a 14 ans est une perte d'énergie stérile.</p>
       </div>
 
-      <!-- H3 Étape 5 -->
-      <div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 shadow-card mb-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <span>Étape 5 :</span> Réservez du temps simple et brut pour vos parents
-        </h3>
-        <p class="mb-4">
-          Vos parents âgés ne demandent ni des discours savants, ni des démonstrations de force financière.
-        </p>
-        <p class="mb-4">
-          Ils ont besoin de deux choses simples : <strong>du temps et du respect.</strong>
-        </p>
-        <ul class="space-y-2 mb-4 pl-2">
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Faites des visites directes</strong> : n'attendez pas que votre conjointe vienne avec vous si les relations sont parfois tendues. Allez-y seul.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Partagez des moments simples</strong> : asseyez-vous sur leur canapé, demandez à votre mère de préparer votre plat d'enfance préféré, écoutez leurs anecdotes sur le passé, touchez leurs mains avec gratitude.</span>
-          </li>
-          <li class="flex items-start gap-2 text-sm text-slate-700">
-            <span class="text-brand-500 font-bold mt-0.5">•</span>
-            <span><strong>Soyez présent par téléphone</strong> : un coup de fil de trois minutes chaque jour vaut mieux qu'une visite précipitée une fois par trimestre.</span>
-          </li>
+      <!-- Étape 5 -->
+      <div class="cute-card">
+        <h3>Étape 5 : Réservez du temps simple et brut pour vos parents</h3>
+        <p>Vos parents âgés ne demandent ni des discours savants, ni des démonstrations de force financière.</p>
+        <p>Ils ont besoin de deux choses simples : <strong>du temps et du respect.</strong></p>
+        <ul>
+          <li><strong>Faites des visites directes</strong> : n'attendez pas que votre conjointe vienne avec vous si les relations sont parfois tendues. Allez-y seul.</li>
+          <li><strong>Partagez des moments simples</strong> : asseyez-vous sur leur canapé, demandez à votre mère de préparer votre plat d'enfance préféré, écoutez leurs anecdotes sur le passé, touchez leurs mains avec gratitude.</li>
+          <li><strong>Soyez présent par téléphone</strong> : un coup de fil de trois minutes chaque jour vaut mieux qu'une visite précipitée une fois par trimestre.</li>
         </ul>
-        <p>
-          En leur apportant cette sérénité sans intermédiaire, vous allégez vos tensions familiales et vous honorez vos devoirs avec dignité.
-        </p>
+        <p>En leur apportant cette sérénité sans intermédiaire, vous allégez vos tensions familiales et vous honorez vos devoirs avec dignité.</p>
       </div>
     </section>
 
-    <!-- H2 : Synthèse Table -->
-    <section class="mb-14">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-lg">📋</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          Synthèse : La grille de passage de vos 40 à 50 ans
-        </h2>
-      </div>
+    <!-- SECTION 5 -->
+    <section>
+      <h2>📋 Synthèse : La grille de passage de vos 40 à 50 ans</h2>
 
-      <div class="overflow-x-auto rounded-2xl border border-orange-100 bg-white shadow-card">
-        <table class="w-full text-left border-collapse text-sm">
+      <div class="table-container">
+        <table>
           <thead>
-            <tr class="bg-brand-50 border-b border-orange-100">
-              <th class="p-4 font-bold text-slate-900">Domaine</th>
-              <th class="p-4 font-bold text-rose-600">Réflexe à éviter (Panique)</th>
-              <th class="p-4 font-bold text-emerald-700">Comportement recommandé (Maîtrise)</th>
+            <tr>
+              <th>Domaine</th>
+              <th style="color: #E11D48;">Réflexe à éviter (Panique)</th>
+              <th style="color: #059669;">Comportement recommandé (Maîtrise)</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-orange-50">
-            <tr class="hover:bg-orange-50/30 transition-colors">
-              <td class="p-4 font-bold text-slate-800">Finances</td>
-              <td class="p-4 text-slate-600">Acheter une moto ou des gadgets coûteux en solitaire</td>
-              <td class="p-4 text-slate-700 font-medium">Investir dans le cadre de vie familial et le confort quotidien</td>
+          <tbody>
+            <tr>
+              <td><strong>Finances</strong></td>
+              <td>Acheter une moto ou des gadgets coûteux en solitaire</td>
+              <td><strong>Investir dans le cadre de vie familial et le confort quotidien</strong></td>
             </tr>
-            <tr class="hover:bg-orange-50/30 transition-colors">
-              <td class="p-4 font-bold text-slate-800">Couple</td>
-              <td class="p-4 text-slate-600">Se plaindre du manque de gratitude reçu</td>
-              <td class="p-4 text-slate-700 font-medium">Rassurer sa conjointe sur l'avenir matériel et les enfants</td>
+            <tr>
+              <td><strong>Couple</strong></td>
+              <td>Se plaindre du manque de gratitude reçu</td>
+              <td><strong>Rassurer sa conjointe sur l'avenir matériel et les enfants</strong></td>
             </tr>
-            <tr class="hover:bg-orange-50/30 transition-colors">
-              <td class="p-4 font-bold text-slate-800">Enfants</td>
-              <td class="p-4 text-slate-600">Transmettre son angoisse en exigeant la perfection scolaire</td>
-              <td class="p-4 text-slate-700 font-medium">Être un repère bienveillant sans dramatiser leurs résultats</td>
+            <tr>
+              <td><strong>Enfants</strong></td>
+              <td>Transmettre son angoisse en exigeant la perfection scolaire</td>
+              <td><strong>Être un repère bienveillant sans dramatiser leurs résultats</strong></td>
             </tr>
-            <tr class="hover:bg-orange-50/30 transition-colors">
-              <td class="p-4 font-bold text-slate-800">Parents</td>
-              <td class="p-4 text-slate-600">Créer des querelles d'arbitrage avec sa femme</td>
-              <td class="p-4 text-slate-700 font-medium">Leur accorder du temps direct, régulier et plein de respect</td>
+            <tr>
+              <td><strong>Parents</strong></td>
+              <td>Créer des querelles d'arbitrage avec sa femme</td>
+              <td><strong>Leur accorder du temps direct, régulier et plein de respect</strong></td>
             </tr>
-            <tr class="hover:bg-orange-50/30 transition-colors">
-              <td class="p-4 font-bold text-slate-800">Santé</td>
-              <td class="p-4 text-slate-600">Courir des marathons extrêmes ou tout cacher</td>
-              <td class="p-4 text-slate-700 font-medium">Accepter son âge, soigner sa tension et garder son calme</td>
+            <tr>
+              <td><strong>Santé</strong></td>
+              <td>Courir des marathons extrêmes ou tout cacher</td>
+              <td><strong>Accepter son âge, soigner sa tension et garder son calme</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- H2 : FAQ -->
-    <section class="mb-14">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg">❓</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          Foire Aux Questions (FAQ)
-        </h2>
-      </div>
+    <!-- SECTION 6 -->
+    <section>
+      <h2>❓ Foire Aux Questions (FAQ)</h2>
 
-      <div class="space-y-4">
-        <details class="group bg-white p-5 rounded-2xl border border-slate-100 shadow-card open:ring-2 open:ring-brand-200 transition-all">
-          <summary class="font-bold text-slate-900 cursor-pointer list-none flex justify-between items-center text-base">
-            <span>1. Combien de temps dure réellement cette crise chez l'homme ?</span>
-            <span class="text-brand-500 font-bold group-open:rotate-180 transition-transform">↓</span>
-          </summary>
-          <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-            Elle s'étale généralement sur une période comprise entre 3 ans et 10 à 12 ans. Ce n'est pas un événement ponctuel, mais une transition graduelle entre deux âges de la vie adulte.
-          </p>
-        </details>
+      <details>
+        <summary>1. Combien de temps dure réellement cette crise chez l'homme ?</summary>
+        <p>Elle s'étale généralement sur une période comprise entre 3 ans et 10 à 12 ans. Ce n'est pas un événement ponctuel, mais une transition graduelle entre deux âges de la vie adulte.</p>
+      </details>
 
-        <details class="group bg-white p-5 rounded-2xl border border-slate-100 shadow-card open:ring-2 open:ring-brand-200 transition-all">
-          <summary class="font-bold text-slate-900 cursor-pointer list-none flex justify-between items-center text-base">
-            <span>2. Pourquoi les hommes qui réussissent professionnellement semblent-ils touchés plus tard ?</span>
-            <span class="text-brand-500 font-bold group-open:rotate-180 transition-transform">↓</span>
-          </summary>
-          <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-            Parce que la croissance de carrière, les augmentations de revenus et les promotions occupent l'esprit et offrent une valorisation constante. Mais dès que la courbe stagne (souvent vers 50-55 ans), la confrontation avec le vide survient immanquablement.
-          </p>
-        </details>
+      <details>
+        <summary>2. Pourquoi les hommes qui réussissent professionnellement semblent-ils touchés plus tard ?</summary>
+        <p>Parce que la croissance de carrière, les augmentations de revenus et les promotions occupent l'esprit et offrent une valorisation constante. Mais dès que la courbe stagne (souvent vers 50-55 ans), la confrontation avec le vide survient immanquablement.</p>
+      </details>
 
-        <details class="group bg-white p-5 rounded-2xl border border-slate-100 shadow-card open:ring-2 open:ring-brand-200 transition-all">
-          <summary class="font-bold text-slate-900 cursor-pointer list-none flex justify-between items-center text-base">
-            <span>3. Faut-il complètement renoncer à se faire plaisir pour tout donner à sa famille ?</span>
-            <span class="text-brand-500 font-bold group-open:rotate-180 transition-transform">↓</span>
-          </summary>
-          <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-            Non. Porter une veste qui vous plaît ou cultiver une passion est sain. En revanche, dilapider des dizaines de milliers d'euros dans des emblèmes de jeunesse (grosses motos, escapades solitaires) pour fuir votre maison ne résout rien et détériore vos liens familiaux.
-          </p>
-        </details>
+      <details>
+        <summary>3. Faut-il complètement renoncer à se faire plaisir pour tout donner à sa famille ?</summary>
+        <p>Non. Porter une veste qui vous plaît ou cultiver une passion est sain. En revanche, dilapider des dizaines de milliers d'euros dans des emblèmes de jeunesse (grosses motos, escapades solitaires) pour fuir votre maison ne résout rien et détériore vos liens familiaux.</p>
+      </details>
 
-        <details class="group bg-white p-5 rounded-2xl border border-slate-100 shadow-card open:ring-2 open:ring-brand-200 transition-all">
-          <summary class="font-bold text-slate-900 cursor-pointer list-none flex justify-between items-center text-base">
-            <span>4. Que faire si ma conjointe me reproche de passer trop de temps chez mes parents ?</span>
-            <span class="text-brand-500 font-bold group-open:rotate-180 transition-transform">↓</span>
-          </summary>
-          <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-            Évitez les disputes frontales. Allez voir vos parents seul, sans lui imposer ces visites ni lui reprocher son absence. Assurez-vous que les besoins de votre foyer sont couverts avant de vous consacrer aux démarches de vos aînés.
-          </p>
-        </details>
+      <details>
+        <summary>4. Que faire si ma conjointe me reproche de passer trop de temps chez mes parents ?</summary>
+        <p>Évitez les disputes frontales. Allez voir vos parents seul, sans lui imposer ces visites ni lui reprocher son absence. Assurez-vous que les besoins de votre foyer sont couverts avant de vous consacrer aux démarches de vos aînés.</p>
+      </details>
 
-        <details class="group bg-white p-5 rounded-2xl border border-slate-100 shadow-card open:ring-2 open:ring-brand-200 transition-all">
-          <summary class="font-bold text-slate-900 cursor-pointer list-none flex justify-between items-center text-base">
-            <span>5. Est-il dangereux de reprendre le sport de manière trop intense à 45 ans ?</span>
-            <span class="text-brand-500 font-bold group-open:rotate-180 transition-transform">↓</span>
-          </summary>
-          <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-            Oui. Votre corps ne récupère plus comme à 20 ans. Le sport doit servir à préserver votre souffle, votre cœur et votre mobilité, non à prouver une performance sportive aux dépens de vos articulations.
-          </p>
-        </details>
+      <details>
+        <summary>5. Est-il dangereux de reprendre le sport de manière trop intense à 45 ans ?</summary>
+        <p>Oui. Votre corps ne récupère plus comme à 20 ans. Le sport doit servir à préserver votre souffle, votre cœur et votre mobilité, non à prouver une performance sportive aux dépens de vos articulations.</p>
+      </details>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section>
+      <h2>☀️ Conclusion : Restez droit au poste, le calme reviendra</h2>
+
+      <div class="article-intro" style="margin-top: 1.5rem; background: linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 100%);">
+        <p>La crise de la quarantaine n'est pas une malédiction : c'est l'examen final de votre maturité d'homme.</p>
+        <p>Ce n'est pas le moment de fuir sur une départementale au guidon d'une moto à crédit. Ce n'est pas le moment d'exiger des applaudissements ou des flatteries de la part de ceux qui dépendent de votre solidité.</p>
+        <p style="font-size: 1.25rem; font-weight: 800; color: #0F172A;">C'est l'heure de tenir votre position.</p>
+        <p>Acceptez vos cheveux gris. Souriez quand la pression monte. Rallumez la sérénité chez votre épouse, protégez vos enfants sans les étouffer, et faites de votre argent un bouclier pour vos proches.</p>
+        <p><strong>La façon dont vous traversez cette décennie entre 40 et 50 ans définira la paix et le respect dont vous profiterez pour tout le reste de votre vie.</strong></p>
       </div>
     </section>
 
-    <!-- H2 : Conclusion -->
-    <section class="mb-14">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">☀️</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          Conclusion : Restez droit au poste, le calme reviendra
-        </h2>
-      </div>
+    <div style="text-align: center; font-size: 1.5rem; color: #FFBCA1; margin: 2rem 0;">***</div>
 
-      <div class="bg-gradient-to-b from-white to-orange-50/40 rounded-3xl p-6 sm:p-8 border border-orange-100 shadow-card space-y-4">
-        <p>
-          La crise de la quarantaine n'est pas une malédiction : c'est l'examen final de votre maturité d'homme.
-        </p>
-        <p>
-          Ce n'est pas le moment de fuir sur une départementale au guidon d'une moto à crédit. Ce n'est pas le moment d'exiger des applaudissements ou des flatteries de la part de ceux qui dépendent de votre solidité.
-        </p>
-        <p class="text-lg font-semibold text-slate-900">
-          C'est l'heure de tenir votre position.
-        </p>
-        <p>
-          Acceptez vos cheveux gris. Souriez quand la pression monte. Rallumez la sérénité chez votre épouse, protégez vos enfants sans les étouffer, et faites de votre argent un bouclier pour vos proches.
-        </p>
-        <p class="font-medium text-slate-800">
-          La façon dont vous traversez cette décennie entre 40 et 50 ans définira la paix et le respect dont vous profiterez pour tout le reste de votre vie.
-        </p>
-      </div>
-    </section>
+    <!-- CTA / COMMENTAIRES -->
+    <section class="cta-card" id="comments">
+      <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">💬</div>
+      <h3>Et vous, où en êtes-vous dans cette transition ?</h3>
+      <p>Ressentez-vous cette pression constante du pourvoyeur ou cette perte d'emprise sur votre quotidien ? Quelles stratégies avez-vous mises en place pour préserver le dialogue dans votre couple ?</p>
+      <p style="font-size: 0.9rem; font-weight: 700; color: var(--brand-primary); margin-top: 0.8rem;">
+        Partagez votre expérience dans les commentaires ci-dessous : vos réflexions peuvent aider d'autres hommes à garder le cap aujourd'hui.
+      </p>
 
-    <!-- Séparateur Cute -->
-    <div class="text-center text-2xl text-brand-300 mb-8">***</div>
-
-    <!-- CTA & Zone de commentaires -->
-    <section id="comments" class="bg-white rounded-3xl p-6 sm:p-9 border border-orange-100 shadow-cute">
-      <div class="max-w-xl mx-auto text-center mb-8">
-        <span class="text-3xl mb-2 block">💬</span>
-        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2">
-          Et vous, où en êtes-vous dans cette transition ?
-        </h3>
-        <p class="text-slate-600 text-sm mb-4">
-          Ressentez-vous cette pression constante du pourvoyeur ou cette perte d'emprise sur votre quotidien ? Quelles stratégies avez-vous mises en place pour préserver le dialogue dans votre couple ?
-        </p>
-        <p class="text-xs font-bold text-brand-600 tracking-wide">
-          Partagez votre expérience dans les commentaires ci-dessous : vos réflexions peuvent aider d'autres hommes à garder le cap aujourd'hui.
-        </p>
-      </div>
-
-      <!-- Formulaire Cute & Fonctionnel -->
-      <form class="space-y-4 max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Merci pour votre partage précieux !');">
-        <div>
-          <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5" for="name">Votre prénom ou pseudo</label>
-          <input type="text" id="name" required placeholder="Ex: Thomas, 44 ans" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-slate-50/50" />
+      <form class="cta-form" onsubmit="event.preventDefault(); alert('Merci pour votre message précieux !');">
+        <div class="form-group">
+          <label for="author">Votre nom ou prénom</label>
+          <input type="text" id="author" placeholder="Ex: Marc, 46 ans" required />
         </div>
-        <div>
-          <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5" for="message">Votre témoignage</label>
-          <textarea id="message" rows="4" required placeholder="Partagez votre ressenti, vos victoires ou vos doutes..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-slate-50/50"></textarea>
+        <div class="form-group">
+          <label for="content">Votre message ou retour d'expérience</label>
+          <textarea id="content" rows="4" placeholder="Exprimez votre situation, vos doutes ou vos conseils..." required></textarea>
         </div>
-        <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 hover:from-brand-600 hover:to-amber-600 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform active:scale-98">
-          Envoyer mon commentaire 💌
-        </button>
+        <button type="submit" class="btn-submit">Envoyer mon témoignage 💌</button>
       </form>
     </section>
 
   </main>
 
-  <!-- Footer Doux & Zen -->
-  <footer class="mt-20 border-t border-orange-100 bg-white/60 py-10 text-center text-xs text-slate-400">
-    <div class="max-w-3xl mx-auto px-4 space-y-2">
-      <p class="font-semibold text-slate-600">CapQuarantaine • La boussole des hommes qui avancent</p>
-      <p>Pensé avec calme, clarté et sérénité. © {new Date().getFullYear()}</p>
-    </div>
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>CapQuarantaine</strong> • La boussole des hommes qui avancent avec sagesse.</p>
+    <p style="margin-top: 0.4rem; font-size: 0.8rem;">Design cute & doux sans dépendance externe. © {new Date().getFullYear()}</p>
   </footer>
 
 </body>
