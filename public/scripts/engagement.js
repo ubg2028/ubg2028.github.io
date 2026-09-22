@@ -1,5 +1,5 @@
 /* ============================================================
-   KawaiiPlay — shared site script (one file, cached everywhere)
+   Pizza Edition — shared site script (one file, cached everywhere)
    Handles: theme toggle, sidebar, search, load-more, hover
    videos, favorites, recently-played, play streak, session
    timer, star ratings, and the featured-game iframe player.

@@ -13,8 +13,8 @@ export function getStaticPaths() {
 
 const { categoryName, categorySlug } = Astro.props;
 const games = getGamesByCategorySlug(categorySlug);
-const title = `${categoryName} Games - Play Free Online | KawaiiPlay`;
-const description = `Play the best free ${categoryName} games online at KawaiiPlay. ${games.length} hand-picked ${categoryName.toLowerCase()} games playable instantly in your browser — no downloads needed.`;
+const title = `${categoryName} Games - Play Free Online | Pizza Edition`;
+const description = `Play the best free ${categoryName} games online at Pizza Edition. ${games.length} hand-picked ${categoryName.toLowerCase()} games playable instantly in your browser — no downloads needed.`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
