@@ -13,7 +13,7 @@ export function getStaticPaths() {
 }
 
 const { game } = Astro.props;
-const related = getRelatedGames(game, 12);
+const related = getRelatedGames(game, 999);
 const categorySlug = slugify(game.category);
 const title = `Play ${game.title} Free Online | KawaiiPlay`;
 const jsonLd = [

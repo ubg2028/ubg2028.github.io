@@ -21,7 +21,7 @@ if (!game) {
 // Seeded on THIS game's own id, so every /game/<id> page gets its own fixed
 // selection/order of "more games" — no two game pages look like duplicate
 // content to search engines, and the list never changes between visits.
-const related = await getSeededRandomGames(`related:${game.id}`, game.id, 12);
+const related = await getSeededRandomGames(`related:${game.id}`, game.id, 999);
 const sidebarRelated = await getSeededRandomGames(`sidebar:${game.id}`, game.id, 6);
 
 const pageTitle = `${game.title} Unblocked — Play Free Online`;
