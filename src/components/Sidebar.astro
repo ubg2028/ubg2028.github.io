@@ -1,0 +1,24 @@
+---
+import { getAllCategories } from "../lib/gamesApi";
+
+interface Props {
+  activeCategory?: string;
+}
+const { activeCategory } = Astro.props;
+const categories = await getAllCategories();
+---
+<aside class="sidebar" id="site-sidebar" aria-label="Game categories">
+  <p class="sidebar-title">Categories</p>
+  <a href="/" class="sidebar-link" aria-current={!activeCategory ? "page" : undefined}>
+    ⭐ Home
+  </a>
+  {categories.map((cat) => (
+    <a
+      href={`/category/${encodeURIComponent(cat.toLowerCase())}`}
+      class="sidebar-link"
+      aria-current={activeCategory === cat ? "page" : undefined}
+    >
+      {cat}
+    </a>
+  ))}
+</aside>

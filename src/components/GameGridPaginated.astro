@@ -1,0 +1,116 @@
+---
+import GameCard from "./GameCard.astro";
+import type { Game } from "../lib/types";
+
+interface Props {
+  games: Game[];
+  title?: string;
+  priorityFirst?: boolean;
+  /** How many games render as real HTML up front. Rest load via the button. */
+  initialCount?: number;
+  /** How many more games each "Load More" click reveals. */
+  batchSize?: number;
+}
+const { games, title, priorityFirst = false, initialCount = 20, batchSize = 20 } = Astro.props;
+
+const visible = games.slice(0, initialCount);
+const remaining = games.slice(initialCount);
+
+// Only the fields the card markup actually needs — keeps this inline JSON
+// small even once your catalog grows to hundreds of games.
+const remainingData = remaining.map((g) => ({
+  id: g.id,
+  title: g.title,
+  category: g.category,
+  rating: g.rating,
+  thumbnail: g.thumbnail,
+  previewVideo: g.previewVideo,
+}));
+---
+<section class="game-grid-section" data-batch={batchSize}>
+  {title && <h2 class="section-title">{title}</h2>}
+  <div class="game-grid" data-grid>
+    {visible.map((game, i) => (
+      <GameCard game={game} priority={priorityFirst && i === 0} />
+    ))}
+  </div>
+
+  {remaining.length > 0 && (
+    <>
+      <script type="application/json" data-remaining set:html={JSON.stringify(remainingData)} />
+      <div class="load-more-wrap">
+        <button class="load-more-btn" type="button">Load More Games</button>
+      </div>
+    </>
+  )}
+</section>
+
+<script>
+  // Delegated on document (not per-instance) so ONE listener correctly
+  // handles every GameGridPaginated section on the page, no matter how many
+  // there are or in what order they finished rendering.
+  function cardHTML(g: {
+    id: string; title: string; category: string; rating?: number;
+    thumbnail: string; previewVideo?: string;
+  }) {
+    const ratingHTML = g.rating ? ` · ★ ${Number(g.rating).toFixed(1)}` : "";
+    const videoHTML = g.previewVideo
+      ? `<video muted loop playsinline preload="none" data-preview-src="${g.previewVideo}" aria-hidden="true"></video>`
+      : "";
+    return `
+      <a href="/game/${g.id}" class="game-card" data-game-card aria-label="${g.title}">
+        <div class="thumb-wrap">
+          <img src="${g.thumbnail}" alt="${g.title}" loading="lazy" decoding="async" width="300" height="225" />
+          ${videoHTML}
+          <div class="card-overlay">
+            <p class="card-title">${g.title}</p>
+            <p class="card-meta">${g.category}${ratingHTML}</p>
+          </div>
+        </div>
+      </a>`;
+  }
+
+  document.addEventListener("click", (e) => {
+    const btn = (e.target as Element)?.closest?.(".load-more-btn") as HTMLButtonElement | null;
+    if (!btn) return;
+
+    const section = btn.closest(".game-grid-section");
+    const grid = section?.querySelector<HTMLElement>("[data-grid]");
+    const dataScript = section?.querySelector<HTMLScriptElement>('script[data-remaining]');
+    if (!grid || !dataScript) return;
+
+    const remaining: any[] = JSON.parse(dataScript.textContent || "[]");
+    const batchSize = Number((section as HTMLElement).dataset.batch) || 20;
+    const next = remaining.splice(0, batchSize);
+
+    grid.insertAdjacentHTML("beforeend", next.map(cardHTML).join(""));
+    dataScript.textContent = JSON.stringify(remaining);
+
+    if (remaining.length === 0) btn.remove();
+  });
+</script>
+
+<style>
+  .load-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 18px 0 6px;
+  }
+  .load-more-btn {
+    padding: 11px 28px;
+    border-radius: 999px;
+    border: 1px solid #262a3a;
+    background: var(--bg-card);
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .load-more-btn:hover {
+    background: var(--gradient);
+    color: #0b0c14;
+    border-color: transparent;
+    transform: translateY(-1px);
+  }
+</style>

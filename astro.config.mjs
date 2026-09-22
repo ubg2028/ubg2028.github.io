@@ -1,9 +1,12 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  integrations: [tailwind()],
-  // Seedha apna root URL ya custom domain daalein:
-  site: 'https://ubg2030.github.io', 
-  // 'base' ki ab bilkul zaroorat nahi hai!
+  integrations: [tailwind(), sitemap()],
+  site: 'https://ubg2028.github.io',
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto',
+  },
 });

@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameGrid from '../../components/GameGrid.astro';
+import RecentlyPlayedRow from '../../components/RecentlyPlayedRow.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getAllGames, getRelatedGames, slugify } from '../../lib/games.js';
+
+export function getStaticPaths() {
+  return getAllGames().map((game) => ({
+    params: { slug: game.slug },
+    props: { game },
+  }));
+}
+
+const { game } = Astro.props;
+const related = getRelatedGames(game, 12);
+const categorySlug = slugify(game.category);
+const title = `Play ${game.title} Free Online | KawaiiPlay`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: game.title,
+    description: game.description,
+    image: game.thumbnail,
+    genre: game.category,
+    applicationCategory: 'Game',
+    operatingSystem: 'Any (Web Browser)',
+    url: `https://ubg2028.github.io/games/${game.slug}/`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ubg2028.github.io/' },
+      { '@type': 'ListItem', position: 2, name: game.category, item: `https://ubg2028.github.io/category/${categorySlug}/` },
+      { '@type': 'ListItem', position: 3, name: game.title, item: `https://ubg2028.github.io/games/${game.slug}/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={game.description}
+  path={`/games/${game.slug}/`}
+  ogImage={game.thumbnail}
+  jsonLd={jsonLd}
+  activeCategorySlug={categorySlug}
+>
+  <main class="container main-content">
+    <!-- Hidden marker so engagement.js knows which game to log as "recently played" -->
+    <div
+      data-current-game
+      data-slug={game.slug}
+      data-title={game.title}
+      data-thumbnail={game.thumbnail}
+      data-category={game.category}
+      class="hidden"
+    ></div>
+
+    <Breadcrumbs
+      crumbs={[
+        { label: 'Home', href: '/' },
+        { label: game.category, href: `/category/${categorySlug}/` },
+        { label: game.title },
+      ]}
+    />
+
+    <section class="featured-section">
+      <div id="gameScreenContainer" class="game-screen-box">
+        <div class="aspect-video-box">
+          <div id="gameCoverOverlay" class="hero-cover">
+            <div class="hero-glow-blob1"></div>
+            <div class="hero-glow-blob2"></div>
+
+            <div class="hero-content">
+              <div class="hero-icon-box">{game.icon}</div>
+              <span class="badge-featured">{game.category}</span>
+              <h1 class="hero-title">{game.title}</h1>
+              <p class="hero-desc">{game.description}</p>
+              <button id="playGameBtn" class="btn-play-hero">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                PLAY NOW
+              </button>
+            </div>
+          </div>
+
+          <iframe
+            id="gameIframe"
+            class="game-iframe hidden"
+            data-src={game.url}
+            title={game.title}
+            allow="fullscreen; autoplay; gamepad"
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="fullscreen-row">
+        <button id="fullscreenBtn" class="btn-fullscreen">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+          Full Screen Mode
+        </button>
+        <button
+          class="btn-favorite"
+          data-fav-toggle
+          data-fav-label
+          data-slug={game.slug}
+          data-title={game.title}
+          data-thumbnail={game.thumbnail}
+          data-category={game.category}
+        >🤍 Save Game</button>
+        <span id="sessionTimer" class="session-timer">⏱️ Not started yet</span>
+      </div>
+
+      <div class="rating-row">
+        <div class="rating-stars" data-slug={game.slug}>
+          <button class="rating-star" data-value="1" aria-label="Rate 1 star">★</button>
+          <button class="rating-star" data-value="2" aria-label="Rate 2 stars">★</button>
+          <button class="rating-star" data-value="3" aria-label="Rate 3 stars">★</button>
+          <button class="rating-star" data-value="4" aria-label="Rate 4 stars">★</button>
+          <button class="rating-star" data-value="5" aria-label="Rate 5 stars">★</button>
+        </div>
+        <span class="rating-label">Tap to rate this game</span>
+      </div>
+    </section>
+
+    <RecentlyPlayedRow />
+
+    <!-- ================= ABOUT THIS GAME (unique content per page = SEO) ================= -->
+    <section class="games-section">
+      <div class="section-header">
+        <div class="section-title"><span>ℹ️</span><h2>About {game.title}</h2></div>
+      </div>
+      <p style="line-height:1.7; opacity:0.9; max-width:820px;">{game.description} Play it instantly in your browser for free on KawaiiPlay — no downloads, no installs, just click "PLAY NOW" and jump straight into the {game.category} action. Enjoyed it? Save it to your favorites so it's one tap away next time.</p>
+    </section>
+
+    <GameGrid games={related} title="Related Games" icon="🎯" id="related-grid" initialVisible={12} />
+  </main>
+</BaseLayout>

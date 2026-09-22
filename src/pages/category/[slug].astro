@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import GameGrid from "../../components/GameGrid.astro";
+import { getAllCategories, getGamesByCategory } from "../../lib/gamesApi";
+
+export async function getStaticPaths() {
+  const categories = await getAllCategories();
+  return categories.map((cat) => ({
+    params: { slug: cat.toLowerCase() },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props as { category: string };
+const games = await getGamesByCategory(category);
+---
+<BaseLayout
+  title={`${category} Games Unblocked — Moto X3M Unblocked`}
+  description={`Play the best free ${category} games online, unblocked at school and at work.`}
+  canonicalPath={`/category/${category.toLowerCase()}`}
+>
+  <div class="layout">
+    <Sidebar activeCategory={category} />
+    <main class="main">
+      <div class="container">
+        <GameGrid title={`${category} Games`} games={games} priorityFirst />
+      </div>
+    </main>
+  </div>
+</BaseLayout>

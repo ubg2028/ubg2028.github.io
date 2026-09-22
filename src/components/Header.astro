@@ -1,0 +1,54 @@
+---
+---
+<header class="site-header">
+  <button
+    class="menu-toggle"
+    id="menu-toggle"
+    aria-label="Toggle menu"
+    aria-expanded="false"
+    aria-controls="site-sidebar"
+  >
+    <span></span><span></span><span></span>
+  </button>
+  <a href="/" class="logo">Moto X3M<span> Unblocked</span></a>
+  <form class="search-form" action="/search" method="get" role="search">
+    <input
+      type="search"
+      name="q"
+      placeholder="Search games..."
+      aria-label="Search games"
+      autocomplete="off"
+    />
+  </form>
+</header>
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<script>
+  // Tiny, dependency-free mobile menu toggle. Runs on every page (Header is
+  // in BaseLayout), targets the Sidebar component by id.
+  const toggle = document.getElementById("menu-toggle");
+  const backdrop = document.getElementById("sidebar-backdrop");
+
+  function setOpen(open: boolean) {
+    document.body.classList.toggle("sidebar-open", open);
+    toggle?.setAttribute("aria-expanded", String(open));
+  }
+
+  toggle?.addEventListener("click", () => {
+    setOpen(!document.body.classList.contains("sidebar-open"));
+  });
+
+  backdrop?.addEventListener("click", () => setOpen(false));
+
+  // Close the drawer after tapping any category link inside it.
+  document.addEventListener("click", (e) => {
+    if (e.target instanceof Element && e.target.closest("#site-sidebar a")) {
+      setOpen(false);
+    }
+  });
+
+  // Close on Escape for keyboard users.
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+</script>

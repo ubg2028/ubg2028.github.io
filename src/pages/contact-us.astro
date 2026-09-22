@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = 'Contact Us | KawaiiPlay';
+const description = 'Get in touch with the KawaiiPlay team for questions, feedback, copyright notices, or partnership inquiries.';
+---
+<BaseLayout title={title} description={description} path="/contact-us/">
+  <main class="container">
+    <article class="content-page">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you! Whether it's a bug report, a game suggestion, a business inquiry, or a legal notice (DMCA/privacy), reach out using the details below.</p>
+
+      <h2>Email</h2>
+      <p>📧 <a href="mailto:contact@ubg2028.github.io">contact@ubg2028.github.io</a> <em>(replace with your real support email before publishing)</em></p>
+
+      <h2>What to Include</h2>
+      <ul>
+        <li><strong>Bug reports:</strong> the game name, your device/browser, and what went wrong.</li>
+        <li><strong>Game suggestions:</strong> the name of the game and a link if you have one.</li>
+        <li><strong>Copyright notices:</strong> please see our <a href="/dmca/">DMCA Policy</a> for the required information.</li>
+        <li><strong>Partnerships / advertising:</strong> a short note about your site or business and how you'd like to collaborate.</li>
+      </ul>
+
+      <p>We aim to respond to all genuine inquiries as quickly as we can.</p>
+    </article>
+  </main>
+</BaseLayout>

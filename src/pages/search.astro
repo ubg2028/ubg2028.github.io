@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Sidebar from "../components/Sidebar.astro";
+---
+<BaseLayout title="Search Games — Moto X3M Unblocked" canonicalPath="/search">
+  <div class="layout">
+    <Sidebar />
+    <main class="main">
+      <div class="container">
+        <h2 class="section-title" id="search-heading">Search results</h2>
+        <div class="game-grid" id="search-results"></div>
+        <p id="search-empty" style="color:var(--text-muted);display:none;">No games matched your search.</p>
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+<script>
+  async function runSearch() {
+    const q = new URLSearchParams(location.search).get("q")?.trim().toLowerCase() ?? "";
+    const heading = document.getElementById("search-heading")!;
+    const grid = document.getElementById("search-results")!;
+    const empty = document.getElementById("search-empty")!;
+    heading.textContent = q ? `Results for "${q}"` : "Type something to search";
+    if (!q) return;
+
+    const res = await fetch("/games-index.json");
+    const games: { id: string; title: string; category: string; tags: string[]; thumbnail: string }[] =
+      await res.json();
+
+    const results = games.filter(
+      (g) =>
+        g.title.toLowerCase().includes(q) ||
+        g.category.toLowerCase().includes(q) ||
+        g.tags.some((t) => t.toLowerCase().includes(q))
+    );
+
+    empty.style.display = results.length ? "none" : "block";
+    grid.innerHTML = results
+      .map(
+        (g) => `
+      <a href="/game/${g.id}" class="game-card" data-game-card>
+        <div class="thumb-wrap">
+          <img src="${g.thumbnail}" alt="${g.title}" loading="lazy" decoding="async" width="300" height="225" />
+          <div class="card-overlay">
+            <p class="card-title">${g.title}</p>
+            <p class="card-meta">${g.category}</p>
+          </div>
+        </div>
+      </a>`
+      )
+      .join("");
+  }
+  runSearch();
+</script>

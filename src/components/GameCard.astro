@@ -1,0 +1,44 @@
+---
+export interface Props {
+  game: any;
+  hidden?: boolean;
+}
+const { game, hidden = false } = Astro.props;
+---
+<a
+  href={`/games/${game.slug}/`}
+  class={`game-card small-card ${hidden ? 'card-hidden' : ''}`}
+  style={`background: ${game.bg};`}
+  data-search-item
+  data-title={game.title}
+  data-category={game.category}
+>
+  {game.badge && <span class="card-badge">{game.badge}</span>}
+
+  <img
+    class="card-thumb"
+    src={game.thumbnail}
+    alt={`${game.title} thumbnail`}
+    width="500"
+    height="375"
+    loading="lazy"
+    decoding="async"
+  />
+  <video class="hover-video" loop muted playsinline preload="none" data-src={game.video}></video>
+
+  <button
+    class="card-fav-btn"
+    data-fav-toggle
+    data-slug={game.slug}
+    data-title={game.title}
+    data-thumbnail={game.thumbnail}
+    data-category={game.category}
+    aria-label={`Save ${game.title} to favorites`}
+    onclick="event.preventDefault();"
+  >🤍</button>
+
+  <div class="card-bottom-info compact">
+    <span class="card-title-small">{game.title}</span>
+    <span class="btn-card-play-sm">PLAY</span>
+  </div>
+</a>

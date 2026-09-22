@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameGrid from '../../components/GameGrid.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCategories, getGamesByCategorySlug } from '../../lib/games.js';
+
+export function getStaticPaths() {
+  return getCategories().map((cat) => ({
+    params: { category: cat.slug },
+    props: { categoryName: cat.name, categorySlug: cat.slug },
+  }));
+}
+
+const { categoryName, categorySlug } = Astro.props;
+const games = getGamesByCategorySlug(categorySlug);
+const title = `${categoryName} Games - Play Free Online | KawaiiPlay`;
+const description = `Play the best free ${categoryName} games online at KawaiiPlay. ${games.length} hand-picked ${categoryName.toLowerCase()} games playable instantly in your browser — no downloads needed.`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: `https://ubg2028.github.io/category/${categorySlug}/`,
+};
+---
+
+<BaseLayout title={title} description={description} path={`/category/${categorySlug}/`} jsonLd={jsonLd} activeCategorySlug={categorySlug}>
+  <main class="container main-content">
+    <Breadcrumbs crumbs={[{ label: 'Home', href: '/' }, { label: categoryName }]} />
+
+    <h1 style="font-size:clamp(1.4rem,4vw,2rem); font-weight:900; margin-bottom:0.5rem;">{categoryName} Games</h1>
+    <p style="opacity:0.75; font-weight:600; max-width:680px; margin-bottom:0.5rem;">{description}</p>
+
+    <GameGrid games={games} title={`All ${categoryName} Games`} icon="🎮" id="category-grid" initialVisible={18} />
+  </main>
+</BaseLayout>

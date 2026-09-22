@@ -1,0 +1,185 @@
+---
+import { Image } from "astro:assets";
+import type { Game } from "../lib/types";
+
+interface Props { game: Game }
+const { game } = Astro.props;
+---
+<div class="player-wrap" id="player-wrap" data-play-url={game.playUrl} data-title={game.title}>
+  <!-- Static poster only — no background video autoplay. The actual game
+       (iframe) loads only once "Play Now" is clicked. -->
+  <Image
+    class="bg-poster"
+    src={game.thumbnail}
+    alt={`${game.title} unblocked — play free online`}
+    width={960}
+    height={540}
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+  />
+
+  <button class="player-cover" id="play-cover" aria-label={`Play ${game.title}`}>
+    <span class="cover-thumb">
+      <Image
+        src={game.thumbnail}
+        alt={`${game.title} unblocked — play free online`}
+        width={220}
+        height={140}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </span>
+    <span class="play-now-btn">
+      <span class="play-now-icon">▶</span>
+      Play Now
+    </span>
+  </button>
+
+  <button class="fullscreen-btn" id="fullscreen-btn" type="button" aria-label={`Play ${game.title} fullscreen`}>
+    ⛶ Fullscreen
+  </button>
+</div>
+
+<script>
+  // Click-to-play: the actual game iframe (often several MB of its own JS/
+  // assets) is never requested until the player is clicked — keeps LCP/TBT
+  // low on every page this component is used on (home + game pages). No
+  // background video autoplay — just the static poster until then.
+  function initPlayer(root: ParentNode = document) {
+    const wrap = root.querySelector<HTMLElement>("#player-wrap");
+    const cover = root.querySelector<HTMLButtonElement>("#play-cover");
+    const fsBtn = root.querySelector<HTMLButtonElement>("#fullscreen-btn");
+    if (!wrap || wrap.dataset.playerReady) return;
+    wrap.dataset.playerReady = "1";
+
+    function ensureIframe(): HTMLIFrameElement {
+      let iframe = wrap!.querySelector("iframe");
+      if (!iframe) {
+        const url = wrap!.dataset.playUrl;
+        const title = wrap!.dataset.title ?? "Game";
+        iframe = document.createElement("iframe");
+        iframe.src = url ?? "";
+        iframe.title = title;
+        iframe.allow = "fullscreen; autoplay; gamepad; xr-spatial-tracking";
+        iframe.setAttribute("allowfullscreen", "true");
+        iframe.loading = "eager";
+        cover?.remove();
+        wrap!.appendChild(iframe);
+      }
+      return iframe;
+    }
+
+    cover?.addEventListener("click", () => ensureIframe());
+
+    fsBtn?.addEventListener("click", () => {
+      const iframe = ensureIframe();
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen().catch(() => {});
+      } else if ((wrap as any).webkitRequestFullscreen) {
+        (wrap as any).webkitRequestFullscreen();
+      }
+    });
+  }
+  initPlayer();
+</script>
+
+<style>
+  .player-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .bg-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Dark tint over the poster underneath — this is what makes the
+     background read as dimmed instead of fully hidden. */
+  .player-cover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 0 16px;
+    /* nudges the thumbnail+button group down from dead-center */
+    padding-top: 7%;
+    border: none;
+    cursor: pointer;
+    background: rgba(6, 7, 14, 0.58);
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  .cover-thumb {
+    display: block;
+    width: 32%;
+    max-width: 220px;
+    min-width: 110px;
+    aspect-ratio: 16 / 10;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.75);
+    border: 2px solid rgba(255, 255, 255, 0.14);
+  }
+  .cover-thumb :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .play-now-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: var(--gradient);
+    color: #0b0c14;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 22px -4px rgba(139, 92, 246, 0.6);
+    transition: transform 0.15s ease;
+  }
+  .play-now-icon { font-size: 0.85em; }
+  .player-cover:hover .play-now-btn { transform: scale(1.06); }
+
+  .fullscreen-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(11, 12, 20, 0.72);
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .fullscreen-btn:hover { background: var(--accent); color: #0b0c14; transform: translateY(-1px); }
+
+  @media (max-width: 480px) {
+    .cover-thumb { width: 42%; min-width: 96px; }
+    .play-now-btn { padding: 10px 22px; font-size: 0.9rem; }
+  }
+</style>

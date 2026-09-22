@@ -1,0 +1,45 @@
+---
+import GameCard from './GameCard.astro';
+
+export interface Props {
+  games: any[];
+  title: string;
+  icon?: string;
+  id?: string;
+  initialVisible?: number; // how many cards render "open" before Load More
+}
+
+const {
+  games,
+  title,
+  icon = '⭐',
+  id = 'games-grid',
+  initialVisible = 18,
+} = Astro.props;
+---
+
+<section id={`${id}-section`} class="games-section">
+  <div class="section-header">
+    <div class="section-title">
+      <span>{icon}</span>
+      <h2>{title}</h2>
+    </div>
+    <span class="count-badge">{games.length} Games</span>
+  </div>
+
+  <div id="searchEmpty" class="search-empty">No games match your search 🥲 try another keyword.</div>
+
+  <div id={id} class="games-grid">
+    {games.map((game, i) => (
+      <GameCard game={game} hidden={i >= initialVisible} />
+    ))}
+  </div>
+
+  {games.length > initialVisible && (
+    <div class="explore-wrapper">
+      <button class="btn-loadmore" data-target={id}>
+        <span>🎮</span> Load More Games
+      </button>
+    </div>
+  )}
+</section>

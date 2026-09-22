@@ -1,0 +1,230 @@
+---
+import '../styles/global.css';
+import { getCategories, slugify } from '../lib/games.js';
+
+export interface Props {
+  title: string;
+  description: string;
+  path?: string;          // e.g. "/games/cyber-kitty/"
+  ogImage?: string;
+  jsonLd?: Record<string, any> | Record<string, any>[];
+  activeCategorySlug?: string;
+  showSearch?: boolean;
+}
+
+const {
+  title,
+  description,
+  path = '/',
+  ogImage = 'https://picsum.photos/seed/kawaiiplay/1200/630',
+  jsonLd,
+  activeCategorySlug = '',
+  showSearch = true,
+} = Astro.props;
+
+const site = 'https://ubg2028.github.io';
+const canonical = new URL(path, site).toString();
+const categories = getCategories();
+const jsonLdList = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={canonical} />
+  <meta name="theme-color" content="#0B0F19" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Perf: warm up connections to the domains we actually fetch from -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://picsum.photos" />
+  <link rel="dns-prefetch" href="https://videos.crazygames.com" />
+  <link rel="dns-prefetch" href="https://commondatastorage.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" /></noscript>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  {jsonLdList.map((block) => (
+    <script type="application/ld+json" set:html={JSON.stringify(block)} />
+  ))}
+
+  <!-- Instant Dark Mode Script (No White Flash) -->
+  <script is:inline>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+</head>
+
+<body>
+  <!-- ================= SIDEBAR MENU ================= -->
+  <div id="menuOverlay" class="menu-overlay hidden"></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <div class="brand">
+          <span class="emoji-logo">🎀</span>
+          <span class="brand-name">KawaiiPlay</span>
+        </div>
+        <button id="closeMenuBtn" aria-label="Close Menu" class="icon-btn">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="/" class={`nav-item ${activeCategorySlug === '' && path === '/' ? 'active' : ''}`}>🔥 Home</a>
+        <a href="/favorites/" class={`nav-item ${path.startsWith('/favorites') ? 'active' : ''}`}>💗 My Favorites</a>
+        <p class="sidebar-nav-heading">Categories</p>
+        {categories.map((cat) => (
+          <a href={`/category/${cat.slug}/`} class={`nav-item ${activeCategorySlug === cat.slug ? 'active' : ''}`}>
+            <span>{cat.name}</span>
+            <span class="nav-count">{cat.count}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <p>© 2026 KawaiiPlay Zone</p>
+      <p><a href="/privacy-policy/">Privacy</a> · <a href="/terms-of-service/">Terms</a> · <a href="/contact-us/">Contact</a></p>
+    </div>
+  </aside>
+
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="top-navbar">
+    <div class="container nav-content">
+      <div class="nav-left">
+        <button id="openMenuBtn" aria-label="Open Menu" class="icon-btn">
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        <a href="/" class="site-logo">
+          <span>🐱</span> KawaiiPlay
+        </a>
+      </div>
+
+      {showSearch && (
+        <div id="searchWrapper" class="search-wrapper">
+          <span class="search-icon" aria-hidden="true">🔎</span>
+          <input id="siteSearch" class="search-input" type="search" placeholder="Search games..." aria-label="Search games" />
+        </div>
+      )}
+
+      <div class="nav-right">
+        {showSearch && (
+          <button id="searchToggleBtn" aria-label="Toggle Search" aria-haspopup="true" aria-expanded="false" class="icon-btn search-toggle-btn" type="button">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path stroke-linecap="round" d="M21 21l-4.3-4.3"></path></svg>
+          </button>
+        )}
+        <button id="themeToggleBtn" aria-label="Toggle Theme" class="theme-btn">
+          <svg id="moonIcon" class="hidden" width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <span id="themeText" class="hidden sm:inline">Dark Mode</span>
+        </button>
+      </div>
+
+      <div class="nav-utility">
+        <div class="streak-wrapper">
+          <button id="streakBadge" class="streak-badge" type="button" aria-haspopup="true" aria-expanded="false">🔥 …</button>
+          <div id="streakPanel" class="streak-panel hidden">
+            <p class="streak-panel-title">Your play streak</p>
+            <p id="streakPanelCount" class="streak-panel-count">🔥 0-day streak</p>
+            <div id="streakPanelDays" class="streak-days"></div>
+            <p class="streak-panel-note">Play any game once a day to keep your streak alive.</p>
+            <p class="streak-panel-bookmark">💡 Press <kbd>Ctrl</kbd> + <kbd>D</kbd> to bookmark us!</p>
+          </div>
+        </div>
+        <div class="fav-wrapper">
+          <button id="headerFavBtn" class="header-fav-btn" type="button" aria-haspopup="true" aria-expanded="false" data-tooltip="Favourites">
+            <span id="headerFavIcon">🤍</span>
+            <span id="headerFavCount" class="fav-count hidden">0</span>
+          </button>
+          <div id="favPanel" class="fav-panel hidden">
+            <p class="fav-panel-title">💗 Your Favorites</p>
+            <p id="favPanelEmpty" class="empty-note">Tap the 🤍 on any game to save it here.</p>
+            <div id="favPanelList" class="fav-panel-list"></div>
+            <a href="/favorites/" class="fav-panel-viewall">View all favorites →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= PAGE CONTENT ================= -->
+  <slot />
+
+  <!-- ================= PARTNER NETWORKS (in body, not footer) ================= -->
+  <section class="partner-section">
+    <div class="container">
+      <div class="footer-card footer-card-center">
+        <h3>OUR PARTNER NETWORKS & BACKLINKS</h3>
+        <div class="backlinks">
+          <a href="https://example.com/crazy-games" target="_blank" rel="noopener dofollow">CrazyGames Portal</a>
+          <a href="https://example.com/poki-clone" target="_blank" rel="noopener dofollow">Poki Free Games</a>
+          <a href="https://example.com/html5-arcade" target="_blank" rel="noopener dofollow">HTML5 Game Hub</a>
+          <a href="https://example.com/unblocked-games" target="_blank" rel="noopener dofollow">Unblocked Games 76</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-card">
+        <h3>BROWSE CATEGORIES</h3>
+        <div class="footer-links">
+          {categories.slice(0, 10).map((cat) => (
+            <a href={`/category/${cat.slug}/`}>{cat.name}</a>
+          ))}
+        </div>
+      </div>
+      <div class="footer-card footer-card-center">
+        <h3>SITE INFO</h3>
+        <div class="footer-links">
+          <a href="/about-us/">About Us</a>
+          <a href="/contact-us/">Contact Us</a>
+          <a href="/privacy-policy/">Privacy Policy</a>
+          <a href="/terms-of-service/">Terms of Service</a>
+          <a href="/cookie-policy/">Cookie Policy</a>
+          <a href="/disclaimer/">Disclaimer</a>
+          <a href="/dmca/">DMCA</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>🐱 KawaiiPlay © 2026. Fast & Cute Gaming Experience.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING BACK TO GAME BUTTON ================= -->
+  <button id="backToGameBtn" aria-label="Back to Game" class="btn-back-to-game hidden-floating">
+    <svg class="bounce-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+    <span>Back to Game</span>
+  </button>
+
+  <script src="/scripts/engagement.js" defer></script>
+</body>
+</html>
