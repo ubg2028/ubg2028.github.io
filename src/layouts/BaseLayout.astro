@@ -33,6 +33,7 @@ const jsonLdList = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="gOg18sr9RISynx-JcghGoknG9UzeZdxEwLE_UXfgPCw" />
 
   <title>{title}</title>
   <meta name="description" content={description} />
@@ -74,7 +75,17 @@ const jsonLdList = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     } else {
       document.documentElement.classList.add('dark');
     }
-  </script>
+  </script> 
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HRJMKF4HWL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HRJMKF4HWL');
+</script>
 </head>
 
 <body>
